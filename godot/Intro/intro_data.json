@@ -1,0 +1,48 @@
+[
+    {
+        "text": "오래전 인간과 괴물 두 종족이 세상을 다스렸습니다",
+        "sleep": 0.3,
+        "image_path": "res://Game/assets/intro/1.png",
+        "duration": 4.5
+    },
+    {
+        "text": "괴물 세계에 떨어진 인간은 점차 괴물들을 죽이고 세계를 없앴지만 단 하나 몰살 엔딩을 보지 않았습니다",
+        "sleep": 0.2,
+        "image_path": "res://Game/assets/intro/2.png",
+        "duration": 4.5
+    },
+    {
+        "text": "덕분의 기억이 안 지워진 플라위는 리셋의 기억을 간직한 플라위는 결국 샌즈에게..",
+        "sleep": 0.2,
+        "image_path": "res://Game/assets/intro/3.png",
+        "duration": 4.5
+    },
+    {
+        "text": "",
+        "image_path": "res://Game/assets/intro/4.png",
+        "duration": 5.0
+    },
+    {
+        "text": "플라위에게 모든 내용을 듣게된 샌즈는 인간을 막기 위한 방법을 찾기 시작했습니다",
+        "sleep": 0.2,
+        "image_path": "res://Game/assets/intro/5.png",
+        "duration": 3.5
+    },
+    {
+        "text": "그리고 마침내...",
+        "sleep": 0.3,
+        "image_path": "res://Game/assets/intro/6.png",
+        "duration": 4.5
+    },
+    {
+        "text": "하지만 그의 실험은 예상치 못한 결과를 가져왔고...",
+        "sleep": 0.3,
+        "image_path": "res://Game/assets/intro/7.png",
+        "duration": 3.5
+    },
+    {
+        "text": "이제 모든 것이 달라지려 합니다...",
+        "sleep": 0.2,
+        "duration": 4.5
+    }
+]

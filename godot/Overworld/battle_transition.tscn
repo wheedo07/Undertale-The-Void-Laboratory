@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvd3tt1cdjn4v"]
+
+[ext_resource type="Texture2D" uid="uid://bpmpbp7g6ta2u" path="res://Battle/Soul/soul.png" id="1_jpq5a"]
+[ext_resource type="AudioStream" uid="uid://bhai5dt104pmv" path="res://sfx/battle_noise.wav" id="2_fee8q"]
+[ext_resource type="AudioStream" uid="uid://bna625odbjvmr" path="res://sfx/battle_drop.wav" id="3_jex18"]
+
+[sub_resource type="Curve" id="Curve_y65xj"]
+_data = [Vector2(1e-05, 1), 100000.0, 0.0, 1, 0, Vector2(1, 0), -2.00047, 100000.0, 0, 1]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8uiqr"]
+curve = SubResource("Curve_y65xj")
+
+[sub_resource type="Curve" id="Curve_mueeb"]
+min_value = 1.0
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 3.60698, 0, 0, Vector2(1, 2), 0.183359, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o2f5t"]
+curve = SubResource("Curve_mueeb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s6it0"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_o2f5t")
+color = Color(0.75, 0.75, 0.75, 0.784314)
+alpha_curve = SubResource("CurveTexture_8uiqr")
+
+[node name="BattleTransition" type="BattleTransition"]
+
+[node name="Black" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Soul" type="Sprite2D" parent="Black"]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(320, 240)
+texture = ExtResource("1_jpq5a")
+
+[node name="Ghost" type="GPUParticles2D" parent="Black/Soul"]
+show_behind_parent = true
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_s6it0")
+texture = ExtResource("1_jpq5a")
+one_shot = true
+
+[node name="noise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fee8q")
+bus = &"SFX"
+
+[node name="drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jex18")
+bus = &"SFX"

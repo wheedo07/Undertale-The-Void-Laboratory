@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctpvdrr45rmmb"]
+
+[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_g8her"]
+[ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_30vw0"]
+[ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="3_2e27u"]
+[ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="4_6d10q"]
+[ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="5_k66xg"]
+[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="6_ys331"]
+[ext_resource type="PackedScene" uid="uid://dd758xuvic7xl" path="res://Overworld/Interactions/overworld_area_trigger.tscn" id="7_naqw3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aufi1"]
+size = Vector2(167, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etexf"]
+size = Vector2(9, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwx41"]
+size = Vector2(139, 104)
+
+[node name="core_2" type="CoreNode" node_paths=PackedStringArray("room_entrances")]
+player_path = NodePath("PlayerOverworld")
+camera_path = NodePath("image/Camera")
+music = ExtResource("1_g8her")
+room_entrances = [NodePath("trigger/room1"), NodePath("trigger/room3"), NodePath("trigger/room4"), NodePath("trigger/room5")]
+
+[node name="image" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 240)
+scale = Vector2(1.2, 1.02655)
+texture = ExtResource("2_30vw0")
+region_enabled = true
+region_rect = Rect2(2708.82, 775.315, 314.893, 216.608)
+metadata/_edit_lock_ = true
+
+[node name="Camera" parent="image" instance=ExtResource("3_2e27u")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("4_6d10q")]
+position = Vector2(309, 254)
+
+[node name="trigger" type="Node2D" parent="."]
+
+[node name="text_trigger" parent="trigger" instance=ExtResource("5_k66xg")]
+text = PackedStringArray("* ( 더이상 읽을 필요 없다 )")
+position = Vector2(223, 223)
+scale = Vector2(2, 1)
+
+[node name="text_trigger2" parent="trigger" instance=ExtResource("5_k66xg")]
+text = PackedStringArray("* ( 여기 포스필드는 이미 꺼졌다 )")
+position = Vector2(390, 221)
+scale = Vector2(2, 1)
+
+[node name="room1" parent="trigger" instance=ExtResource("6_ys331")]
+facing_direction = Vector2(-1, 0)
+door_id = 1
+new_room = "res://Game/overworld/core/1.tscn"
+offset_left = 484.0
+offset_top = 223.0
+offset_right = 490.0
+offset_bottom = 275.0
+pivot_offset = Vector2(-24, 25)
+
+[node name="room3" parent="trigger" instance=ExtResource("6_ys331")]
+facing_direction = Vector2(0, -1)
+door_id = 3
+new_room = "res://Game/overworld/core/3.tscn"
+new_room_entrance_id = 2
+offset_left = 268.0
+offset_top = 333.0
+offset_right = 343.0
+offset_bottom = 340.0
+pivot_offset = Vector2(38, -16)
+
+[node name="room4" parent="trigger" instance=ExtResource("6_ys331")]
+facing_direction = Vector2(1, 0)
+door_id = 4
+new_room = "res://Game/overworld/core/4.tscn"
+new_room_entrance_id = 2
+offset_left = 161.0
+offset_top = 226.0
+offset_right = 166.0
+offset_bottom = 277.0
+pivot_offset = Vector2(20, 26)
+
+[node name="room5" parent="trigger" instance=ExtResource("6_ys331")]
+door_id = 5
+new_room = "res://Game/overworld/core/5.tscn"
+new_room_entrance_id = 2
+offset_left = 270.0
+offset_top = 153.0
+offset_right = 345.0
+offset_bottom = 160.0
+pivot_offset = Vector2(36, 22)
+
+[node name="event1" parent="trigger" instance=ExtResource("7_naqw3")]
+action = 14
+position = Vector2(472, 250)
+scale = Vector2(0.3, 3)
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="1" type="CollisionShape2D" parent="static"]
+position = Vector2(425.5, 321.5)
+shape = SubResource("RectangleShape2D_aufi1")
+
+[node name="2" type="CollisionShape2D" parent="static"]
+position = Vector2(425.5, 178.5)
+shape = SubResource("RectangleShape2D_aufi1")
+
+[node name="3" type="CollisionShape2D" parent="static"]
+position = Vector2(480, 250)
+shape = SubResource("RectangleShape2D_etexf")
+
+[node name="4" type="CollisionShape2D" parent="static"]
+position = Vector2(201, 324.5)
+shape = SubResource("RectangleShape2D_dwx41")
+
+[node name="5" type="CollisionShape2D" parent="static"]
+position = Vector2(201.5, 177)
+shape = SubResource("RectangleShape2D_dwx41")
+
+[connection signal="cutscene" from="trigger/event1" to="." method="event1"]

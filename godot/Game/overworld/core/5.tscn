@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0kw82mneekh5"]
+
+[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_2i7rt"]
+[ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_1d6tx"]
+[ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="3_78v4o"]
+[ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="3_x272u"]
+[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="4_5ocev"]
+[ext_resource type="PackedScene" uid="uid://dd758xuvic7xl" path="res://Overworld/Interactions/overworld_area_trigger.tscn" id="5_6ssqd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3aei"]
+size = Vector2(164, 254)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhf0w"]
+size = Vector2(139, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wo8o7"]
+size = Vector2(78, 7)
+
+[node name="core_5" type="CoreNode" node_paths=PackedStringArray("room_entrances")]
+player_path = NodePath("PlayerOverworld")
+camera_path = NodePath("image/Camera")
+music = ExtResource("1_2i7rt")
+room_entrances = [NodePath("trigger/room2")]
+
+[node name="image" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 240)
+scale = Vector2(1.2, 1.02655)
+texture = ExtResource("2_1d6tx")
+region_enabled = true
+region_rect = Rect2(2709, 533, 313, 240)
+metadata/_edit_lock_ = true
+
+[node name="Camera" parent="image" instance=ExtResource("3_78v4o")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("3_x272u")]
+position = Vector2(300, 250)
+
+[node name="trigger" type="Node2D" parent="."]
+
+[node name="room2" parent="trigger" instance=ExtResource("4_5ocev")]
+facing_direction = Vector2(0, -1)
+door_id = 2
+new_room = "res://Game/overworld/core/2.tscn"
+new_room_entrance_id = 5
+offset_left = 272.0
+offset_top = 348.0
+offset_right = 346.0
+offset_bottom = 356.0
+pivot_offset = Vector2(35, -14)
+
+[node name="voidwall" parent="trigger" instance=ExtResource("5_6ssqd")]
+action = 14
+position = Vector2(309, 148)
+scale = Vector2(4, 0.3)
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="1" type="CollisionShape2D" parent="static"]
+position = Vector2(427, 242)
+shape = SubResource("RectangleShape2D_s3aei")
+
+[node name="2" type="CollisionShape2D" parent="static"]
+position = Vector2(204, 313.5)
+shape = SubResource("RectangleShape2D_lhf0w")
+
+[node name="3" type="CollisionShape2D" parent="static"]
+position = Vector2(202.5, 166)
+shape = SubResource("RectangleShape2D_lhf0w")
+
+[node name="4" type="CollisionShape2D" parent="static"]
+position = Vector2(309, 141.5)
+shape = SubResource("RectangleShape2D_wo8o7")
+
+[connection signal="cutscene" from="trigger/voidwall" to="." method="voidWall"]

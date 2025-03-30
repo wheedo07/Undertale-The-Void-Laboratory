@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://y0wsj1g417an"]
+
+[node name="RoomEntranceNode" type="RoomEntranceNode"]
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+border_color = Color(0.545098, 0.698039, 0.239216, 1)
+border_width = 2.0
+facing_direction = Vector2(0, 1)

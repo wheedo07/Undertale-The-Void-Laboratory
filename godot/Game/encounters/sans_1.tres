@@ -1,0 +1,11 @@
+[gd_resource type="Encounter" load_steps=4 format=3 uid="uid://qhn0hqcgois5"]
+
+[ext_resource type="Texture2D" uid="uid://cbur7ycquputw" path="res://Game/assets/img/battle/sans_1.png" id="1_81ouh"]
+[ext_resource type="PackedScene" uid="uid://cuuor6488vm2a" path="res://Game/encounters/enemy/sans_1.tscn" id="2_d02iu"]
+[ext_resource type="AudioStream" uid="uid://celc4psyhueu6" path="res://Game/assets/audio/battle/sans_1.wav" id="3_ojb4t"]
+
+[resource]
+encounter_name = &"sans_1"
+background = ExtResource("1_81ouh")
+enemies = Array[PackedScene]([ExtResource("2_d02iu")])
+music = ExtResource("3_ojb4t")

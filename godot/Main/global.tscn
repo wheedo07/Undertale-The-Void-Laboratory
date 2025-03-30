@@ -1,0 +1,143 @@
+[gd_scene load_steps=15 format=3 uid="uid://dc10754oip7a4"]
+
+[ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="1_aygu1"]
+[ext_resource type="AudioStream" uid="uid://bw8viuufk2elm" path="res://sfx/heal.wav" id="2_752qb"]
+
+[sub_resource type="Item" id="Item_vjh6r"]
+item_type = 1
+item_name = "막대기"
+use_message = PackedStringArray("* ?", "* 당신은 막대기를 장착했다")
+item_information = PackedStringArray("* 막대기 - 1\n* 겉보기와 달리 위협적이지 않다")
+throw_message = PackedStringArray("* 당신은 막대기를 바닥에 버렸다")
+
+[sub_resource type="Item" id="Item_2bweu"]
+item_name = "반창고"
+use_message = PackedStringArray("* 당신은 반창고를 사용했다")
+item_information = PackedStringArray("* 반창고 - 10 hp 회복\n* 이미 여러 번 붙였던 것이다")
+throw_message = PackedStringArray("* 반창고를 버렸다")
+heal_amount = 10
+
+[sub_resource type="Item" id="Item_ortms"]
+item_type = 1
+item_name = "빈 권총"
+weapon_speed = 1.5
+weapon_bars = 4
+weapon_type = 5
+critical_hits = true
+use_message = PackedStringArray("* 당신은 빈 권총을 착용했다")
+item_information = PackedStringArray("* 빈 권총 - 12\n* 골동품 리볼버다. 총알은 없다.", "* 정확한 공격이 아니면 주는 피해가 적다.")
+throw_message = PackedStringArray("* 당신은 빈 권총을 버렸다")
+attack_amount = 12
+
+[sub_resource type="Item" id="Item_6g36q"]
+item_type = 2
+item_name = "카우보이 모자"
+use_message = PackedStringArray("* 당신은 카우보이 모자를 착용했다")
+item_information = PackedStringArray("* 카우보이 모자 - 12", "* 전투로 낡은 이 모자엔 턱수염이 딱 어울릴 텐데. 공격력도 5 올려준다.")
+throw_message = PackedStringArray("* 당신은 카우보이 모자를 버렸다")
+attack_amount = 5
+defense_amount = 12
+
+[sub_resource type="Item" id="Item_74wqe"]
+item_type = 1
+item_name = "진짜 칼"
+use_message = PackedStringArray("* [color=red]이제서야.[/color]")
+item_information = PackedStringArray("* 진짜 칼 - 99\n* 드디어 찾았다!")
+throw_message = PackedStringArray("* 당신은 진짜 칼은 버렸다", "* [color=red]...[/color]")
+attack_amount = 99
+
+[sub_resource type="Item" id="Item_4mto3"]
+item_type = 2
+item_name = "로켓"
+use_message = PackedStringArray("* [color=red]원래 자리로.[/color]")
+item_information = PackedStringArray("* 로켓 - 99\n* 고동치는 게 느껴진다.")
+throw_message = PackedStringArray("* 당신은 로켓을 버렸다", "* [color=red]...[/color]")
+defense_amount = 99
+
+[sub_resource type="Item" id="Item_g72yp"]
+item_name = "파이"
+use_message = PackedStringArray("* 당신은 파이를 사용했다")
+item_information = PackedStringArray("* 파이중에 한조각", "* 버터스카치 시나몬 파이 한 조각이다.")
+throw_message = PackedStringArray("* 파이를 버렸다")
+heal_amount = 999
+
+[sub_resource type="Item" id="Item_y5w0o"]
+item_name = "시나몬버니"
+use_message = PackedStringArray("* 당신은 시나몬버니를 사용했다.")
+item_information = PackedStringArray("* 시나몬버니 - 체력 22 회복\n* 토끼 모양의 시나몬롤이다.")
+throw_message = PackedStringArray("\"* 시나몬버니를 버렸다")
+heal_amount = 45
+
+[sub_resource type="Item" id="Item_3ix70"]
+item_name = "감자칩"
+use_message = PackedStringArray("* 당신은 감자칩을 사용했다")
+item_information = PackedStringArray("* 감자칩 -  13hp 회복\n* 별 특징 없는 오래된 감자칩이다")
+throw_message = PackedStringArray("* 당신은 감자칩을 버렸다")
+heal_amount = 13
+
+[sub_resource type="Item" id="Item_ggybg"]
+item_name = "전설의 영웅"
+use_message = PackedStringArray("* 당신은 전설의 영웅을 사용했다")
+item_information = PackedStringArray("* 전설의 영웅 - 40hp 회복\n* 검 모양 샌드위치. 먹으면 공격력 향상.")
+throw_message = PackedStringArray("* 당신은 전설의 영웅을 버렸다")
+heal_amount = 40
+attack_amount = 4
+
+[sub_resource type="Item" id="Item_2vafi"]
+item_name = "크로케 롤"
+use_message = PackedStringArray("* 를 사용했다")
+item_information = PackedStringArray("*  - 15 hp 회복\n* 전통적으로 타구망치와 같이 제공되는 튀김 도넛.")
+throw_message = PackedStringArray("* 를 버렸다")
+heal_amount = 15
+
+[sub_resource type="Item" id="Item_wk1s5"]
+item_name = "컵라면"
+use_message = PackedStringArray("* 당신은 컵라면을 사용했다")
+item_information = PackedStringArray("* 컵라면 - 90hp 회복\n* 그냥 평범한 컵라면이다")
+throw_message = PackedStringArray("* 당신은 컵라면을 버렸다")
+heal_amount = 90
+
+[node name="Global" type="Global"]
+item_list = Array[Item]([SubResource("Item_vjh6r"), SubResource("Item_2bweu"), SubResource("Item_ortms"), SubResource("Item_6g36q"), SubResource("Item_74wqe"), SubResource("Item_4mto3"), SubResource("Item_g72yp"), SubResource("Item_y5w0o"), SubResource("Item_3ix70"), SubResource("Item_ggybg"), SubResource("Item_2vafi"), SubResource("Item_wk1s5")])
+equipment = {
+"armor": 3,
+"weapon": 2
+}
+items = [6, 7, 7, 9, 10]
+player_gold = 4374
+player_lv = 15
+player_exp = 8263
+player_hp = 76
+player_max_hp = 76
+player_defense = 13
+player_attack = 38
+player_kills = 103
+process_mode = 3
+layer = 10
+
+[node name="Info" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_aygu1")
+bbcode_enabled = true
+
+[node name="heal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_752qb")
+bus = &"SFX"
+
+[node name="KrTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MusicGlobal" type="AudioStreamPlayer" parent="."]
+process_mode = 1
+bus = &"Music"
+
+[connection signal="timeout" from="KrTimer" to="." method="_on_kr_tick"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlgt4euxo4kwg"]
+
+[ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_j1ohj"]
+[ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_na0ty"]
+[ext_resource type="PackedScene" uid="uid://gyhc83v53iax" path="res://Overworld/Interactions/save.tscn" id="3_sx1mm"]
+[ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="3_yiaqt"]
+[ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="4_13m3u"]
+[ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="4_et7pl"]
+[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="5_k6kbm"]
+
+[sub_resource type="Encounter" id="Encounter_evx2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lu3lb"]
+size = Vector2(295.5, 118.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbdhq"]
+size = Vector2(617, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayyyk"]
+size = Vector2(104, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5tgr"]
+size = Vector2(513, 125.5)
+
+[node name="core_1" type="Overworld" node_paths=PackedStringArray("room_entrances")]
+world_name = "핫랜드 - 코어의 끝"
+player_path = NodePath("PlayerOverworld")
+camera_path = NodePath("PlayerOverworld/Camera")
+music = ExtResource("1_j1ohj")
+room_entrances = [NodePath("trigger/room2")]
+
+[node name="image" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-54, 268)
+scale = Vector2(1.2, 1.17497)
+texture = ExtResource("2_na0ty")
+region_enabled = true
+region_rect = Rect2(3025.66, 808, 754.102, 206.214)
+metadata/_edit_lock_ = true
+
+[node name="Save" parent="." instance=ExtResource("3_sx1mm")]
+save_text = PackedStringArray("* 무언가 불길한 기운이 당신을 감싼다", "* 그럼에도 당신은 의지로 가득찬다")
+position = Vector2(377, 232)
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("3_yiaqt")]
+Encounters = Array[Encounter]([SubResource("Encounter_evx2d")])
+position = Vector2(320, 240)
+
+[node name="Camera" parent="PlayerOverworld" instance=ExtResource("4_13m3u")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+limit_left = -500
+limit_top = 140
+limit_right = 400
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="1" type="CollisionShape2D" parent="static"]
+position = Vector2(250.75, 329.25)
+shape = SubResource("RectangleShape2D_lu3lb")
+
+[node name="2" type="CollisionShape2D" parent="static"]
+position = Vector2(261, 164)
+shape = SubResource("RectangleShape2D_lu3lb")
+
+[node name="3" type="CollisionShape2D" parent="static"]
+position = Vector2(-197.5, 186.5)
+shape = SubResource("RectangleShape2D_tbdhq")
+
+[node name="4" type="CollisionShape2D" parent="static"]
+position = Vector2(-455, 330.5)
+shape = SubResource("RectangleShape2D_ayyyk")
+
+[node name="5" type="CollisionShape2D" parent="static"]
+position = Vector2(-147, 322.25)
+shape = SubResource("RectangleShape2D_x5tgr")
+
+[node name="trigger" type="Node2D" parent="."]
+
+[node name="text_trigger" parent="trigger" instance=ExtResource("4_et7pl")]
+text = PackedStringArray("* ( 문이 열리지 않는다 다른 길을 찾아야 할거 같다 )")
+position = Vector2(231, 219)
+scale = Vector2(2, 1)
+
+[node name="text_trigger2" parent="trigger" instance=ExtResource("4_et7pl")]
+text = PackedStringArray("* ( ? 엘레베이터가 작동을 안한다 )")
+position = Vector2(327, 218)
+scale = Vector2(2, 1)
+
+[node name="room2" parent="trigger" instance=ExtResource("5_k6kbm")]
+facing_direction = Vector2(1, 0)
+new_room = "res://Game/overworld/core/2.tscn"
+new_room_entrance_id = 1
+offset_left = -491.0
+offset_top = 219.0
+offset_right = -481.0
+offset_bottom = 277.0
+pivot_offset = Vector2(26, 27)
+metadata/_edit_use_anchors_ = true
