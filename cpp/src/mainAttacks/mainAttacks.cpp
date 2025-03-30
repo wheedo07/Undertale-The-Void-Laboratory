@@ -32,7 +32,7 @@ Bone* MainAttacks::create_bone(Masking type) {
     add_bullet(boneObject, type);
     return boneObject;
 }
-            
+
 Blaster* MainAttacks::create_blaster(Masking type) {
     Blaster* blasterObject = Object::cast_to<Blaster>(blaster->instantiate());
     add_bullet(blasterObject, type);
