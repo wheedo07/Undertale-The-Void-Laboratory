@@ -70,7 +70,7 @@ offset_bottom = 132.0
 pivot_offset = Vector2(33, 24)
 
 [node name="event2" parent="trigger" instance=ExtResource("6_uk2ss")]
-action = 8
+action = 12
 position = Vector2(304, 243)
 scale = Vector2(3.3, 2)
 

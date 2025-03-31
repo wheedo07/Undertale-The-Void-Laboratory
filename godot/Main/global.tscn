@@ -103,7 +103,7 @@ equipment = {
 "armor": 3,
 "weapon": 2
 }
-items = [6, 7, 7, 9, 10]
+items = [6, 0, 7, 7, 9, 9, 10]
 player_gold = 4374
 player_lv = 15
 player_exp = 8263

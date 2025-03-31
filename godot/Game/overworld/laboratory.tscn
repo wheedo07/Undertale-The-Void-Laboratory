@@ -1,0 +1,186 @@
+[gd_scene load_steps=19 format=3 uid="uid://0w6206ajnb2r"]
+
+[ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_wjc33"]
+[ext_resource type="Texture2D" uid="uid://cgl2ly10cs5oe" path="res://Game/assets/img/laboratory.png" id="2_4xebv"]
+[ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="3_lhw5i"]
+[ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="4_vblli"]
+[ext_resource type="PackedScene" uid="uid://bj6e8xllsfsj4" path="res://Overworld/Characters/sans.tscn" id="5_6xecf"]
+[ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="5_c6odf"]
+[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="6_outnr"]
+[ext_resource type="PackedScene" uid="uid://g6wce27yxejw" path="res://Game/move_trigger.tscn" id="8_nhqnf"]
+[ext_resource type="PackedScene" uid="uid://d26ybge5kvki2" path="res://Overworld/Interactions/item_interaction.tscn" id="9_y6mkm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6lp"]
+size = Vector2(7, 54.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft5j7"]
+size = Vector2(90, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbh4i"]
+size = Vector2(981, 162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qni8"]
+size = Vector2(312, 85)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5cfg"]
+size = Vector2(1203, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0gp5"]
+size = Vector2(24, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ywur"]
+size = Vector2(20, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwx75"]
+size = Vector2(40, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a88rx"]
+size = Vector2(46, 20)
+
+[node name="Laboratory" type="LaboratoryNode"]
+player_path = NodePath("PlayerOverworld")
+camera_path = NodePath("PlayerOverworld/Camera")
+music = ExtResource("1_wjc33")
+
+[node name="image" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-221, 83)
+scale = Vector2(1.2, 1.02655)
+texture = ExtResource("2_4xebv")
+region_rect = Rect2(2062, 278, 306, 292)
+metadata/_edit_lock_ = true
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("3_lhw5i")]
+position = Vector2(320, 235)
+
+[node name="Camera" parent="PlayerOverworld" instance=ExtResource("4_vblli")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+
+[node name="Sans" parent="." instance=ExtResource("5_6xecf")]
+position = Vector2(320, 272)
+
+[node name="trigger" type="Node2D" parent="."]
+
+[node name="room_core" parent="trigger" instance=ExtResource("6_outnr")]
+facing_direction = Vector2(-1, 0)
+new_room = "res://Game/overworld/core/3.tscn"
+offset_left = 371.0
+offset_top = 217.0
+offset_right = 377.0
+offset_bottom = 265.0
+pivot_offset = Vector2(-51, 17)
+
+[node name="experiment_data" type="Node2D" parent="trigger"]
+position = Vector2(23, 23)
+
+[node name="1" parent="trigger/experiment_data" instance=ExtResource("5_c6odf")]
+text = PackedStringArray(" THE CORE... MY CREATION... IT\'S PULLING ME IN. I CAN\'T... I CAN\'T ESCAPE.")
+position = Vector2(-272, 203)
+scale = Vector2(0.5, 0.417)
+
+[node name="2" parent="trigger/experiment_data" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* ( 너무 복잡한 수식 처럼 보인다 )", "* ( 내가 읽을수 없을거 같다 )")
+position = Vector2(-250, 211)
+scale = Vector2(0.5, 0.417)
+
+[node name="3" parent="trigger/experiment_data" instance=ExtResource("5_c6odf")]
+text = PackedStringArray(" DARKNESS. ENDLESS DARKNESS.", "BUT I CAN SEE... EVERYTHING. ALL POSSIBILITIES AT ONCE.")
+position = Vector2(-304, 212)
+scale = Vector2(0.5, 0.417)
+
+[node name="4" parent="trigger/experiment_data" instance=ExtResource("5_c6odf")]
+text = PackedStringArray(" I SEE OTHER WORLDS.", "NOT JUST OUR UNDERGROUND.", "WORLDS WHERE MONSTERS WON THE WAR. WORLDS WHERE WE NEVER EXISTED.")
+position = Vector2(-341, 212)
+scale = Vector2(0.5, 0.417)
+
+[node name="text_trigger" parent="trigger" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* ( 화면은 더이상 켜지지 않는다.. )")
+position = Vector2(-420, 192)
+scale = Vector2(4, 1)
+
+[node name="text_trigger2" parent="trigger" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* ( 에스컬레이터가 작동하지 않는다 )")
+position = Vector2(299, 191)
+scale = Vector2(1.2, 1)
+
+[node name="text_trigger3" parent="trigger" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* ( 에스컬레이터가 작동하지 않는다 )")
+position = Vector2(-517, 191)
+scale = Vector2(1.2, 1)
+
+[node name="text_trigger4" parent="trigger" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* 여기 구멍도 쓸모없어 보인다")
+position = Vector2(48, 192)
+scale = Vector2(3, 1)
+
+[node name="MoveTrigger" parent="trigger" instance=ExtResource("8_nhqnf")]
+text = PackedStringArray("* ( 아무래도 안보이는 벽이 지나간후 막힌거 같다.. )")
+position = Vector2(357, 240)
+scale = Vector2(0.3, 3)
+
+[node name="MoveTrigger2" parent="trigger" instance=ExtResource("8_nhqnf")]
+text = PackedStringArray("* ( 이쪽도 지나갈수는 없는거 같다 )")
+position = Vector2(-717, 260)
+scale = Vector2(0.3, 3)
+
+[node name="PickupInteractArea" parent="trigger" instance=ExtResource("9_y6mkm")]
+discover_text = PackedStringArray("* ( 아직도 냉장고 속에 컵라면이 있다 )", "* 가져갈까?")
+accept_text = PackedStringArray("* 당신은 [color=yellow]컵라면[/color]을 얻었다")
+item_id = 11
+position = Vector2(-168, 205)
+scale = Vector2(2, 1.5)
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="1" type="CollisionShape2D" parent="static"]
+position = Vector2(362.5, 237.875)
+shape = SubResource("RectangleShape2D_5q6lp")
+
+[node name="2" type="CollisionShape2D" parent="static"]
+position = Vector2(381, 275.5)
+shape = SubResource("RectangleShape2D_ft5j7")
+
+[node name="3" type="CollisionShape2D" parent="static"]
+position = Vector2(380, 206)
+shape = SubResource("RectangleShape2D_ft5j7")
+
+[node name="4" type="CollisionShape2D" parent="static"]
+position = Vector2(-64.5, 118)
+shape = SubResource("RectangleShape2D_sbh4i")
+
+[node name="5" type="CollisionShape2D" parent="static"]
+position = Vector2(-711, 196.5)
+shape = SubResource("RectangleShape2D_2qni8")
+
+[node name="6" type="CollisionShape2D" parent="static"]
+position = Vector2(-265.5, 284.5)
+shape = SubResource("RectangleShape2D_j5cfg")
+
+[node name="7" type="CollisionShape2D" parent="static"]
+position = Vector2(-722, 260)
+shape = SubResource("RectangleShape2D_5q6lp")
+
+[node name="8" type="CollisionShape2D" parent="static"]
+position = Vector2(-469, 209.5)
+shape = SubResource("RectangleShape2D_e0gp5")
+
+[node name="9" type="CollisionShape2D" parent="static"]
+position = Vector2(-373, 210)
+shape = SubResource("RectangleShape2D_e0gp5")
+
+[node name="10" type="CollisionShape2D" parent="static"]
+position = Vector2(-333, 209.5)
+shape = SubResource("RectangleShape2D_8ywur")
+
+[node name="11" type="CollisionPolygon2D" parent="static"]
+polygon = PackedVector2Array(-309, 240, -289, 240, -289, 216, -284, 216, -284, 225, -279, 225, -279, 216, -269, 216, -269, 225, -263, 225, -263, 216, -241, 216, -241, 225, -235, 225, -235, 216, -226, 216, -226, 225, -220, 225, -220, 216, -214, 215, -214, 240, -193, 240, -194, 200, -309, 199)
+
+[node name="12" type="CollisionShape2D" parent="static"]
+position = Vector2(-168, 207.5)
+shape = SubResource("RectangleShape2D_mwx75")
+
+[node name="13" type="CollisionShape2D" parent="static"]
+position = Vector2(-121, 197)
+shape = SubResource("RectangleShape2D_a88rx")

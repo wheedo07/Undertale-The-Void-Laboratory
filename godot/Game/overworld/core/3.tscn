@@ -90,6 +90,9 @@ offset_bottom = 282.0
 pivot_offset = Vector2(23, 21)
 
 [node name="room_lab" parent="trigger" instance=ExtResource("7_5uqtv")]
+facing_direction = Vector2(0, -1)
+new_room = "res://Game/overworld/laboratory.tscn"
+special_room = true
 offset_left = 281.0
 offset_top = 361.0
 offset_right = 363.0
