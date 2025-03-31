@@ -23,7 +23,7 @@ world_name = "핫랜드 - 코어 갈림길"
 player_path = NodePath("PlayerOverworld")
 camera_path = NodePath("Save/Camera")
 music = ExtResource("1_50nku")
-room_entrances = [NodePath("trigger/room2"), NodePath("trigger/room4")]
+room_entrances = [NodePath("trigger/room2"), NodePath("trigger/room4"), NodePath("trigger/room8")]
 
 [node name="image" type="Sprite2D" parent="."]
 z_index = -1
@@ -77,6 +77,17 @@ offset_top = 155.0
 offset_right = 356.0
 offset_bottom = 163.0
 pivot_offset = Vector2(35, 23)
+
+[node name="room8" parent="trigger" instance=ExtResource("7_5uqtv")]
+facing_direction = Vector2(1, 0)
+door_id = 8
+new_room = "res://Game/overworld/core/8.tscn"
+new_room_entrance_id = 3
+offset_left = 161.0
+offset_top = 236.0
+offset_right = 168.0
+offset_bottom = 282.0
+pivot_offset = Vector2(23, 21)
 
 [node name="room_lab" parent="trigger" instance=ExtResource("7_5uqtv")]
 offset_left = 281.0

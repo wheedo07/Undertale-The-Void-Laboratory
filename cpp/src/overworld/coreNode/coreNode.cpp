@@ -134,7 +134,7 @@ void CoreNode::event1() {
                 String::utf8("* !?"), String::utf8("* 앞으로 갈수가 없다..?")
             })
         ));
-        sys->sequence([this]() { return !global->get("player_text_box"); },
+        sys->sequence([this]() { return !global->get_player_text_box(); },
         {[this]() {
             Music->stop();
             summontextbox()->generic(sys->dia()->from(
@@ -198,7 +198,7 @@ void CoreNode::text_trigger1() {
             String::utf8("ALL SUFFERING WILL CEASE TO EXIST...")
         })
     ));
-    sys->sequence([this]() { return !global->get("player_text_box"); },
+    sys->sequence([this]() { return !global->get_player_text_box(); },
     {[this]() {
         summontextbox()->generic(sys->dia()->from(
             PackedStringArray({

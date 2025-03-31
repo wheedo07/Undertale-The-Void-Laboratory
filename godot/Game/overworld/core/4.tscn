@@ -17,7 +17,7 @@ size = Vector2(145, 246)
 player_path = NodePath("PlayerOverworld")
 camera_path = NodePath("image/Camera")
 music = ExtResource("1_ebl56")
-room_entrances = [NodePath("trigger/room2"), NodePath("trigger/room3")]
+room_entrances = [NodePath("trigger/room2"), NodePath("trigger/room3"), NodePath("trigger/room6")]
 
 [node name="image" type="Sprite2D" parent="."]
 z_index = -1
@@ -63,6 +63,16 @@ offset_top = 341.0
 offset_right = 343.0
 offset_bottom = 349.0
 pivot_offset = Vector2(35, -13)
+
+[node name="room6" parent="trigger" instance=ExtResource("6_chewf")]
+door_id = 6
+new_room = "res://Game/overworld/core/6.tscn"
+new_room_entrance_id = 4
+offset_left = 271.0
+offset_top = 123.0
+offset_right = 347.0
+offset_bottom = 132.0
+pivot_offset = Vector2(37, 25)
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = -1

@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://bslxakcqobxqp"]
+
+[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_h7b80"]
+[ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_32f81"]
+[ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="3_x28ty"]
+[ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="4_i72ud"]
+[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="5_okyjl"]
+[ext_resource type="PackedScene" uid="uid://dd758xuvic7xl" path="res://Overworld/Interactions/overworld_area_trigger.tscn" id="6_uk2ss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_678je"]
+size = Vector2(172, 106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik5fn"]
+size = Vector2(139, 251)
+
+[node name="core_7" type="CoreNode" node_paths=PackedStringArray("room_entrances")]
+player_path = NodePath("PlayerOverworld")
+camera_path = NodePath("image/Camera")
+music = ExtResource("1_h7b80")
+room_entrances = [NodePath("trigger/room6"), NodePath("trigger/room8"), NodePath("trigger/room9")]
+
+[node name="image" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 240)
+scale = Vector2(1.2, 1.02655)
+texture = ExtResource("2_32f81")
+region_enabled = true
+region_rect = Rect2(2075, 525.331, 319, 248.669)
+metadata/_edit_lock_ = true
+
+[node name="Camera" parent="image" instance=ExtResource("3_x28ty")]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = false
+
+[node name="PlayerOverworld" parent="." instance=ExtResource("4_i72ud")]
+position = Vector2(307, 306)
+
+[node name="trigger" type="Node2D" parent="."]
+
+[node name="room6" parent="trigger" instance=ExtResource("5_okyjl")]
+facing_direction = Vector2(-1, 0)
+door_id = 6
+new_room = "res://Game/overworld/core/6.tscn"
+new_room_entrance_id = 7
+offset_left = 471.0
+offset_top = 221.0
+offset_right = 478.0
+offset_bottom = 265.0
+pivot_offset = Vector2(-16, 21)
+
+[node name="room8" parent="trigger" instance=ExtResource("5_okyjl")]
+facing_direction = Vector2(0, -1)
+door_id = 8
+new_room = "res://Game/overworld/core/8.tscn"
+new_room_entrance_id = 7
+offset_left = 265.0
+offset_top = 352.0
+offset_right = 341.0
+offset_bottom = 360.0
+pivot_offset = Vector2(37, -15)
+
+[node name="room9" parent="trigger" instance=ExtResource("5_okyjl")]
+door_id = 9
+new_room = "res://Game/overworld/core/9.tscn"
+new_room_entrance_id = 7
+offset_left = 269.0
+offset_top = 125.0
+offset_right = 337.0
+offset_bottom = 132.0
+pivot_offset = Vector2(33, 24)
+
+[node name="event2" parent="trigger" instance=ExtResource("6_uk2ss")]
+action = 8
+position = Vector2(304, 243)
+scale = Vector2(3.3, 2)
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = -1
+
+[node name="1" type="CollisionShape2D" parent="static"]
+position = Vector2(426, 318)
+shape = SubResource("RectangleShape2D_678je")
+
+[node name="2" type="CollisionShape2D" parent="static"]
+position = Vector2(425.5, 168.5)
+shape = SubResource("RectangleShape2D_678je")
+
+[node name="3" type="CollisionShape2D" parent="static"]
+position = Vector2(199.5, 239.5)
+shape = SubResource("RectangleShape2D_ik5fn")
+
+[connection signal="cutscene" from="trigger/event2" to="." method="event2"]
