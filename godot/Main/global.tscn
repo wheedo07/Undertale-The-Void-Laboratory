@@ -43,7 +43,7 @@ item_type = 1
 item_name = "진짜 칼"
 use_message = PackedStringArray("* [color=red]이제서야.[/color]")
 item_information = PackedStringArray("* 진짜 칼 - 99\n* 드디어 찾았다!")
-throw_message = PackedStringArray("* 당신은 진짜 칼은 버렸다", "* [color=red]...[/color]")
+throw_message = PackedStringArray("* [color=red]...[/color]", "* 당신은 진짜 칼은 버렸다")
 attack_amount = 99
 
 [sub_resource type="Item" id="Item_4mto3"]
@@ -51,7 +51,7 @@ item_type = 2
 item_name = "로켓"
 use_message = PackedStringArray("* [color=red]원래 자리로.[/color]")
 item_information = PackedStringArray("* 로켓 - 99\n* 고동치는 게 느껴진다.")
-throw_message = PackedStringArray("* 당신은 로켓을 버렸다", "* [color=red]...[/color]")
+throw_message = PackedStringArray("* [color=red]...[/color]", "* 당신은 로켓을 버렸다")
 defense_amount = 99
 
 [sub_resource type="Item" id="Item_g72yp"]
@@ -65,7 +65,7 @@ heal_amount = 999
 item_name = "시나몬버니"
 use_message = PackedStringArray("* 당신은 시나몬버니를 사용했다.")
 item_information = PackedStringArray("* 시나몬버니 - 체력 22 회복\n* 토끼 모양의 시나몬롤이다.")
-throw_message = PackedStringArray("\"* 시나몬버니를 버렸다")
+throw_message = PackedStringArray("* 시나몬버니를 버렸다")
 heal_amount = 45
 
 [sub_resource type="Item" id="Item_3ix70"]
