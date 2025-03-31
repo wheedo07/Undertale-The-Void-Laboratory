@@ -68,9 +68,8 @@ void Enemy_SANS1::_on_get_turn() {
                         sprites->set_z_index(0);
                         sprites->set_y_sort_enabled(false);
     
-                        MainAttacks* attack1 = create_attack();
-                        attack1->set_part(PartType::sans_1);
-                        attacks->start_attack(0);
+                        create_attack()->set_part(PartType::sans_1);
+                        attacks->start_attacks();
                         sys->sleep([this]() { is = true; }, 24);
                     }, 3);
                 },
