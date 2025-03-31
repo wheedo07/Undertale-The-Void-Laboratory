@@ -71,7 +71,7 @@ void CoreNode::init() {
             sans->start_walking();
             sys->sleep([this]() { global->set_player_text_box(false); }, 1);
         }, [this]() {
-            summontextbox()->character(TextBox::SANS, sys->dia()->from(
+            summontextbox()->character(Character::SANS, sys->dia()->from(
                 PackedStringArray({
                     String::utf8("* 음 kid 여기 있었네.."),
                     String::utf8("* ..."),
@@ -95,18 +95,18 @@ void CoreNode::voidWall() {
     int is = global->get_flags()["is"];
     if(is) {
         summontextbox()->generic(sys->dia()->from(
-            Array::make(
+            PackedStringArray({
                 String::utf8("* 안보이는 벽이 있는거 같다.."),
                 String::utf8("* ( 다른 길을 찾아야 할거 같다.. )")
-            )
+            })
         ));
     }else {
         summontextbox()->generic(sys->dia()->from(
-            Array::make(
+            PackedStringArray({
                 String::utf8("* !?"), String::utf8("* 앞으로 갈수가 없다..?"),
                 String::utf8("* 무언가 앞에 안보이는 벽이있는거 같다..?"),
                 String::utf8("* ( 다른 길을 찾아야 할거 같다... )")
-            )
+            })
         ));
         global->set_flag("is", 1);
     }
@@ -117,11 +117,11 @@ void CoreNode::event1() {
     int is = global->get_flags()["is"];
     if(!is) {
         summontextbox()->generic(sys->dia()->from(
-            Array::make(
+            PackedStringArray({
                 String::utf8("* !?"), String::utf8("* 앞으로 갈수가 없다..?"),
                 String::utf8("* 무언가 앞에 안보이는 벽이있는거 같다..?"),
                 String::utf8("* 무언가 느낌이 안 좋다..")
-            )
+            })
         ));
         global->set_flag("is", 1);
         global->set_player_can_move(true);
@@ -130,20 +130,20 @@ void CoreNode::event1() {
 
     if(is == 2) {
         summontextbox()->generic(sys->dia()->from(
-            Array::make(
+            PackedStringArray({
                 String::utf8("* !?"), String::utf8("* 앞으로 갈수가 없다..?")
-            )
+            })
         ));
         sys->sequence([this]() { return !global->get("player_text_box"); },
         {[this]() {
             Music->stop();
             summontextbox()->generic(sys->dia()->from(
-                Array::make(
+                PackedStringArray({
                     String::utf8("* [color=red]흠.. 역시..[/color]"),
                     String::utf8("* [color=red]음? 왜 파트너?[/color]"),
                     String::utf8("* [color=red]아 무슨일인지는 직접알아봐[/color]"),
                     String::utf8("* [color=red]일단 코어 갈림길로 가볼래? 나한테 묻지 말고[/color]")
-                )
+                })
             ));
         },
         [this]() {
@@ -151,9 +151,9 @@ void CoreNode::event1() {
             global->set_flag("is", 3);
         }});
     }else summontextbox()->generic(sys->dia()->from(
-        Array::make(
+        PackedStringArray({
             String::utf8("* 여기도 막혀있다...")
-        )
+        })
     ));
     global->set_player_can_move(true);
 }
@@ -163,11 +163,11 @@ void CoreNode::event2() {
     if(is < 2) {
         Music->stop();
         global->set_player_move(false);
-        Array text = Array::make(
+        PackedStringArray text = PackedStringArray({
             String::utf8("* [color=red]흠.. 뭔가 이상하네..[/color]"),
             String::utf8("* [color=red]그렇지 않아? 파트너? 내가 벌써 나오고..[/color]"),
             String::utf8("* [color=red]( 너는 아직도 영혼을 안줬고... :) )[/color]")
-        );
+        });
         if(is == 1) {
             text.append_array(Array::make(
                 String::utf8("* [color=red]주변은 또 막혀있고 말이야..[/color]"),
@@ -192,26 +192,26 @@ void CoreNode::event2() {
 }
 
 void CoreNode::text_trigger1() {
-    summontextbox()->character(TextBox::GASTER, sys->dia()->from(
-        Array::make(
+    summontextbox()->character(Character::GASTER, sys->dia()->from(
+        PackedStringArray({
             String::utf8("WHEN TIME AND SPACE BECOME ONE..."),
             String::utf8("ALL SUFFERING WILL CEASE TO EXIST...")
-        )
+        })
     ));
     sys->sequence([this]() { return !global->get("player_text_box"); },
     {[this]() {
         summontextbox()->generic(sys->dia()->from(
-            Array::make(
+            PackedStringArray({
                 String::utf8("* ?"),
                 String::utf8("* 이해 할수 없는 문양이다..")
-            )
+            })
         ));
 
         Node* text_trigger = get_node_internal("trigger/text_trigger");
         text_trigger->disconnect("dialogue_finished", Callable(this, "text_trigger1"));
-        text_trigger->set("text", Array::make(
+        text_trigger->set("text", PackedStringArray({
             String::utf8("* ( 아까 문자는 뭐였을까..? )")
-        ));
+        }));
         global->set_flag("event1", true);
     }});
 }

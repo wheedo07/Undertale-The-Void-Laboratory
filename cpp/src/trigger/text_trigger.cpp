@@ -22,7 +22,7 @@ void TextTrigger::_on_interact_text() {
     Ref<Dialogues> dia = sys->dia(); 
     dia->from(text);
     if(is_wingdings(text[0])) {
-        textbox->character(TextBox::GASTER, dia);
+        textbox->character(Character::GASTER, dia);
     }else textbox->generic(dia);
     textbox->connect("dialogue_finished", Callable(this, "emit_signal").bind("dialogue_finished"));
 }

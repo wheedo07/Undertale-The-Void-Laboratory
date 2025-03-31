@@ -30,13 +30,13 @@ void LaboratoryNode::initEvent() {
         ));
         sys->sequence([this]() { return !global->get_player_text_box(); },
         {[this]() {
-            summontextbox()->character(TextBox::SANS, sys->dia()->from(
+            summontextbox()->character(Character::SANS, sys->dia()->from(
                 Array::make(String::utf8("* 여기까지 왔으니 이제 돌아가."))
             )->set_expressions(Array::make(4)));
         }, [this, sans]() {
             sans->start_walking(Vector2(0, -1));
             sans->start_walking();
-            summontextbox()->character(TextBox::SANS, sys->dia()->from(
+            summontextbox()->character(Character::SANS, sys->dia()->from(
                 Array::make(
                     String::utf8("* 연구소 정문으로 나갈수 있어 이만 나가 줘"),
                     String::utf8("* 넌 이미 충분히 많은 걸 해왔잖아?"),
@@ -52,7 +52,7 @@ void LaboratoryNode::initEvent() {
             audio_player->play("beep");
             sys->sleep([this]() {
                 camera->Void(0.5, 0.5, 0.002);
-                summontextbox()->character(TextBox::SANS, sys->dia()->from(
+                summontextbox()->character(Character::SANS, sys->dia()->from(
                     Array::make(
                         String::utf8("* ...제길")
                     )
@@ -61,7 +61,7 @@ void LaboratoryNode::initEvent() {
         }, [this]() {
             global->set_player_text_box(true);
             sys->sleep([this]() {
-                summontextbox()->character(TextBox::SANS, sys->dia()->from(
+                summontextbox()->character(Character::SANS, sys->dia()->from(
                     Array::make(
                         String::utf8("* ...하지만 지금은."),
                         String::utf8("* 더 큰 문제가 생긴거 같네..")
