@@ -5,33 +5,31 @@ compatibility_minimum = "4.1"
 
 [libraries]
 
-macos.debug = "res://exe/libgdexample.macos.template_debug.framework"
-macos.release = "res://exe/libgdexample.macos.template_release.framework"
-windows.debug.x86_32 = "res://exe/libgdexample.windows.template_debug.x86_32.dll"
-windows.release.x86_32 = "res://exe/libgdexample.windows.template_release.x86_32.dll"
-windows.debug.x86_64 = "res://exe/libgdexample.windows.template_debug.x86_64.dll"
-windows.release.x86_64 = "res://exe/libgdexample.windows.template_release.x86_64.dll"
-linux.debug.x86_64 = "res://exe/libgdexample.linux.template_debug.x86_64.so"
-linux.release.x86_64 = "res://exe/libgdexample.linux.template_release.x86_64.so"
-linux.debug.arm64 = "res://exe/libgdexample.linux.template_debug.arm64.so"
-linux.release.arm64 = "res://exe/libgdexample.linux.template_release.arm64.so"
-linux.debug.rv64 = "res://exe/libgdexample.linux.template_debug.rv64.so"
-linux.release.rv64 = "res://exe/libgdexample.linux.template_release.rv64.so"
-android.debug.x86_64 = "res://exe/libgdexample.android.template_debug.x86_64.so"
-android.release.x86_64 = "res://exe/libgdexample.android.template_release.x86_64.so"
-android.debug.arm64 = "res://exe/libgdexample.android.template_debug.arm64.so"
-android.release.arm64 = "res://exe/libgdexample.android.template_release.arm64.so"
-web.debug.wasm32 = "res://exe/libgdexample.web.template_debug.wasm32.wasm"
-web.release.wasm32 = "res://exe/libgdexample.web.template_release.wasm32.wasm"
-web.debug.wasm32.nothreads = "res://exe/libgdexample.web.template_debug.wasm32.nothreads.wasm"
-web.release.wasm32.nothreads = "res://exe/libgdexample.web.template_release.wasm32.nothreads.wasm"
+windows.debug.x86_32 = "res://exe/lib.UndertaleEngine.windows_debug.x86_32.dll"
+windows.release.x86_32 = "res://exe/lib.UndertaleEngine.windows_release.x86_32.dll"
+windows.debug.x86_64 = "res://exe/lib.UndertaleEngine.windows_debug.x86_64.dll"
+windows.release.x86_64 = "res://exe/lib.UndertaleEngine.windows_release.x86_64.dll"
+linux.debug.x86_64 = "res://exe/lib.UndertaleEngine.linux_debug.x86_64.so"
+linux.release.x86_64 = "res://exe/lib.UndertaleEngine.linux_release.x86_64.so"
+linux.debug.arm64 = "res://exe/lib.UndertaleEngine.linux_debug.arm64.so"
+linux.release.arm64 = "res://exe/lib.UndertaleEngine.linux_release.arm64.so"
+linux.debug.rv64 = "res://exe/lib.UndertaleEngine.linux_debug.rv64.so"
+linux.release.rv64 = "res://exe/lib.UndertaleEngine.linux_release.rv64.so"
+android.debug.x86_64 = "res://exe/lib.UndertaleEngine.android_debug.x86_64.so"
+android.release.x86_64 = "res://exe/lib.UndertaleEngine.android_release.x86_64.so"
+android.debug.arm64 = "res://exe/lib.UndertaleEngine.android_debug.arm64.so"
+android.release.arm64 = "res://exe/lib.UndertaleEngine.android_release.arm64.so"
+web.debug.wasm32 = "res://exe/lib.UndertaleEngine.web_debug.wasm32.wasm"
+web.release.wasm32 = "res://exe/lib.UndertaleEngine.web_release.wasm32.wasm"
+web.debug.wasm32.nothreads = "res://exe/lib.UndertaleEngine.web_debug.wasm32.nothreads.wasm"
+web.release.wasm32.nothreads = "res://exe/lib.UndertaleEngine.web_release.wasm32.nothreads.wasm"
 
 [dependencies]
 
 web.debug.wasm32.nothreads = {
-    "res://exe/libgdexample.web.template_debug.wasm32.nothreads.wasm": ""
+    "res://exe/lib.UndertaleEngine.web_debug.wasm32.nothreads.wasm": ""
 }
 
 web.debug.wasm32 {
-    "res://exe/libgdexample.web.template_debug.wasm32.wasm": ""
+    "res://exe/lib.UndertaleEngine.web_debug.wasm32.wasm": ""
 }

@@ -22,18 +22,9 @@ sources += Glob("cpp/engine/*/*.cpp")
 sources += Glob("cpp/src/*/*.cpp")
 sources += Glob("cpp/src/*/*/*.cpp")
 
-
-if env["platform"] == "macos":
-    library = env.SharedLibrary(
-        "godot/exe/libgdexample.{}.{}.framework/libgdexample.{}.{}".format(
-            env["platform"], env["target"], env["platform"], env["target"]
-        ),
-        source=sources,
-    )
-else:
-    library = env.SharedLibrary(
-        "godot/exe/libgdexample{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
-        source=sources,
-    )
+library = env.SharedLibrary(
+    "godot/exe/lib.UndertaleEngine{}{}".format(env["suffix"], env["SHLIBSUFFIX"]).replace(".template", ""),
+    source=sources,
+)
 
 Default(library)
