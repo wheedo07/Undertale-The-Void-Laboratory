@@ -6,6 +6,7 @@
 #include<godot_cpp/classes/scene_tree.hpp>
 #include<godot_cpp/variant/callable.hpp>
 #include<godot_cpp/classes/engine.hpp>
+#define OptionSize 3
 
 bool is = false;
 Title::Title() {

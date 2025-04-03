@@ -1,6 +1,5 @@
 #ifndef TITLE_H
 #define TITLE_H
-#define OptionSize 3
 
 #include<godot_cpp/classes/control.hpp>
 #include<godot_cpp/classes/input_event.hpp>
