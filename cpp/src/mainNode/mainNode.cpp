@@ -1,7 +1,9 @@
 #include "mainNode.h"
 #include "env.h"
 
-MainNode::MainNode() {}
+MainNode::MainNode() {
+    isClear = false;
+}
 
 MainNode::~MainNode() {}
 

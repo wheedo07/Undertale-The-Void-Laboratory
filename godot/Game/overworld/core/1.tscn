@@ -43,6 +43,7 @@ save_text = PackedStringArray("* 무언가 불길한 기운이 당신을 감싼�
 position = Vector2(377, 232)
 
 [node name="PlayerOverworld" parent="." instance=ExtResource("3_yiaqt")]
+frame_alert = 2
 Encounters = Array[Encounter]([SubResource("Encounter_evx2d")])
 position = Vector2(320, 240)
 

@@ -69,7 +69,7 @@ void Enemy_SANS1::_on_get_turn() {
                         sprites->set_y_sort_enabled(false);
     
                         create_attack()->set_part(PartType::sans_1);
-                        attacks->start_attacks();
+                        attacks->start_attack(0);
                         sys->sleep([this]() { is = true; }, 24);
                     }, 3);
                 },
@@ -90,7 +90,17 @@ void Enemy_SANS1::_on_get_turn() {
             });
         }, 17);
     }else {
-        global->set_flag("main1", true);
+        play_dialogue(1);
+        sys->sequence([this]() { return !global->get_battle_text_box(); }, {
+            [this]() {
+                audio_player->play("beep");
+                play_dialogue(2);
+            },
+            [this]() {
+                global->set_flag("main1", true);
+                scene_changer->load_cached_overworld_scene();
+            }
+        });
     }
 }
 

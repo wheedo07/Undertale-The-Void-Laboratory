@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://bj6e8xllsfsj4"]
+[gd_scene load_steps=26 format=3 uid="uid://bj6e8xllsfsj4"]
 
+[ext_resource type="Texture2D" uid="uid://dgt76c4oamvka" path="res://Overworld/Interactions/alert.png" id="2_0qowa"]
 [ext_resource type="Texture2D" uid="uid://c1bq5e0an0nld" path="res://Overworld/Characters/sans.png" id="2_ek4yr"]
 [ext_resource type="PackedScene" uid="uid://mh5dhu6wa6nf" path="res://Overworld/Interactions/interaction_trigger.tscn" id="3_mi26t"]
 
@@ -126,6 +127,35 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilg8t"]
+atlas = ExtResource("2_0qowa")
+region = Rect2(1, 1, 12, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tlmq"]
+atlas = ExtResource("2_0qowa")
+region = Rect2(14, 1, 12, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coku4"]
+atlas = ExtResource("2_0qowa")
+region = Rect2(27, 1, 12, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3881"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilg8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tlmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coku4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
 [node name="Sans" type="EnemyOverworld" groups=["sans"]]
 y_sort_enabled = true
 slide_on_ceiling = false
@@ -141,6 +171,11 @@ debug_color = Color(1, 1, 1, 0.419608)
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_c51cd")
 offset = Vector2(0, -5)
+
+[node name="Alert" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -36)
+sprite_frames = SubResource("SpriteFrames_c3881")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25

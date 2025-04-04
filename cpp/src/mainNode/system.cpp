@@ -51,30 +51,33 @@ void MainNode::time_loop(function<void(double delta)> fun, double time) {
 }
 
 void MainNode::clear_system() {
-    for(int i=0; i < sleepFuns.size(); i++) {
-        sleepFuns.erase(sleepFuns.begin() + i);
-    }
-    for(int i=0; i < loopFuns.size(); i++) {
-        loopFuns.erase(loopFuns.begin() + i);
-    }
+    isClear = true;
 }
 
 void MainNode::system(double delta) {
-    int i1 = 0;
-    for(auto& fun : sleepFuns) {
-        if(fun.cool <= fun.time) {
-            fun.fun();
-            sleepFuns.erase(sleepFuns.begin() + i1);
-        }else {
-            fun.time+=delta;
-            i1++;
+    if(isClear) {
+        for(int i=0; i < sleepFuns.size(); i++) 
+            sleepFuns.erase(sleepFuns.begin() + i);
+        for(int i=0; i < loopFuns.size(); i++) 
+            loopFuns.erase(loopFuns.begin() + i);
+        isClear = false;
+    }else {
+        int i1 = 0;
+        for(auto& fun : sleepFuns) {
+            if(fun.cool <= fun.time) {
+                fun.fun();
+                sleepFuns.erase(sleepFuns.begin() + i1);
+            }else {
+                fun.time+=delta;
+                i1++;
+            }
         }
-    }
-
-    int i2 = 0;
-    for(auto& fun : loopFuns) {
-        if(fun(delta)) 
+        
+        int i2 = 0;
+        for(auto& fun : loopFuns) {
+            if(fun(delta)) 
             loopFuns.erase(loopFuns.begin() + i2);
-        else i2++;
+            else i2++;
+        }
     }
 }

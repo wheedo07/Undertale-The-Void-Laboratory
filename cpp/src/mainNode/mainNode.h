@@ -14,6 +14,7 @@ namespace godot {
 
         private:
             ResourceLoader* loader;
+            bool isClear;
         
         public:
             MainNode();
