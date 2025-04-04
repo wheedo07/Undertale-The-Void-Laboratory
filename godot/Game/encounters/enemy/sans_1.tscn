@@ -1102,7 +1102,6 @@ dodging = true
 stats = {
 "def": 1,
 "hp": 1,
-"kr": true,
 "max_hp": 1
 }
 one_by_one_overrdie = true
@@ -1197,8 +1196,8 @@ local_coords = true
 custom_character = 1
 offset_left = 59.0
 offset_top = -141.0
-offset_right = 218.0
-offset_bottom = -26.0
+offset_right = 237.0
+offset_bottom = -31.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6
