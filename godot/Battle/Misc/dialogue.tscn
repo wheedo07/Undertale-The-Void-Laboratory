@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://d3j04wql8n25c"]
+[gd_scene load_steps=47 format=3 uid="uid://d3j04wql8n25c"]
 
 [ext_resource type="Texture2D" uid="uid://1hnj4eaoawfv" path="res://Battle/Misc/Bubble/bubble_1.png" id="1_v6xqj"]
 [ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="2_2m2k7"]
+[ext_resource type="Shader" path="res://Text/pixel.gdshader" id="2_wqw4s"]
 [ext_resource type="AudioStream" uid="uid://degl6ii2gdr87" path="res://sfx/Clicks/generic1.wav" id="12_6qcf2"]
 [ext_resource type="AudioStream" uid="uid://c31288d48uxlm" path="res://sfx/Clicks/sans.wav" id="13_yqa7m"]
 [ext_resource type="AudioStream" uid="uid://celgg0c7gujrh" path="res://sfx/Clicks/papyrus.wav" id="14_x3llm"]
@@ -39,6 +40,10 @@
 [ext_resource type="AudioStream" uid="uid://do1da1erd4lgy" path="res://sfx/Clicks/toriel1.wav" id="45_mk2tc"]
 [ext_resource type="AudioStream" uid="uid://bwtyu078dolgx" path="res://sfx/Clicks/toriel2.wav" id="46_54qmn"]
 [ext_resource type="AudioStream" uid="uid://dujqmsj4dnghp" path="res://sfx/Clicks/toriel3.wav" id="47_48vxc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3046"]
+shader = ExtResource("2_wqw4s")
+shader_parameter/threshold = 0.4
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_61nwo"]
 streams_count = 4
@@ -105,6 +110,7 @@ theme_override_constants/margin_bottom = 6
 [node name="Text" type="EnemySpeech" parent="TextContainer"]
 click_path = NodePath("Sounds/Generic")
 entire_text_bbcode = "[center]"
+material = SubResource("ShaderMaterial_f3046")
 layout_mode = 2
 theme = ExtResource("2_2m2k7")
 theme_override_colors/default_color = Color(0, 0, 0, 1)

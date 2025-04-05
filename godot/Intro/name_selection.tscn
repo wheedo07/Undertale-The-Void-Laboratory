@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw7by1ibpkm1x"]
+[gd_scene load_steps=9 format=3 uid="uid://cw7by1ibpkm1x"]
 
 [ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="1_wgwn4"]
 [ext_resource type="FontFile" uid="uid://bmu72gsmwg55g" path="res://Game/assets/font/korean.ttf" id="2_r36tv"]
 [ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="3_2u401"]
 [ext_resource type="AudioStream" uid="uid://bp5oyjspngmp2" path="res://sfx/Clicks/generic2.wav" id="4_wgfxx"]
+[ext_resource type="Shader" path="res://Text/pixel.gdshader" id="5_jss6j"]
 [ext_resource type="AudioStream" uid="uid://dsid8nuan7lku" path="res://sfx/player_hurt.wav" id="5_kots0"]
 [ext_resource type="AudioStream" uid="uid://btx6cbfdqvvbh" path="res://sfx/mus_cymbal.ogg" id="6_s3pw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ea88n"]
+shader = ExtResource("5_jss6j")
+shader_parameter/threshold = 0.5
 
 [node name="NameSelection" type="NameSelection"]
 process_mode = 3
@@ -39,6 +44,7 @@ text = "[center][shake rate=3 level=5]
 scroll_active = false
 
 [node name="Name" type="Label" parent="."]
+material = SubResource("ShaderMaterial_ea88n")
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.18
@@ -71,6 +77,7 @@ border_width = 2.0
 
 [node name="Shift" type="OptionSelectable" parent="Letters"]
 self_modulate = Color(0.721569, 0.721569, 0.721569, 1)
+clip_contents = false
 layout_mode = 0
 offset_left = 167.0
 offset_top = 288.0
@@ -92,6 +99,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Quit" type="OptionSelectable" parent="Options"]
+clip_contents = false
 layout_mode = 0
 offset_right = 75.0
 offset_bottom = 40.0
@@ -100,6 +108,7 @@ text = "나가기
 "
 
 [node name="Backspace" type="OptionSelectable" parent="Options"]
+clip_contents = false
 layout_mode = 0
 offset_left = 156.0
 offset_right = 286.0
@@ -108,6 +117,7 @@ theme = ExtResource("3_2u401")
 text = "지우기"
 
 [node name="Done" type="OptionSelectable" parent="Options"]
+clip_contents = false
 layout_mode = 0
 offset_left = 324.0
 offset_right = 382.0
