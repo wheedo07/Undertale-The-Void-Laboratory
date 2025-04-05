@@ -11,14 +11,14 @@ namespace godot {
             static void _bind_methods();
 
         private:
-            CameraFx* camera;
+            bool is;
 
         public:
             LaboratoryNode();
             ~LaboratoryNode();
 
+            void ready() override;
             void init();
-            void initEvent();
     };
 }
 

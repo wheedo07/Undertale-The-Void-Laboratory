@@ -10,15 +10,11 @@ namespace godot {
         protected:
             static void _bind_methods();
         
-        private:
-            CameraFx* camera;
-
         public:
             CoreNode();
             ~CoreNode();
 
             void ready() override;
-            void init();
 
             void voidWall();
             void event1();

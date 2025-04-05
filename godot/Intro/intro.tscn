@@ -23,6 +23,7 @@ texture = ExtResource("3_2gjn4")
 [node name="IntroText" type="GenericTextTyper" parent="."]
 click_path = NodePath("Generic")
 queued_texts_handling = 1
+clip_contents = false
 layout_mode = 0
 offset_left = 83.0
 offset_top = 293.0

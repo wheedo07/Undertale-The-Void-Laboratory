@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0w6206ajnb2r"]
+[gd_scene load_steps=18 format=3 uid="uid://0w6206ajnb2r"]
 
 [ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_wjc33"]
 [ext_resource type="Texture2D" uid="uid://cgl2ly10cs5oe" path="res://Game/assets/img/laboratory.png" id="2_4xebv"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="4_vblli"]
 [ext_resource type="PackedScene" uid="uid://bj6e8xllsfsj4" path="res://Overworld/Characters/sans.tscn" id="5_6xecf"]
 [ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="5_c6odf"]
-[ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="6_outnr"]
 [ext_resource type="PackedScene" uid="uid://g6wce27yxejw" path="res://Game/move_trigger.tscn" id="8_nhqnf"]
 [ext_resource type="PackedScene" uid="uid://d26ybge5kvki2" path="res://Overworld/Interactions/item_interaction.tscn" id="9_y6mkm"]
 
@@ -51,25 +50,17 @@ region_rect = Rect2(2062, 278, 306, 292)
 metadata/_edit_lock_ = true
 
 [node name="PlayerOverworld" parent="." instance=ExtResource("3_lhw5i")]
-position = Vector2(320, 235)
+walk_speed = 30.0
+position = Vector2(330, 245)
 
 [node name="Camera" parent="PlayerOverworld" instance=ExtResource("4_vblli")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = false
 
 [node name="Sans" parent="." instance=ExtResource("5_6xecf")]
-position = Vector2(320, 272)
+position = Vector2(192, 245)
 
 [node name="trigger" type="Node2D" parent="."]
-
-[node name="room_core" parent="trigger" instance=ExtResource("6_outnr")]
-facing_direction = Vector2(-1, 0)
-new_room = "res://Game/overworld/core/3.tscn"
-offset_left = 371.0
-offset_top = 217.0
-offset_right = 377.0
-offset_bottom = 265.0
-pivot_offset = Vector2(-51, 17)
 
 [node name="experiment_data" type="Node2D" parent="trigger"]
 position = Vector2(23, 23)

@@ -15,11 +15,6 @@ void CoreNode::_bind_methods() {
 }
 
 void CoreNode::ready() {
-    camera = global->get_scene_container()->get_camera();
-    init();
-}
-
-void CoreNode::init() {
     String name = get_name();
     Dictionary flags = global->get_flags();
     if(flags["event1"] || flags["main1"])
@@ -37,57 +32,30 @@ void CoreNode::init() {
     }else if(name == "core_3") {
         int main1 = flags["main1"];
         RoomEntranceNode* room_lab = Object::cast_to<RoomEntranceNode>(get_node_internal("trigger/room_lab"));
+        EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
         if(main1) {
+            sans->queue_free();
             room_lab->set_position(Vector2(281, 351));
             return;
         }
 
         global->set_player_move(false);
-        EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
         summontextbox()->generic(sys->dia()->from(
             PackedStringArray({
-                String::utf8("* ...."),
-                String::utf8("* ( 당신은 코어 구조부터 모든게 이상하다는것을 느낀다.. )")
+                String::utf8("* [color=red]..."),
             })
-        ));
-        sys->sequence([this]() { return !global->get_player_text_box(); },
-        {[this, sans]() {
-            global->set_player_text_box(true);
-            sans->set_position(Vector2(321, 356));
-            sans->start_walking(Vector2i(0, -1));
-            sys->sleep([this]() { global->set_player_text_box(false); }, 1.3);
-        }, [this, sans]() {
-            global->set_player_text_box(true);
-            Vector2 player_pos = global->get_player_position();
-            Vector2 sans_pos = sans->get_position();
-            Vector2 diff = player_pos - sans_pos;
-            Vector2i direction;
-            
-            if (abs(diff.x) > abs(diff.y))
-                direction = Vector2i(diff.x > 0 ? 1 : -1, 0);
-            else direction = Vector2i(0, diff.y > 0 ? 1 : -1);
-            
-            sans->start_walking(direction);
-            sans->start_walking();
-            sys->sleep([this]() { global->set_player_text_box(false); }, 1);
-        }, [this]() {
-            summontextbox()->character(Character::SANS, sys->dia()->from(
-                PackedStringArray({
-                    String::utf8("* 음 kid 여기 있었네.."),
-                    String::utf8("* ..."),
-                    String::utf8("* 뼈밖에서 보니까 반갑네"),
-                    String::utf8("* 꽤 바빠보이던데... Love 15라..."),
-                    String::utf8("* 그나저나 이상하지 않아? 기계는 작동을 안하고..."),
-                    String::utf8("* 아. 근데 말이야, kid..."),
-                    String::utf8("* 내가 여기 있는것도 우연은 아니고..."),
-                    String::utf8("* 지금 당장 이걸 끝내야 해."),
-                    String::utf8("* 그게 나을거야, 꼬맹아")
-                })
-            )->set_expressions(Array::make(2, 4, 3, 1, 0, 4, 4, 18, 19))->
-            set_speed(Array::make(0.1, 0.1)));
-        }, [this]() {
-            sys->load_battle("res://Game/encounters/sans_1.tres", Vector2(324, 323));
-        }});
+        )->set_speed(Array::make(0.03)));
+        sys->sequence([this]() { return !global->get_player_text_box(); }, {
+            [this, sans, room_lab]() {
+                sans->start_walking(Vector2i(0, 1));
+                sys->sleep([this, sans, room_lab]() {
+                    global->set_flag("main1", true);
+                    sans->queue_free();
+                    room_lab->set_position(Vector2(281, 351));
+                    global->set_player_move(true);
+                }, 1.5);
+            }
+        });
     }
 }
 

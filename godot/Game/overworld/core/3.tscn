@@ -45,6 +45,10 @@ position_smoothing_enabled = false
 [node name="PlayerOverworld" parent="." instance=ExtResource("5_bs0jp")]
 position = Vector2(393, 265)
 
+[node name="Sans" parent="." instance=ExtResource("8_wktk1")]
+walk_speed = 30
+position = Vector2(320, 315)
+
 [node name="trigger" type="Node2D" parent="."]
 
 [node name="text_trigger" parent="trigger" instance=ExtResource("6_rvccq")]
@@ -97,9 +101,6 @@ offset_left = 281.0
 offset_top = 361.0
 offset_right = 363.0
 offset_bottom = 368.0
-
-[node name="Sans" parent="." instance=ExtResource("8_wktk1")]
-position = Vector2(321, 407)
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = -1
