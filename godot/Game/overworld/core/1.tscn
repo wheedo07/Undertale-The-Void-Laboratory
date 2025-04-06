@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlgt4euxo4kwg"]
+[gd_scene load_steps=14 format=3 uid="uid://dlgt4euxo4kwg"]
 
 [ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_j1ohj"]
 [ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_na0ty"]
@@ -21,6 +21,9 @@ size = Vector2(104, 117)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5tgr"]
 size = Vector2(513, 125.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ur0u"]
+size = Vector2(12, 63)
 
 [node name="core_1" type="Overworld" node_paths=PackedStringArray("room_entrances")]
 world_name = "핫랜드 - 코어의 끝"
@@ -76,6 +79,10 @@ shape = SubResource("RectangleShape2D_ayyyk")
 [node name="5" type="CollisionShape2D" parent="static"]
 position = Vector2(-147, 322.25)
 shape = SubResource("RectangleShape2D_x5tgr")
+
+[node name="6" type="CollisionShape2D" parent="static"]
+position = Vector2(403, 244.5)
+shape = SubResource("RectangleShape2D_3ur0u")
 
 [node name="trigger" type="Node2D" parent="."]
 
