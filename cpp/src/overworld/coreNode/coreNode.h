@@ -9,6 +9,8 @@ namespace godot {
 
         protected:
             static void _bind_methods();
+
+            void main2_selected_option(int option);
         
         public:
             CoreNode();
@@ -20,6 +22,7 @@ namespace godot {
             void event1();
             void event2();
             void text_trigger1();
+            void main2_start();
     };
 }
 

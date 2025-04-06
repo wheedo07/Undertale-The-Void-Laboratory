@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://x1g53cac1aq7"]
+[gd_scene load_steps=16 format=3 uid="uid://x1g53cac1aq7"]
 
 [ext_resource type="Shader" path="res://Shaders/blur.gdshader" id="1_n24qb"]
 [ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="2_rnrpm"]
 [ext_resource type="StyleBox" uid="uid://lx860swgqgcf" path="res://Boxes/BoxBackground.tres" id="3_jxe76"]
 [ext_resource type="FontFile" uid="uid://bmu72gsmwg55g" path="res://Game/assets/font/korean.ttf" id="4_g0vdf"]
+[ext_resource type="Shader" path="res://Text/pixel.gdshader" id="4_rygnh"]
 [ext_resource type="Texture2D" uid="uid://b11qd5emkkagu" path="res://Boxes/GlobalBoxTexture.tres" id="5_v15op"]
 [ext_resource type="PackedScene" uid="uid://cnm64bp0hy4b0" path="res://Menus/audiobus.tscn" id="6_t1t4d"]
 
@@ -13,6 +14,18 @@ bg_color = Color(0, 0, 0, 0.705882)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_owj1f"]
 shader = ExtResource("1_n24qb")
 shader_parameter/lod = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_67afo"]
+shader = ExtResource("4_rygnh")
+shader_parameter/threshold = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrnwr"]
+shader = ExtResource("4_rygnh")
+shader_parameter/threshold = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0px4p"]
+shader = ExtResource("4_rygnh")
+shader_parameter/threshold = 0.7
 
 [sub_resource type="Animation" id="Animation_qnifu"]
 length = 0.001
@@ -117,6 +130,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Paused" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_67afo")
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = -84.0
@@ -125,7 +139,7 @@ offset_bottom = 28.0
 grow_horizontal = 2
 theme = ExtResource("2_rnrpm")
 bbcode_enabled = true
-text = "[center]--설정--"
+text = "[center]--일시정지--"
 
 [node name="BoolOptions" type="Control" parent="."]
 layout_mode = 3
@@ -160,6 +174,7 @@ grow_vertical = 2
 
 [node name="VFX" type="SettingBoolButton" parent="BoolOptions/VBoxContainer"]
 setting_name = "vfx"
+material = SubResource("ShaderMaterial_67afo")
 layout_mode = 2
 theme = ExtResource("2_rnrpm")
 theme_override_fonts/font = ExtResource("4_g0vdf")
@@ -167,6 +182,7 @@ text = "VFX 쉐이더 끄기"
 
 [node name="CamShake" type="SettingBoolButton" parent="BoolOptions/VBoxContainer"]
 setting_name = "shake"
+material = SubResource("ShaderMaterial_yrnwr")
 layout_mode = 2
 theme = ExtResource("2_rnrpm")
 theme_override_fonts/font = ExtResource("4_g0vdf")
@@ -174,6 +190,7 @@ text = "카메라 흔들림"
 
 [node name="Border" type="SettingBoolButton" parent="BoolOptions/VBoxContainer"]
 setting_name = "border"
+material = SubResource("ShaderMaterial_0px4p")
 layout_mode = 2
 theme = ExtResource("2_rnrpm")
 theme_override_fonts/font = ExtResource("4_g0vdf")

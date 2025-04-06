@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dy0t6jldvkcc1"]
+[gd_scene load_steps=53 format=3 uid="uid://dy0t6jldvkcc1"]
 
 [ext_resource type="StyleBox" uid="uid://lx860swgqgcf" path="res://Boxes/BoxBackground.tres" id="1_gscy0"]
 [ext_resource type="SpriteFrames" uid="uid://dj2frtvnpp2o6" path="res://Game/text_box_head.tres" id="2_gj67d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpmpbp7g6ta2u" path="res://Battle/Soul/soul.png" id="4_1fbps"]
 [ext_resource type="AudioStream" uid="uid://c6u3egkne7fdu" path="res://sfx/button_choice.wav" id="5_uxfsj"]
 [ext_resource type="AudioStream" uid="uid://bh0xfl2mpo5vi" path="res://sfx/button_select.wav" id="6_3vwd2"]
+[ext_resource type="Shader" path="res://Text/pixel.gdshader" id="7_nm6xw"]
 [ext_resource type="FontFile" uid="uid://bmu72gsmwg55g" path="res://Game/assets/font/korean.ttf" id="7_wv0lv"]
 [ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="8_1qomw"]
 [ext_resource type="AudioStream" uid="uid://degl6ii2gdr87" path="res://sfx/Clicks/generic1.wav" id="9_6g2we"]
@@ -45,6 +46,10 @@
 [ext_resource type="AudioStream" uid="uid://do1da1erd4lgy" path="res://sfx/Clicks/toriel1.wav" id="43_2c8ib"]
 [ext_resource type="AudioStream" uid="uid://bwtyu078dolgx" path="res://sfx/Clicks/toriel2.wav" id="44_urrdq"]
 [ext_resource type="AudioStream" uid="uid://dujqmsj4dnghp" path="res://sfx/Clicks/toriel3.wav" id="45_54n7u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sdknb"]
+shader = ExtResource("7_nm6xw")
+shader_parameter/threshold = 0.5
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cv3w1"]
 streams_count = 4
@@ -195,6 +200,7 @@ metadata/_edit_group_ = true
 
 [node name="Text" type="TextBoxWriter" parent="Control/TextContainer"]
 click_path = NodePath("../../../Sounds/Generic")
+material = SubResource("ShaderMaterial_sdknb")
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("8_1qomw")
@@ -212,6 +218,7 @@ size_flags_vertical = 8
 
 [node name="First" type="TextBoxOptionWriter" parent="Control/TextContainer/Options"]
 visible = false
+material = SubResource("ShaderMaterial_sdknb")
 clip_contents = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -225,6 +232,7 @@ autowrap_mode = 0
 
 [node name="Second" type="TextBoxOptionWriter" parent="Control/TextContainer/Options"]
 visible = false
+material = SubResource("ShaderMaterial_sdknb")
 clip_contents = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -238,6 +246,7 @@ autowrap_mode = 0
 
 [node name="Third" type="TextBoxOptionWriter" parent="Control/TextContainer/Options"]
 visible = false
+material = SubResource("ShaderMaterial_sdknb")
 clip_contents = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -251,6 +260,7 @@ autowrap_mode = 0
 
 [node name="Fourth" type="TextBoxOptionWriter" parent="Control/TextContainer/Options"]
 visible = false
+material = SubResource("ShaderMaterial_sdknb")
 clip_contents = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2

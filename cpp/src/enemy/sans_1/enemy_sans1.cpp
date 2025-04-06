@@ -97,7 +97,7 @@ void Enemy_SANS1::_on_get_turn() {
                 play_dialogue(2);
             },
             [this]() {
-                global->set_flag("main2", true);
+                global->save_flag("main2", true);
                 scene_changer->load_cached_overworld_scene();
             }
         });

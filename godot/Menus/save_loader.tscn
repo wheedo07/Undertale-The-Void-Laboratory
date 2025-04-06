@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4c1hkxfxvh2t"]
+[gd_scene load_steps=10 format=3 uid="uid://c4c1hkxfxvh2t"]
 
+[ext_resource type="Shader" path="res://Text/pixel.gdshader" id="2_4f7u4"]
 [ext_resource type="Theme" uid="uid://s3o3wkvbt3ej" path="res://Themes/DTMono24.tres" id="2_u0ptt"]
 [ext_resource type="FontFile" uid="uid://bmu72gsmwg55g" path="res://Game/assets/font/korean.ttf" id="3_xxmk5"]
 [ext_resource type="AudioStream" uid="uid://c6u3egkne7fdu" path="res://sfx/button_choice.wav" id="4_6utps"]
 [ext_resource type="AudioStream" uid="uid://dkpyd33jvupcp" path="res://sfx/warning.ogg" id="5_rfr4t"]
 [ext_resource type="AudioStream" uid="uid://bh0xfl2mpo5vi" path="res://sfx/button_select.wav" id="5_rk211"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ihriq"]
+shader = ExtResource("2_4f7u4")
+shader_parameter/threshold = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kc30e"]
+shader = ExtResource("2_4f7u4")
+shader_parameter/threshold = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mkrny"]
+shader = ExtResource("2_4f7u4")
+shader_parameter/threshold = 0.7
 
 [node name="SaveLoader" type="SaveLoader"]
 
@@ -63,6 +76,7 @@ text = "HH:MM:SS"
 scroll_active = false
 
 [node name="Location" type="RichTextLabel" parent="Control/Texts"]
+material = SubResource("ShaderMaterial_ihriq")
 clip_contents = false
 layout_mode = 0
 offset_left = 28.0
@@ -84,6 +98,7 @@ grow_vertical = 2
 
 [node name="Load" type="OptionSelectableSolo" parent="Control/Options"]
 NodeRight = NodePath("../Reset")
+material = SubResource("ShaderMaterial_kc30e")
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -99,6 +114,7 @@ scroll_active = false
 
 [node name="Reset" type="OptionSelectableSolo" parent="Control/Options"]
 NodeLeft = NodePath("../Load")
+material = SubResource("ShaderMaterial_mkrny")
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0vr6ikc2lhu2"]
+[gd_scene load_steps=13 format=3 uid="uid://d0vr6ikc2lhu2"]
 
 [ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_50nku"]
 [ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_pv7oy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="6_rvccq"]
 [ext_resource type="PackedScene" uid="uid://y0wsj1g417an" path="res://Overworld/room_entrance_node.tscn" id="7_5uqtv"]
 [ext_resource type="PackedScene" uid="uid://bj6e8xllsfsj4" path="res://Overworld/Characters/sans.tscn" id="8_wktk1"]
+[ext_resource type="PackedScene" uid="uid://dd758xuvic7xl" path="res://Overworld/Interactions/overworld_area_trigger.tscn" id="9_sqw1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1uib"]
 size = Vector2(71, 6)
@@ -98,9 +99,14 @@ facing_direction = Vector2(0, -1)
 new_room = "res://Game/overworld/laboratory.tscn"
 special_room = true
 offset_left = 281.0
-offset_top = 361.0
+offset_top = 363.0
 offset_right = 363.0
-offset_bottom = 368.0
+offset_bottom = 370.0
+
+[node name="main2_start" parent="trigger" instance=ExtResource("9_sqw1q")]
+action = 6
+position = Vector2(322, 355)
+scale = Vector2(4, 0.3)
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = -1
@@ -125,3 +131,5 @@ shape = SubResource("RectangleShape2D_f3n87")
 [node name="5" type="CollisionShape2D" parent="static"]
 position = Vector2(-143, 69)
 shape = SubResource("RectangleShape2D_f3n87")
+
+[connection signal="cutscene" from="trigger/main2_start" to="." method="main2_start"]
