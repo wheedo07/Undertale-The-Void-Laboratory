@@ -188,9 +188,7 @@ void CoreNode::main2_start() {
         })
     ), Array::make(String::utf8("따라간다"), String::utf8("아니요")),
     Array::make(
-        sys->dia()->from(
-            PackedStringArray()
-        ),
+        Variant(),
         sys->dia()->from(
             PackedStringArray({
                 String::utf8("* 아직 할일이 있다")
@@ -201,8 +199,9 @@ void CoreNode::main2_start() {
 
 void CoreNode::main2_selected_option(int option) {
     if(option == 0) {
+        get_node_internal("trigger/main2_start")->queue_free();
         get_node_internal("static/1")->queue_free();
-        player->start_walking(Vector2i(0, 1));
+        player->call_deferred("start_walking", Vector2i(0, 1));
     }else if(option == 1) {
         player->start_walking(Vector2i(0, -1));
         sys->sleep([this]() {

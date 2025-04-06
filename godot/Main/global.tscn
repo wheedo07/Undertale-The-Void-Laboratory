@@ -99,6 +99,7 @@ heal_amount = 90
 
 [node name="Global" type="Global"]
 item_list = Array[Item]([SubResource("Item_vjh6r"), SubResource("Item_2bweu"), SubResource("Item_ortms"), SubResource("Item_6g36q"), SubResource("Item_74wqe"), SubResource("Item_4mto3"), SubResource("Item_g72yp"), SubResource("Item_y5w0o"), SubResource("Item_3ix70"), SubResource("Item_ggybg"), SubResource("Item_2vafi"), SubResource("Item_wk1s5")])
+savepath = "C:$home\\.Undertale-The-Void-Laboratory\\saved.json"
 equipment = {
 "armor": 3,
 "weapon": 2
