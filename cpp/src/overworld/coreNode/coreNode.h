@@ -10,6 +10,7 @@ namespace godot {
         protected:
             static void _bind_methods();
 
+        private:
             void main2_selected_option(int option);
         
         public:
