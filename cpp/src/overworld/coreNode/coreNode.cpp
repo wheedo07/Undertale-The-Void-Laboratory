@@ -31,7 +31,6 @@ void CoreNode::ready() {
     }else if(name == "core_3") {
         EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
         if(global->get_flag("main1")) {
-            get_node_internal("static/1")->queue_free();
             sans->queue_free();
             return;
         }

@@ -89,7 +89,8 @@ void Enemy_SANS1::_on_get_turn() {
                 }
             });
         }, 17);
-    }else {
+    }else if(main->turn_number == 1) {
+        soul->set_mode();
         play_dialogue(1);
         sys->sequence([this]() { return !global->get_battle_text_box(); }, {
             [this]() {
@@ -97,8 +98,9 @@ void Enemy_SANS1::_on_get_turn() {
                 play_dialogue(2);
             },
             [this]() {
+                audio_player->stop_audio("beep");
                 global->save_flag("main2", true);
-                scene_changer->call_deferred("load_cached_overworld_scene");
+                scene_changer->load_cached_overworld_scene();
             }
         });
     }

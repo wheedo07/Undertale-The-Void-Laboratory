@@ -18,10 +18,9 @@ void LaboratoryNode::ready() {
 }
 
 void LaboratoryNode::init() {
-    Dictionary flags = global->get_flags();
     EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
 
-    if(!flags["main2"]) {
+    if(!global->get_flag("main2")) {
         global->set_player_move(false);
         sans->start_walking(Vector2(0, -1));
         sans->start_walking();
@@ -76,5 +75,6 @@ void LaboratoryNode::init() {
                 sys->load_battle("res://Game/encounters/sans_1.tres",  Vector2(324, 323));
             }
         });
+    }else {
     }
 }
