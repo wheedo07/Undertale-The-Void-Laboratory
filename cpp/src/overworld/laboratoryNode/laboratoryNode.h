@@ -12,7 +12,6 @@ namespace godot {
 
         private:
             bool is;
-
             void character_talk();
 
         public:

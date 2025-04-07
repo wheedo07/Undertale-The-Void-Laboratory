@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://0w6206ajnb2r"]
+[gd_scene load_steps=21 format=3 uid="uid://0w6206ajnb2r"]
 
 [ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_wjc33"]
 [ext_resource type="Texture2D" uid="uid://cgl2ly10cs5oe" path="res://Game/assets/img/laboratory.png" id="2_4xebv"]
@@ -8,6 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="5_c6odf"]
 [ext_resource type="PackedScene" uid="uid://g6wce27yxejw" path="res://Game/move_trigger.tscn" id="8_nhqnf"]
 [ext_resource type="PackedScene" uid="uid://d26ybge5kvki2" path="res://Overworld/Interactions/item_interaction.tscn" id="9_y6mkm"]
+
+[sub_resource type="Dialogue" id="Dialogue_7f4gi"]
+dialog_text = "* 음 kid 미안하지만 지금 상황이 상황인지라"
+
+[sub_resource type="Dialogue" id="Dialogue_857ec"]
+dialog_text = "* !"
+dialog_expressions = Array[int]([10, 0])
+
+[sub_resource type="Dialogues" id="Dialogues_6le1q"]
+dialogues = Array[Dialogue]([SubResource("Dialogue_7f4gi"), SubResource("Dialogue_857ec")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6lp"]
 size = Vector2(7, 54.25)
@@ -40,6 +50,7 @@ size = Vector2(46, 20)
 player_path = NodePath("PlayerOverworld")
 camera_path = NodePath("PlayerOverworld/Camera")
 music = ExtResource("1_wjc33")
+y_sort_enabled = true
 
 [node name="image" type="Sprite2D" parent="."]
 z_index = -1
@@ -56,8 +67,10 @@ position = Vector2(330, 245)
 [node name="Camera" parent="PlayerOverworld" instance=ExtResource("4_vblli")]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = false
+limit_right = 400
 
 [node name="Sans" parent="." instance=ExtResource("5_6xecf")]
+dialogues = Array[Dialogues]([SubResource("Dialogues_6le1q")])
 position = Vector2(192, 245)
 
 [node name="trigger" type="Node2D" parent="."]
@@ -103,6 +116,11 @@ scale = Vector2(1.2, 1)
 [node name="text_trigger4" parent="trigger" instance=ExtResource("5_c6odf")]
 text = PackedStringArray("* 여기 구멍도 쓸모없어 보인다")
 position = Vector2(48, 192)
+scale = Vector2(3, 1)
+
+[node name="text_trigger5" parent="trigger" instance=ExtResource("5_c6odf")]
+text = PackedStringArray("* 컴퓨터로 조작해야지 열수 있을거 같다")
+position = Vector2(190, 192)
 scale = Vector2(3, 1)
 
 [node name="MoveTrigger" parent="trigger" instance=ExtResource("8_nhqnf")]
@@ -175,3 +193,5 @@ shape = SubResource("RectangleShape2D_mwx75")
 [node name="13" type="CollisionShape2D" parent="static"]
 position = Vector2(-121, 197)
 shape = SubResource("RectangleShape2D_a88rx")
+
+[connection signal="character_finished" from="Sans" to="." method="character_talk"]

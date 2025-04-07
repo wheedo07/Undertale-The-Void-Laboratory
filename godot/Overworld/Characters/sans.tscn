@@ -1,11 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://bj6e8xllsfsj4"]
+[gd_scene load_steps=27 format=3 uid="uid://bj6e8xllsfsj4"]
 
 [ext_resource type="Texture2D" uid="uid://dgt76c4oamvka" path="res://Overworld/Interactions/alert.png" id="2_0qowa"]
 [ext_resource type="Texture2D" uid="uid://c1bq5e0an0nld" path="res://Overworld/Characters/sans.png" id="2_ek4yr"]
 [ext_resource type="PackedScene" uid="uid://mh5dhu6wa6nf" path="res://Overworld/Interactions/interaction_trigger.tscn" id="3_mi26t"]
+[ext_resource type="AudioStream" uid="uid://b7pkf261ktb1q" path="res://sfx/overworld_encounter_surprise.wav" id="4_gxgth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdrqj"]
-size = Vector2(18, 3)
+size = Vector2(18, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cairb"]
 atlas = ExtResource("2_ek4yr")
@@ -163,7 +164,7 @@ wall_min_slide_angle = 0.785398
 platform_on_leave = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_bdrqj")
 debug_color = Color(1, 1, 1, 0.419608)
 
@@ -182,8 +183,12 @@ wait_time = 0.25
 autostart = true
 
 [node name="Area" parent="." instance=ExtResource("3_mi26t")]
-position = Vector2(0, -4)
-scale = Vector2(0.983261, 0.45462)
+position = Vector2(0, -3)
+scale = Vector2(0.983, 0.3)
+
+[node name="encounter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gxgth")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="interacted" from="Area" to="." method="_on_area_interacted"]

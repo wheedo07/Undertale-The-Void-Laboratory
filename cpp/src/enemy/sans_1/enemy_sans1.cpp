@@ -99,7 +99,7 @@ void Enemy_SANS1::_on_get_turn() {
             },
             [this]() {
                 audio_player->stop_audio("beep");
-                global->save_flag("main2", true);
+                global->set_flags("main2", true);
                 scene_changer->load_cached_overworld_scene();
             }
         });

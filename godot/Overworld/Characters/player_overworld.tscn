@@ -374,5 +374,6 @@ sprite_frames = SubResource("SpriteFrames_5wajs")
 
 [node name="encounter" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_5j3a3")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

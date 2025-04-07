@@ -77,6 +77,22 @@ void LaboratoryNode::init() {
             }
         });
     }else {
+        summontextbox()->character(Character::SANS, sys->dia()->from(
+            PackedStringArray({
+                String::utf8("* ..."),
+                String::utf8("* 잠깐 있어봐"),
+            })
+        )->set_expressions(Array::make(2, 18)));
+        sys->sequence([this]() { return !global->get_player_text_box(); }, {
+            [this, sans]() {
+                audio_player->play("teleport");
+                camera->blind(0.3, 1);
+                sans->set_position(Vector2(-420, 233));
+                sans->start_walking(Vector2i(0, -1));
+                sans->start_walking();
+                global->set_player_move(true);
+            }
+        });
     }
 }
 

@@ -28,7 +28,7 @@ void TextTrigger::_on_interact_text() {
 }
 
 bool TextTrigger::is_wingdings(String t) {
-    return t.chr(0) == " ";
+    return t[0] == 32;
 }
 
 void TextTrigger::set_text(PackedStringArray value) {
