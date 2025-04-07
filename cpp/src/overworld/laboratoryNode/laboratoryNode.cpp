@@ -10,6 +10,7 @@ LaboratoryNode::~LaboratoryNode() {}
 
 void LaboratoryNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("init"), &LaboratoryNode::init);
+    ClassDB::bind_method(D_METHOD("character_talk"), &LaboratoryNode::character_talk);
 }
 
 void LaboratoryNode::ready() {
@@ -77,4 +78,7 @@ void LaboratoryNode::init() {
         });
     }else {
     }
+}
+
+void LaboratoryNode::character_talk() {
 }

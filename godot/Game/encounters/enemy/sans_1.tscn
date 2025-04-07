@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bw02r33khpc4w" path="res://particles/smoke.png" id="16_n4l3h"]
 [ext_resource type="PackedScene" uid="uid://d3j04wql8n25c" path="res://Battle/Misc/dialogue.tscn" id="17_akvrj"]
 [ext_resource type="AudioStream" uid="uid://d0shy16q7rrx" path="res://sfx/snd_ehurt1.wav" id="18_fpynh"]
-[ext_resource type="Texture2D" uid="uid://be5xqdr4doast" path="res://Game/assets/sprite/death.png" id="18_teahm"]
+[ext_resource type="Texture2D" uid="uid://be5xqdr4doast" path="res://Game/assets/sprite/sheet/death.png" id="18_teahm"]
 [ext_resource type="AudioStream" uid="uid://dtoo70e1wko8r" path="res://sfx/snd_vaporized.wav" id="19_31muo"]
 
 [sub_resource type="Dialogue" id="Dialogue_h1dhv"]
