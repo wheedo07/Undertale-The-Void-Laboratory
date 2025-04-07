@@ -86,11 +86,11 @@ void LaboratoryNode::init() {
         sys->sequence([this]() { return !global->get_player_text_box(); }, {
             [this, sans]() {
                 audio_player->play("teleport");
-                camera->blind(0.3, 1);
+                camera->blind(1, 1);
                 sans->set_position(Vector2(-420, 233));
                 sans->start_walking(Vector2i(0, -1));
                 sans->start_walking();
-                global->set_player_move(true);
+                camera->connect("finished_tween", Callable(global, "set_player_move").bind(true), CONNECT_ONE_SHOT);
             }
         });
     }

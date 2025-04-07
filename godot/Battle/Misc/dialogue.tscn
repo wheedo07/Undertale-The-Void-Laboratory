@@ -102,14 +102,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 22
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
 [node name="Text" type="EnemySpeech" parent="TextContainer"]
 click_path = NodePath("Sounds/Generic")
-entire_text_bbcode = "[center]"
 material = SubResource("ShaderMaterial_f3046")
 layout_mode = 2
 theme = ExtResource("2_2m2k7")
