@@ -86,7 +86,7 @@ void LaboratoryNode::init() {
         sys->sequence([this]() { return !global->get_player_text_box(); }, {
             [this, sans]() {
                 audio_player->play("teleport");
-                camera->blind(1, 1);
+                camera->blind(0.2, 1, 0.3);
                 sans->set_position(Vector2(-420, 233));
                 sans->start_walking(Vector2i(0, -1));
                 sans->start_walking();
