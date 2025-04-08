@@ -178,7 +178,7 @@ material = SubResource("ShaderMaterial_67afo")
 layout_mode = 2
 theme = ExtResource("2_rnrpm")
 theme_override_fonts/font = ExtResource("4_g0vdf")
-text = "VFX 쉐이더 끄기"
+text = "VFX 쉐이더"
 
 [node name="CamShake" type="SettingBoolButton" parent="BoolOptions/VBoxContainer"]
 setting_name = "shake"

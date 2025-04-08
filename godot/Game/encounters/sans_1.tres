@@ -9,3 +9,4 @@ encounter_name = &"sans_1"
 background = ExtResource("1_81ouh")
 enemies = Array[PackedScene]([ExtResource("2_d02iu")])
 music = ExtResource("3_ojb4t")
+mercy_options = PackedStringArray("* 자비")

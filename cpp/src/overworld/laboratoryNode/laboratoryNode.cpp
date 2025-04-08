@@ -91,6 +91,7 @@ void LaboratoryNode::init() {
                 sans->start_walking(Vector2i(0, -1));
                 sans->start_walking();
                 camera->connect("finished_tween", Callable(global, "set_player_move").bind(true), CONNECT_ONE_SHOT);
+                camera->connect("finished_tween", Callable(camera, "Void"), CONNECT_ONE_SHOT);
             }
         });
     }

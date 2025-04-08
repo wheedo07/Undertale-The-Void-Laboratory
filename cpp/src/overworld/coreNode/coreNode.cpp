@@ -17,9 +17,6 @@ void CoreNode::_bind_methods() {
 
 void CoreNode::ready() {
     String name = get_name();
-    if(global->get_flag("event1") || global->get_flag("main1"))
-        camera->Void(0.5, 5, 0.002);
-    else camera->Void(0.5);
 
     if(name == "core_9") {
         if(!global->get_flag("event1")) return;

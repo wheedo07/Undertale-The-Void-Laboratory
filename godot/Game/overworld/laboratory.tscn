@@ -13,7 +13,7 @@
 dialog_text = "* 음 kid 미안하지만 지금 상황이 상황인지라"
 
 [sub_resource type="Dialogue" id="Dialogue_857ec"]
-dialog_text = "* !"
+dialog_text = "* 어라..?"
 dialog_expressions = Array[int]([10, 0])
 
 [sub_resource type="Dialogues" id="Dialogues_6le1q"]

@@ -94,6 +94,7 @@ void Enemy_SANS1::_on_get_turn() {
         play_dialogue(1);
         sys->sequence([this]() { return !global->get_battle_text_box(); }, {
             [this]() {
+                global->get_scene_container()->get_camera()->Void(0, 5, 0.005, 0.1, 2);
                 audio_player->play("beep");
                 play_dialogue(2);
             },
