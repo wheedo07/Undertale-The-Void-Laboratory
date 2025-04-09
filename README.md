@@ -3,7 +3,7 @@
 <div align="center">
   <img src="./assets/logo.png" alt="게임 로고" width="600"/>
   
-  <p><b>『공허 속에 잊혀진 진실을 찾아서』</b></p>
+  <p><b>『공허 속에 과학자』</b></p>
   <p>Godot 엔진으로 제작한 언더테일 팬게임</p>
 </div>
 
