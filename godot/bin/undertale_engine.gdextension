@@ -23,13 +23,3 @@ web.debug.wasm32 = "res://exe/lib.UndertaleEngine.web_debug.wasm32.wasm"
 web.release.wasm32 = "res://exe/lib.UndertaleEngine.web_release.wasm32.wasm"
 web.debug.wasm32.nothreads = "res://exe/lib.UndertaleEngine.web_debug.wasm32.nothreads.wasm"
 web.release.wasm32.nothreads = "res://exe/lib.UndertaleEngine.web_release.wasm32.nothreads.wasm"
-
-[dependencies]
-
-web.debug.wasm32.nothreads = {
-    "res://exe/lib.UndertaleEngine.web_debug.wasm32.nothreads.wasm": ""
-}
-
-web.debug.wasm32 {
-    "res://exe/lib.UndertaleEngine.web_debug.wasm32.wasm": ""
-}

@@ -123,27 +123,37 @@ void CoreNode::event2() {
     if(is < 2) {
         global->set_player_move(false);
         music_player->stop();
-        PackedStringArray text = PackedStringArray({
-            String::utf8("* [color=red]흠.. 뭔가 이상하네..[/color]"),
-            String::utf8("* [color=red]그렇지 않아? 파트너? 내가 벌써 나오고..[/color]"),
-            String::utf8("* [color=red]( 너는 아직도 영혼을 안줬고... :) )[/color]")
-        });
-        if(is == 1) {
-            text.append_array(PackedStringArray({
-                String::utf8("* [color=red]주변은 또 막혀있고 말이야..[/color]"),
-                String::utf8("* [color=red]일단 코어 갈림길로 가볼래? 거기에 있는거 같거든[/color]")
-            }));
-            summontextbox()->generic(
-                sys->dia()->from(text)->set_speed(Array::make(0.3, 0.18, 0.18, 0.2, 0.1))
-            );
+        if(global->get_flag("main1")) {
+            summontextbox()->generic(sys->dia()->from(
+                PackedStringArray({
+                    String::utf8("* [color=red]흠.. 파트너?[/color]"),
+                    String::utf8("* [color=red]일단 그 코미니언을 따라가자[/color]"),
+                })
+            ));
         }else {
-            text.append(String::utf8("* [color=red]일단 뭐 엘레베이터로 돌아가볼래? 뭔가 느낌이 안좋거든[/color]"));
-            summontextbox()->generic(
-                sys->dia()->from(text)->set_speed(Array::make(0.3, 0.18, 0.18, 0.1))
-            );
+            PackedStringArray text = PackedStringArray({
+                String::utf8("* [color=red]흠.. 뭔가 이상하네..[/color]"),
+                String::utf8("* [color=red]그렇지 않아? 파트너? 내가 벌써 나오고..[/color]"),
+                String::utf8("* [color=red]( 너는 아직도 영혼을 안줬고... :) )[/color]")
+            });
+            if(is == 1) {
+                text.append_array(PackedStringArray({
+                    String::utf8("* [color=red]주변은 또 막혀있고 말이야..[/color]"),
+                    String::utf8("* [color=red]일단 코어 갈림길로 가볼래? 거기에 있는거 같거든[/color]")
+                }));
+                summontextbox()->generic(
+                    sys->dia()->from(text)->set_speed(Array::make(0.3, 0.18, 0.18, 0.2, 0.1))
+                );
+            }else {
+                text.append(String::utf8("* [color=red]일단 뭐 엘레베이터로 돌아가볼래? 뭔가 느낌이 안좋거든[/color]"));
+                summontextbox()->generic(
+                    sys->dia()->from(text)->set_speed(Array::make(0.3, 0.18, 0.18, 0.1))
+                );
+            }
         }
         sys->sequence([this]() { return !global->get_player_text_box(); },
         {[this]() {
+            music_player->play();
             global->set_player_move(true);
             global->save_flag("is", 2);
         }});
