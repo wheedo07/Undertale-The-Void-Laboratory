@@ -32,6 +32,8 @@
 - **숨겨진 대화**: 특정 조건에서만 볼 수 있는 특별한 대화를 찾아보세요
 
 <div align="center">
+  <p>게임 스크린샷</p>
+  <img src="./assets/game.png" alt="게임 화면" width="450" onerror="this.style.display='none'"/>
   <img src="./assets/battle.png" alt="전투 장면" width="450" onerror="this.style.display='none'"/>
 </div>
 
@@ -45,8 +47,7 @@
 ## 🛠️ 개발 정보
 - **엔진**: Godot Engine 4.2
 - **해상도**: 640x480
-- **플랫폼**: PC (Windows/Mac/Linux)
-- **개발 상태**: 진행 중 (베타 테스트 모집 중)
+- **플랫폼**: PC (Windows)
 
 <div align="center">
   <p><i>"공허 속에서 잊혀지지 않은 것은 무엇일까...? 그리고 그것은 어떤 대가를 요구할까...?"</i></p>
