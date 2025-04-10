@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxambdq21t4hu"]
+[gd_scene load_steps=8 format=3 uid="uid://bxambdq21t4hu"]
 
 [ext_resource type="AudioStream" uid="uid://c6u3egkne7fdu" path="res://sfx/button_choice.wav" id="1_38hvj"]
 [ext_resource type="AudioStream" uid="uid://bh0xfl2mpo5vi" path="res://sfx/button_select.wav" id="2_cehme"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dsid8nuan7lku" path="res://sfx/player_hurt.wav" id="4_5t55f"]
 [ext_resource type="AudioStream" uid="uid://dat3sohvf36eg" path="res://Game/assets/audio/sfx/beep.mp3" id="5_pamuv"]
 [ext_resource type="AudioStream" uid="uid://dvce1f4hmqxw" path="res://Game/assets/audio/sfx/teleport.mp3" id="6_d88ns"]
+[ext_resource type="AudioStream" uid="uid://jvtmvjjdb5jy" path="res://sfx/glitch.wav" id="7_vjnxj"]
 
 [node name="AudioPlayer" type="AudioPlayer"]
 
@@ -31,4 +32,8 @@ bus = &"SFX"
 
 [node name="teleport" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_d88ns")
+bus = &"SFX"
+
+[node name="glitch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vjnxj")
 bus = &"SFX"

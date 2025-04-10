@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=24 format=3 uid="uid://dj2frtvnpp2o6"]
+[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://dj2frtvnpp2o6"]
 
 [ext_resource type="Texture2D" uid="uid://cpcpbncmm3ati" path="res://Enemies/sans_raw.png" id="1_y45kp"]
 [ext_resource type="Texture2D" uid="uid://mbu7krrwtuxm" path="res://Game/assets/sprite/head/sans_2.tres" id="2_enwbm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://15snk3rimuqp" path="res://Game/assets/sprite/head/sans_3.tres" id="4_nfqom"]
 [ext_resource type="Texture2D" uid="uid://bvc5e1wbrbcab" path="res://Game/assets/sprite/head/sans_4.tres" id="5_f6pyg"]
 [ext_resource type="Texture2D" uid="uid://0s8uhofpqmxh" path="res://Game/assets/sprite/head/sans_5.tres" id="6_2qdu4"]
+[ext_resource type="Texture2D" uid="uid://8l5myhae7b6x" path="res://Game/assets/sprite/head/sans_12.tres" id="7_w7r3f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ns30s"]
 atlas = ExtResource("1_y45kp")
@@ -173,6 +174,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_2qdu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w7r3f")
 }],
 "loop": false,
 "name": &"sans",

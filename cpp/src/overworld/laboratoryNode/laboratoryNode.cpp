@@ -11,6 +11,7 @@ LaboratoryNode::~LaboratoryNode() {}
 void LaboratoryNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("init"), &LaboratoryNode::init);
     ClassDB::bind_method(D_METHOD("character_talk"), &LaboratoryNode::character_talk);
+    ClassDB::bind_method(D_METHOD("finished_on"), &LaboratoryNode::finished_on);
 }
 
 void LaboratoryNode::ready() {
@@ -98,4 +99,51 @@ void LaboratoryNode::init() {
 }
 
 void LaboratoryNode::character_talk() {
+    camera->Void(0, 5, 0.005, 0.1, 2);
+    audio_player->play("beep");
+    TextBox* textbox = summontextbox();
+    textbox->character(Character::SANS, sys->dia()->from(
+        PackedStringArray({
+            String::utf8("어..? 잠깐만.. 뭔가 이상한..")
+        })
+    )->set_speed(Array::make(0.2))->set_expressions(Array::make(22)));
+    sys->sleep([this, textbox]() { textbox->on_text_click_played(); }, 4);
+
+    sys->sequence([this]() { return !global->get_player_text_box(); }, {
+        [this]() {
+            audio_player->stop_audio("beep");
+            global->set_player_in_menu(true);
+            camera->Void(0, 5, 0.02, 0.1, 3);
+            camera->blind(0, 1);
+            camera->shake_for(2, 8);
+            audio_player->loop_play("glitch");
+
+            special_1 = Object::cast_to<Sprite2D>(get_node_internal("event/special_1")->duplicate());
+            camera->blinder->add_child(special_1);
+            special_1->set_visible(true);
+            special_1->set_position(Vector2(400, 30));
+            special_1->set_modulate(Color(1, 1, 1, 0.0));
+            special_1->set_scale(Vector2(0.1, 0.1));
+
+            tween = create_tween()->set_parallel();
+            tween->tween_property(special_1, "scale", Vector2(1.5, 1.5), 6.0)->set_ease(Tween::EASE_OUT)->set_trans(Tween::TRANS_CUBIC);
+            tween->tween_property(special_1, "modulate", Color(1, 1, 1, 1.0), 3.0)->set_ease(Tween::EASE_IN)->set_trans(Tween::TRANS_SINE);
+           
+            sys->sleep([this]() {
+                camera->glitch(0, 0.8);
+                AudioStreamPlayer* sound = Object::cast_to<AudioStreamPlayer>(get_node_internal("event/sound"));
+                sound->connect("finished", Callable(this, "finished_on"), CONNECT_ONE_SHOT);
+                sound->play();
+            }, 3.5);
+        }
+    });
+}
+
+void LaboratoryNode::finished_on() {
+    if(tween->is_valid()) tween->kill();
+    special_1->queue_free();
+    camera->kill();
+    audio_player->stop_audio("glitch");
+    global->set_player_in_menu(false);
+    printf("end\n");
 }

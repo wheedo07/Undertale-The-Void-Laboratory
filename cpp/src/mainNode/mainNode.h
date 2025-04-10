@@ -4,6 +4,7 @@
 #include "engine/resources/Dialogues/dialogues.h"
 #include<godot_cpp/classes/resource_loader.hpp>
 #include<functional>
+#define clearReload_time 1.5f
 using namespace std;
 namespace godot {
     class MainNode : public SceneContainer {
@@ -23,7 +24,7 @@ namespace godot {
             void _ready() override;
             void _process(double delta) override;
 
-            void clear_system();
+            void clear_system(bool is=true);
             void system(double delta);
             void sleep(function<void()> fun, double cool);
             void loop(function<int(double delta)> fun);

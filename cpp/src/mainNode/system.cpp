@@ -1,4 +1,5 @@
 #include "mainNode.h"
+#include<godot_cpp/classes/scene_tree.hpp>
 using namespace godot;
 struct sleepFunction {
     function<void()> fun;
@@ -50,8 +51,12 @@ void MainNode::time_loop(function<void(double delta)> fun, double time) {
     });
 }
 
-void MainNode::clear_system() {
-    isClear = true;
+void MainNode::clear_system(bool is) {
+    isClear = is;
+    if(is) {
+        Ref<SceneTreeTimer> timer = get_tree()->create_timer(clearReload_time);
+        timer->connect("timeout", Callable(this, "clear_system").bind(false), CONNECT_ONE_SHOT);
+    }
 }
 
 void MainNode::system(double delta) {
@@ -60,7 +65,6 @@ void MainNode::system(double delta) {
             sleepFuns.erase(sleepFuns.begin() + i);
         for(int i=0; i < loopFuns.size(); i++) 
             loopFuns.erase(loopFuns.begin() + i);
-        isClear = false;
     }else {
         int i1 = 0;
         for(auto& fun : sleepFuns) {

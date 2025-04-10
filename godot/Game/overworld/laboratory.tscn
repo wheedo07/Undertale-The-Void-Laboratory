@@ -1,11 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://0w6206ajnb2r"]
+[gd_scene load_steps=23 format=3 uid="uid://0w6206ajnb2r"]
 
 [ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_wjc33"]
 [ext_resource type="Texture2D" uid="uid://cgl2ly10cs5oe" path="res://Game/assets/img/laboratory.png" id="2_4xebv"]
 [ext_resource type="PackedScene" uid="uid://d4g7r4oj7f4t8" path="res://Overworld/Characters/player_overworld.tscn" id="3_lhw5i"]
+[ext_resource type="AudioStream" uid="uid://brycomsutim4m" path="res://sfx/Deltarune Intro noise.wav" id="4_mif2h"]
 [ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="4_vblli"]
 [ext_resource type="PackedScene" uid="uid://bj6e8xllsfsj4" path="res://Overworld/Characters/sans.tscn" id="5_6xecf"]
 [ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="5_c6odf"]
+[ext_resource type="Texture2D" uid="uid://bmty2m0eam8na" path="res://Game/assets/sprite/special/1.png" id="5_kk5my"]
 [ext_resource type="PackedScene" uid="uid://g6wce27yxejw" path="res://Game/move_trigger.tscn" id="8_nhqnf"]
 [ext_resource type="PackedScene" uid="uid://d26ybge5kvki2" path="res://Overworld/Interactions/item_interaction.tscn" id="9_y6mkm"]
 
@@ -139,6 +141,18 @@ accept_text = PackedStringArray("* 당신은 [color=yellow]컵라면[/color]을 
 item_id = 11
 position = Vector2(-168, 205)
 scale = Vector2(2, 1.5)
+
+[node name="event" type="Node2D" parent="."]
+
+[node name="special_1" type="Sprite2D" parent="event"]
+visible = false
+z_index = 100
+z_as_relative = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_kk5my")
+
+[node name="sound" type="AudioStreamPlayer" parent="event"]
+stream = ExtResource("4_mif2h")
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = -1

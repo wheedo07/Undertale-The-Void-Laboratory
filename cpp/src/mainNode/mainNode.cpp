@@ -8,7 +8,7 @@ MainNode::MainNode() {
 MainNode::~MainNode() {}
 
 void MainNode::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("clear_system"), &MainNode::clear_system);
+    ClassDB::bind_method(D_METHOD("clear_system", "is"), &MainNode::clear_system, DEFVAL(true));
 }
 
 void MainNode::_ready() {

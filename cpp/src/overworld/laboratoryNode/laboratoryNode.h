@@ -11,8 +11,11 @@ namespace godot {
             static void _bind_methods();
 
         private:
+            Sprite2D* special_1;
+            Ref<Tween> tween;
             bool is;
             void character_talk();
+            void finished_on();
 
         public:
             LaboratoryNode();
