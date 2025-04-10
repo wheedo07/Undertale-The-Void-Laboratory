@@ -123,13 +123,12 @@ void LaboratoryNode::character_talk() {
             global->set_player_in_menu(true);
             camera->Void(0, 5, 0.02, 0.1, 3);
             camera->blind(0, 1);
-            camera->shake_for(2, 8);
             audio_player->loop_play("glitch");
 
             special_1 = Object::cast_to<Sprite2D>(get_node_internal("event/special_1")->duplicate());
             camera->blinder->add_child(special_1);
             special_1->set_visible(true);
-            special_1->set_position(Vector2(400, 30));
+            special_1->set_position(Vector2(400, 50));
             special_1->set_modulate(Color(1, 1, 1, 0.0));
             special_1->set_scale(Vector2(0.1, 0.1));
 
