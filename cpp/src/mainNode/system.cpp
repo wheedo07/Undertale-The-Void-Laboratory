@@ -20,16 +20,14 @@ void MainNode::loop(function<int(double delta)> fun) {
 }
 
 void MainNode::sequence(function<int()> isFun, vector<function<void()>> funs) {
-    loop([this, funs, isFun](double delta) {
-        static size_t current_index = 0;
-        
+    int* current_index = new int(0);
+    loop([this, funs, isFun, current_index](double delta) {
         if (isFun()) {
-            if (current_index < funs.size()) {
-                funs[current_index]();
-                current_index++;
+            if (*current_index < funs.size()) {
+                funs[*current_index]();
+                (*current_index)++;
                 return false;
             }
-            current_index = 0;  // 리셋
             return true;  // 모든 액션 완료
         }else return false;
     });

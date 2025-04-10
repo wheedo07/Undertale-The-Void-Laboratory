@@ -29,7 +29,7 @@ namespace godot {
 
             void ready() override;
             void _on_get_turn() override;
-            void on_fight();
+            void on_death_player() override;
 
             MainAttacks* create_attack();
             void camera_pro(float time, String key="all", Variant value=true);

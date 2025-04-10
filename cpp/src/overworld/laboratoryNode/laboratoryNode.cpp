@@ -2,9 +2,7 @@
 #include "env.h"
 #include "engine/Overworld/Characters/enemy_overworld.h"
 
-LaboratoryNode::LaboratoryNode() {
-    is = false;
-}
+LaboratoryNode::LaboratoryNode() {}
 
 LaboratoryNode::~LaboratoryNode() {}
 
@@ -23,6 +21,7 @@ void LaboratoryNode::init() {
     EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
 
     if(!global->get_flag("main2")) {
+        is = false;
         global->set_player_move(false);
         sans->start_walking(Vector2(0, -1));
         sans->start_walking();
@@ -41,7 +40,14 @@ void LaboratoryNode::init() {
                 sys->sleep([this]() { is = true; }, 0.4);
             },
             [this]() {
-                summontextbox()->character(Character::SANS, sys->dia()->from(
+                if(global->get_flag("sans_1_death")) {
+                    summontextbox()->character(Character::SANS, sys->dia()->from(
+                        PackedStringArray({
+                            String::utf8("* 헤헤"),
+                            String::utf8("* 계속해볼까?"),
+                        })
+                    )->set_expressions(Array::make(1, 5)));
+                }else summontextbox()->character(Character::SANS, sys->dia()->from(
                     PackedStringArray({
                         String::utf8("* ..?"),
                         String::utf8("* ..."),
@@ -53,6 +59,7 @@ void LaboratoryNode::init() {
                 ->set_speed(Array::make(0.03)));
             },
             [this]() {
+                if(global->get_flag("sans_1_death")) return;
                 summontextbox()->generic(sys->dia()->from(
                     PackedStringArray({
                         String::utf8("* (연구소는 평소와 다르게 음산하다...)")
@@ -60,6 +67,7 @@ void LaboratoryNode::init() {
                 ));
             },
             [this]() {
+                if(global->get_flag("sans_1_death")) return;
                 summontextbox()->character(Character::SANS, sys->dia()->from(
                     PackedStringArray({
                         String::utf8("* 다른 타임라인에서 네가 한 일들..."),
@@ -126,7 +134,7 @@ void LaboratoryNode::character_talk() {
             special_1->set_scale(Vector2(0.1, 0.1));
 
             tween = create_tween()->set_parallel();
-            tween->tween_property(special_1, "scale", Vector2(1.5, 1.5), 6.0)->set_ease(Tween::EASE_OUT)->set_trans(Tween::TRANS_CUBIC);
+            tween->tween_property(special_1, "scale", Vector2(1.5, 1.5), 7.0)->set_ease(Tween::EASE_OUT)->set_trans(Tween::TRANS_CUBIC);
             tween->tween_property(special_1, "modulate", Color(1, 1, 1, 1.0), 3.0)->set_ease(Tween::EASE_IN)->set_trans(Tween::TRANS_SINE);
            
             sys->sleep([this]() {

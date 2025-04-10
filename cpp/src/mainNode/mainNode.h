@@ -4,7 +4,7 @@
 #include "engine/resources/Dialogues/dialogues.h"
 #include<godot_cpp/classes/resource_loader.hpp>
 #include<functional>
-#define clearReload_time 1.5f
+#define clearReload_time 1.3f
 using namespace std;
 namespace godot {
     class MainNode : public SceneContainer {
