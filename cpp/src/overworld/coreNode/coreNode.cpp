@@ -38,8 +38,8 @@ void CoreNode::ready() {
                 String::utf8("* [color=red]..."),
             })
         )->set_speed(Array::make(0.03)));
-        sys->sequence([this]() { return !global->get_player_text_box(); }, {
-            [this, sans]() {
+        sys->sequence({
+            {[this, sans]() {
                 sans->start_walking(Vector2i(0, 1));
                 sys->sleep([this, sans]() {
                     global->set_flags("main1", true);
@@ -47,7 +47,7 @@ void CoreNode::ready() {
                     sans->queue_free();
                     global->set_player_move(true);
                 }, 1.5);
-            }
+            }, [this]() { return !global->get_player_text_box(); }}
         });
     }
 }
@@ -94,22 +94,24 @@ void CoreNode::event1() {
                 String::utf8("* !?"), String::utf8("* 앞으로 갈수가 없다..?")
             })
         ));
-        sys->sequence([this]() { return !global->get_player_text_box(); },
-        {[this]() {
-            music_player->stop();
-            summontextbox()->generic(sys->dia()->from(
-                PackedStringArray({
-                    String::utf8("* [color=red]흠.. 역시..[/color]"),
-                    String::utf8("* [color=red]음? 왜 파트너?[/color]"),
-                    String::utf8("* [color=red]아 무슨일인지는 직접알아봐[/color]"),
-                    String::utf8("* [color=red]일단 코어 갈림길로 가볼래? 나한테 묻지 말고[/color]")
-                })
-            ));
-        },
-        [this]() {
-            music_player->play();
-            global->save_flag("is", 3);
-        }});
+        auto isFun = [this]() { return !global->get_player_text_box(); };
+        sys->sequence({
+            {[this]() {
+                music_player->stop();
+                summontextbox()->generic(sys->dia()->from(
+                    PackedStringArray({
+                        String::utf8("* [color=red]흠.. 역시..[/color]"),
+                        String::utf8("* [color=red]음? 왜 파트너?[/color]"),
+                        String::utf8("* [color=red]아 무슨일인지는 직접알아봐[/color]"),
+                        String::utf8("* [color=red]일단 코어 갈림길로 가볼래? 나한테 묻지 말고[/color]")
+                    })
+                ));
+            }, isFun},
+            {[this]() {
+                music_player->play();
+                global->save_flag("is", 3);
+            }, isFun}
+        });
     }else summontextbox()->generic(sys->dia()->from(
         PackedStringArray({
             String::utf8("* 여기도 막혀있다...")
@@ -151,12 +153,13 @@ void CoreNode::event2() {
                 );
             }
         }
-        sys->sequence([this]() { return !global->get_player_text_box(); },
-        {[this]() {
-            music_player->play();
-            global->set_player_move(true);
-            global->save_flag("is", 2);
-        }});
+        sys->sequence({
+            {[this]() {
+                music_player->play();
+                global->set_player_move(true);
+                global->save_flag("is", 2);
+            }, [this]() { return !global->get_player_text_box(); }}
+        });
     }
 }
 
@@ -167,22 +170,23 @@ void CoreNode::text_trigger1() {
             String::utf8("ALL SUFFERING WILL CEASE TO EXIST...")
         })
     ));
-    sys->sequence([this]() { return !global->get_player_text_box(); },
-    {[this]() {
-        summontextbox()->generic(sys->dia()->from(
-            PackedStringArray({
-                String::utf8("* ?"),
-                String::utf8("* 이해 할수 없는 문양이다..")
-            })
-        ));
-
-        Node* text_trigger = get_node_internal("trigger/text_trigger");
-        text_trigger->disconnect("dialogue_finished", Callable(this, "text_trigger1"));
-        text_trigger->set("text", PackedStringArray({
-            String::utf8("* ( 아까 문자는 뭐였을까..? )")
-        }));
-        global->save_flag("event1", true);
-    }});
+    sys->sequence({
+        {[this]() {
+            summontextbox()->generic(sys->dia()->from(
+                PackedStringArray({
+                    String::utf8("* ?"),
+                    String::utf8("* 이해 할수 없는 문양이다..")
+                })
+            ));
+            
+            Node* text_trigger = get_node_internal("trigger/text_trigger");
+            text_trigger->disconnect("dialogue_finished", Callable(this, "text_trigger1"));
+            text_trigger->set("text", PackedStringArray({
+                String::utf8("* ( 아까 문자는 뭐였을까..? )")
+            }));
+            global->save_flag("event1", true);
+        }, [this]() { return !global->get_player_text_box(); }}
+    });
 }
 
 void CoreNode::main2_start() {

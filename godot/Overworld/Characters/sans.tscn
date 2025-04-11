@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b7pkf261ktb1q" path="res://sfx/overworld_encounter_surprise.wav" id="4_gxgth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdrqj"]
-size = Vector2(18, 10)
+size = Vector2(18, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cairb"]
 atlas = ExtResource("2_ek4yr")
@@ -164,7 +164,7 @@ wall_min_slide_angle = 0.785398
 platform_on_leave = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_bdrqj")
 debug_color = Color(1, 1, 1, 0.419608)
 

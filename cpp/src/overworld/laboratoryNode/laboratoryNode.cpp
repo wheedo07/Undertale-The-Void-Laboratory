@@ -13,6 +13,7 @@ void LaboratoryNode::_bind_methods() {
 }
 
 void LaboratoryNode::ready() {
+    event_sound = Object::cast_to<AudioStreamPlayer>(get_node_internal("event/sound"));
     camera->blind(0.3);
     camera->connect("finished_tween", Callable(this, "init"), CONNECT_ONE_SHOT);
 }
@@ -21,25 +22,22 @@ void LaboratoryNode::init() {
     EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
 
     if(!global->get_flag("main2")) {
-        is = false;
         global->set_player_move(false);
         sans->start_walking(Vector2(0, -1));
         sans->start_walking();
         
         player->start_walking(Vector2i(-1, 0));
-        sys->sleep([this]() { is = true; }, 1.5);
-        sys->sequence([this]() { return is && !global->get_player_text_box(); }, {
-            [this, sans]() {
-                is = false;
+        auto isFun = [this]() { return !global->get_player_text_box(); };
+        sys->sequence({
+            {[this, sans]() {
                 player->start_walking();
                 player->set_walk_speed(80);
-                
+
                 sans->start_walking(Vector2i(1, 0));
                 sans->start_walking();
                 sans->show_alert();
-                sys->sleep([this]() { is = true; }, 0.4);
-            },
-            [this]() {
+            }, 1.5f},
+            {[this]() {
                 if(global->get_flag("sans_1_death")) {
                     summontextbox()->character(Character::SANS, sys->dia()->from(
                         PackedStringArray({
@@ -57,16 +55,16 @@ void LaboratoryNode::init() {
                     })
                 )->set_expressions(Array::make(10, 18, 0, 1, 4))
                 ->set_speed(Array::make(0.03)));
-            },
-            [this]() {
+            }, 0.4f},
+            {[this]() {
                 if(global->get_flag("sans_1_death")) return;
                 summontextbox()->generic(sys->dia()->from(
                     PackedStringArray({
                         String::utf8("* (연구소는 평소와 다르게 음산하다...)")
                     })
                 ));
-            },
-            [this]() {
+            }, isFun},
+            {[this]() {
                 if(global->get_flag("sans_1_death")) return;
                 summontextbox()->character(Character::SANS, sys->dia()->from(
                     PackedStringArray({
@@ -80,10 +78,10 @@ void LaboratoryNode::init() {
                     })
                 )->set_expressions(Array::make(4, 5, 15, 17, 19, 4, 5))
                 ->set_speed(Array::make(0.03, 0.01, 0.05)));
-            },
-            [this]() {
+            }, isFun},
+            {[this]() {
                 sys->load_battle("res://Game/encounters/sans_1.tres",  Vector2(324, 323));
-            }
+            }, isFun}
         });
     }else {
         summontextbox()->character(Character::SANS, sys->dia()->from(
@@ -92,16 +90,15 @@ void LaboratoryNode::init() {
                 String::utf8("* 잠깐 있어봐"),
             })
         )->set_expressions(Array::make(2, 18)));
-        sys->sequence([this]() { return !global->get_player_text_box(); }, {
-            [this, sans]() {
-                audio_player->play("teleport");
-                camera->blind(0.2, 1, 0.3);
-                sans->set_position(Vector2(-420, 233));
-                sans->start_walking(Vector2i(0, -1));
-                sans->start_walking();
-                camera->connect("finished_tween", Callable(global, "set_player_move").bind(true), CONNECT_ONE_SHOT);
-                camera->connect("finished_tween", Callable(camera, "Void"), CONNECT_ONE_SHOT);
-            }
+        sys->executeTrue([this]() { return !global->get_player_text_box(); },
+        [this, sans]() {
+            audio_player->play("teleport");
+            camera->blind(0.2, 1, 0.3);
+            sans->set_position(Vector2(-420, 233));
+            sans->start_walking(Vector2i(0, -1));
+            sans->start_walking();
+            camera->connect("finished_tween", Callable(global, "set_player_move").bind(true), CONNECT_ONE_SHOT);
+            camera->connect("finished_tween", Callable(camera, "Void"), CONNECT_ONE_SHOT);
         });
     }
 }
@@ -110,15 +107,16 @@ void LaboratoryNode::character_talk() {
     camera->Void(0, 5, 0.005, 0.1, 2);
     audio_player->play("beep");
     TextBox* textbox = summontextbox();
+    textbox->set_key(false);
+    textbox->set_process_input(false);
     textbox->character(Character::SANS, sys->dia()->from(
         PackedStringArray({
             String::utf8("어..? 잠깐만.. 뭔가 이상한..")
         })
     )->set_speed(Array::make(0.2))->set_expressions(Array::make(22)));
-    sys->sleep([this, textbox]() { textbox->on_text_click_played(); }, 4);
-
-    sys->sequence([this]() { return !global->get_player_text_box(); }, {
-        [this]() {
+    sys->sleep([this, textbox]() { textbox->on_text_click_played(); }, 3.8);
+    sys->sequence({
+        {[this]() {
             audio_player->stop_audio("beep");
             global->set_player_in_menu(true);
             camera->Void(0, 5, 0.02, 0.1, 3);
@@ -135,14 +133,12 @@ void LaboratoryNode::character_talk() {
             tween = create_tween()->set_parallel();
             tween->tween_property(special_1, "scale", Vector2(1.5, 1.5), 7.0)->set_ease(Tween::EASE_OUT)->set_trans(Tween::TRANS_CUBIC);
             tween->tween_property(special_1, "modulate", Color(1, 1, 1, 1.0), 3.0)->set_ease(Tween::EASE_IN)->set_trans(Tween::TRANS_SINE);
-           
-            sys->sleep([this]() {
-                camera->glitch(0, 0.8);
-                AudioStreamPlayer* sound = Object::cast_to<AudioStreamPlayer>(get_node_internal("event/sound"));
-                sound->connect("finished", Callable(this, "finished_on"), CONNECT_ONE_SHOT);
-                sound->play();
-            }, 3.5);
-        }
+        }, [this]() { return !global->get_player_text_box(); }},
+        {[this]() {
+            event_sound->connect("finished", Callable(this, "finished_on"), CONNECT_ONE_SHOT);
+            event_sound->play();
+            camera->glitch(0, 0.8);
+        }, 3.2f}
     });
 }
 

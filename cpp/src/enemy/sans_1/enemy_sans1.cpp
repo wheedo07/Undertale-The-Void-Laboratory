@@ -32,120 +32,111 @@ void Enemy_SANS1::_on_get_turn() {
     if(main->turn_number == 0) {
         is = true;
         if(global->get_flag("sans_1_death")) {
-            global->get_Music()->seek(21);
-            sys->sleep([this]() {
-                sys->sequence([this]() { return is; }, {
-                    [this]() {
-                        is = false;
-                        head->set_frame(20);
-                        camera_pro(2, "zoom", Vector2(2,2));
-                        camera_pro(2, "rotation", 0.6);
-                        camera_pro(0.1, "position", Vector2(320, 150));
-                        sys->sleep([this]() {
-                            camera_pro(0.5);
-                            head->set_frame(21);
-                            body->set_frame(9);
-                            leg->set_frame(3);
-                            main->back_scene->set_visible(false);
-                            sprites->set_z_index(0);
-                            sprites->set_y_sort_enabled(false);
-                            
-                            create_attack()->set_part(PartType::sans_1);
-                            attacks->start_attack(0);
-                            sys->sleep([this]() { is = true; }, 24);
-                        }, 3);
-                    },
-                    [this]() {
-                        head->set_frame(22);
-                        body->set_frame(10);
-                        leg->set_frame(0);
-                        sys->sleep([this]() {
-                            play_dialogue(0);
-                            sys->sequence([this]() { return !global->get_battle_text_box(); }, {
-                                [this]() {
-                                    head->set_frame(3);
-                                    body->set_frame(0);
-                                    attacks->end_attack(0);
-                                }
-                            });
-                        }, 11);
-                    }
-                });
-            }, 1);
+            global->get_Music()->seek(22);
+            head->set_frame(20);
+            camera_pro(2, "zoom", Vector2(2,2));
+            camera_pro(2, "rotation", 0.6);
+            camera_pro(0.1, "position", Vector2(320, 150));
+            sys->sequence({
+                {[this]() {
+                    camera_pro(0.5);
+                    head->set_frame(21);
+                    body->set_frame(9);
+                    leg->set_frame(3);
+                    main->back_scene->set_visible(false);
+                    sprites->set_z_index(0);
+                    sprites->set_y_sort_enabled(false);
+                    
+                    create_attack()->set_part(PartType::sans_1);
+                    attacks->start_attack(0);
+                }, 3.0f},
+                {[this]() {
+                    head->set_frame(22);
+                    body->set_frame(10);
+                    leg->set_frame(0);
+                }, 24.0f},
+                {[this]() {
+                    play_dialogue(0);
+                }, 11.0f},
+                {[this]() {
+                    head->set_frame(3);
+                    body->set_frame(0);
+                    attacks->end_attack(0);
+                }, [this]() { return !global->get_battle_text_box(); }}
+            });
         }else {
             Node2D* friends = Object::cast_to<Node2D>(get_node_internal("friends"));
-            sys->sleep([this, friends]() {
-                friends->set_visible(true);
-                friends->set_modulate(Color(1, 1, 1, 0)); 
-                Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
-                tween->tween_property(friends, "modulate:a", 1.0, 8.0);
-                sys->sleep([this, friends]() {
+            sys->sequence({
+                {[this, friends]() {
+                    friends->set_visible(true);
+                    friends->set_modulate(Color(1, 1, 1, 0)); 
+                    Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
+                    tween->tween_property(friends, "modulate:a", 1.0, 8.0);
+                }, 3.0f},
+                {[this, friends]() {
                     Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
                     tween->tween_property(friends, "modulate:a", 0.0, 5.0);
                     tween->connect("finished", Callable(friends, "queue_free"));
-                }, 7);
-            }, 3);
-            sys->sleep([this]() {
-                sys->sequence([this]() { return is; }, {
-                    [this]() {
-                        is = false;
-                        head->set_frame(18);
-                        sys->sleep([this]() {
-                            head->set_frame(19);
-                        }, 2);
-                        sys->sleep([this]() { is = true; }, 6);
-                    },
-                    [this]() {
-                        is = false;
-                        head->set_frame(20);
-                        camera_pro(2, "zoom", Vector2(2,2));
-                        camera_pro(2, "rotation", 0.6);
-                        camera_pro(0.1, "position", Vector2(320, 150));
-                        sys->sleep([this]() {
-                            camera_pro(0.5);
-                            head->set_frame(21);
-                            body->set_frame(9);
-                            leg->set_frame(3);
-                            main->back_scene->set_visible(false);
-                            sprites->set_z_index(0);
-                            sprites->set_y_sort_enabled(false);
-                            
-                            create_attack()->set_part(PartType::sans_1);
-                            attacks->start_attack(0);
-                            sys->sleep([this]() { is = true; }, 24);
-                        }, 3);
-                    },
-                    [this]() {
-                        head->set_frame(22);
-                        body->set_frame(10);
-                        leg->set_frame(0);
-                        sys->sleep([this]() {
-                            play_dialogue(0);
-                            sys->sequence([this]() { return !global->get_battle_text_box(); },
-                            {[this]() {
-                                head->set_frame(3);
-                                body->set_frame(0);
-                                attacks->end_attack(0);
-                            }});
-                        }, 11);
-                    }
-                });
-            }, 17);
+                }, 7.0f}
+            });
+
+            sys->sequence({
+                {[this]() {
+                    head->set_frame(18);
+                }, 17.0f},
+                {[this]() {
+                    head->set_frame(19);
+                }, 2.0f},
+                {[this]() {
+                    head->set_frame(20);
+                    camera_pro(2, "zoom", Vector2(2,2));
+                    camera_pro(2, "rotation", 0.6);
+                    camera_pro(0.1, "position", Vector2(320, 150));
+                }, 6.0f},
+                {[this]() {
+                    camera_pro(0.5);
+                    head->set_frame(21);
+                    body->set_frame(9);
+                    leg->set_frame(3);
+                    main->back_scene->set_visible(false);
+                    sprites->set_z_index(0);
+                    sprites->set_y_sort_enabled(false);
+                    
+                    create_attack()->set_part(PartType::sans_1);
+                    attacks->start_attack(0);
+                }, 3.0f},
+                {[this]() {
+                    head->set_frame(22);
+                    body->set_frame(10);
+                    leg->set_frame(0);
+                }, 24.0f},
+                {[this]() {
+                    play_dialogue(0);
+                }, 11.0f},
+                {[this]() {
+                    head->set_frame(3);
+                    body->set_frame(0);
+                    attacks->end_attack(0);
+                }, [this]() { return !global->get_battle_text_box(); }}
+            });
         }
     }else if(main->turn_number == 1) {
         soul->set_mode();
-        play_dialogue(1);
-        sys->sequence([this]() { return !global->get_battle_text_box(); }, {
-            [this]() {
+        auto isFun = [this]() { return !global->get_battle_text_box(); };
+        sys->sequence({
+            {[this]() {
+                play_dialogue(1);
+            }, 0.1f},
+            {[this]() {
                 global->get_scene_container()->get_camera()->Void(0, 5, 0.005, 0.1, 2);
                 audio_player->play("beep");
                 play_dialogue(2);
-            },
-            [this]() {
+            }, isFun},
+            {[this]() {
                 audio_player->stop_audio("beep");
                 global->set_flags("main2", true);
                 scene_changer->load_cached_overworld_scene();
-            }
+            }, isFun}
         });
     }
 }
