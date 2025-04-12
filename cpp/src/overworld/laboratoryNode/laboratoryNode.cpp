@@ -14,6 +14,7 @@ void LaboratoryNode::_bind_methods() {
 
 void LaboratoryNode::ready() {
     event_sound = Object::cast_to<AudioStreamPlayer>(get_node_internal("event/sound"));
+    event_main2 = Object::cast_to<AudioStreamPlayer>(get_node_internal("event/main2"));
     camera->blind(0.3);
     camera->connect("finished_tween", Callable(this, "init"), CONNECT_ONE_SHOT);
 }
@@ -119,10 +120,23 @@ void LaboratoryNode::character_talk() {
         {[this]() {
             audio_player->stop_audio("beep");
             global->set_player_in_menu(true);
-            camera->Void(0, 5, 0.02, 0.1, 3);
             camera->blind(0, 1);
             audio_player->loop_play("glitch");
+            camera->glitch(4, 0.1);
 
+            event_main2->play();
+            Ref<PackedScene> scene = ResourceLoader::get_singleton()->load("res://Game/encounters/body/gaster.tscn");
+            gaster = Object::cast_to<Node2D>(scene->instantiate());
+            camera->blinder->add_child(gaster);
+            gaster->set_position(Vector2(330, 200));
+        }, [this]() { return !global->get_player_text_box(); }},
+        {[this]() {
+            gaster->get_node_internal("head")->call("set_frame", 1);
+            camera->glitch(0.15, 0.4);
+        }, 4.0f},
+        {[this]() {
+            gaster->queue_free();
+            camera->Void(0, 5, 0.02, 0.1, 3);
             special_1 = Object::cast_to<Sprite2D>(get_node_internal("event/special_1")->duplicate());
             camera->blinder->add_child(special_1);
             special_1->set_visible(true);
@@ -133,9 +147,10 @@ void LaboratoryNode::character_talk() {
             tween = create_tween()->set_parallel();
             tween->tween_property(special_1, "scale", Vector2(1.5, 1.5), 7.0)->set_ease(Tween::EASE_OUT)->set_trans(Tween::TRANS_CUBIC);
             tween->tween_property(special_1, "modulate", Color(1, 1, 1, 1.0), 3.0)->set_ease(Tween::EASE_IN)->set_trans(Tween::TRANS_SINE);
-        }, [this]() { return !global->get_player_text_box(); }},
+        }, 3.0f},
         {[this]() {
             event_sound->connect("finished", Callable(this, "finished_on"), CONNECT_ONE_SHOT);
+            event_main2->stop();
             event_sound->play();
             camera->glitch(0, 0.8);
         }, 3.2f}

@@ -12,6 +12,8 @@ namespace godot {
 
         private:
             AudioStreamPlayer* event_sound;
+            AudioStreamPlayer* event_main2;
+            Node2D* gaster;
             Sprite2D* special_1;
             Ref<Tween> tween;
 

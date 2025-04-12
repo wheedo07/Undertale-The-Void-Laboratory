@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://0w6206ajnb2r"]
+[gd_scene load_steps=24 format=3 uid="uid://0w6206ajnb2r"]
 
 [ext_resource type="AudioStream" uid="uid://n4nbydhkmdog" path="res://Musics/default2.wav" id="1_wjc33"]
 [ext_resource type="Texture2D" uid="uid://cgl2ly10cs5oe" path="res://Game/assets/img/laboratory.png" id="2_4xebv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmty2m0eam8na" path="res://Game/assets/sprite/special/1.png" id="5_kk5my"]
 [ext_resource type="PackedScene" uid="uid://g6wce27yxejw" path="res://Game/move_trigger.tscn" id="8_nhqnf"]
 [ext_resource type="PackedScene" uid="uid://d26ybge5kvki2" path="res://Overworld/Interactions/item_interaction.tscn" id="9_y6mkm"]
+[ext_resource type="AudioStream" uid="uid://bx0m2orv3kjvg" path="res://Game/assets/audio/event/main2.mp3" id="10_xtcyj"]
 
 [sub_resource type="Dialogue" id="Dialogue_7f4gi"]
 dialog_text = "* 음 kid 미안하지만 지금 상황이 상황인지라"
@@ -150,6 +151,9 @@ z_index = 100
 z_as_relative = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_kk5my")
+
+[node name="main2" type="AudioStreamPlayer" parent="event"]
+stream = ExtResource("10_xtcyj")
 
 [node name="sound" type="AudioStreamPlayer" parent="event"]
 stream = ExtResource("4_mif2h")

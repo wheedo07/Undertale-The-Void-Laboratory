@@ -18,7 +18,7 @@ namespace godot {
             AnimatedSprite2D* head;
             AnimatedSprite2D* throw_head;
             Timer* throw_timer;
-            Node2D* sprites;
+            Node2D* sprite;
             AnimationNodeStateMachinePlayback* AnimStates;
 
             Ref<PackedScene> attackScene;

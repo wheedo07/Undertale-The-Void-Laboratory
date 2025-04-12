@@ -11,21 +11,21 @@ void Enemy_SANS1::_bind_methods() {
 }
 
 void Enemy_SANS1::ready() {
-    body = Object::cast_to<AnimatedSprite2D>(get_node_internal("Sprites/Idle/body"));
-    leg = Object::cast_to<AnimatedSprite2D>(get_node_internal("Sprites/Idle/leg"));
-    head = Object::cast_to<AnimatedSprite2D>(get_node_internal("Sprites/Idle/body/head"));
-    throw_head = Object::cast_to<AnimatedSprite2D>(get_node_internal("Sprites/Throw/head"));
+    body = Object::cast_to<AnimatedSprite2D>(get_node_internal("sans/Idle/body"));
+    leg = Object::cast_to<AnimatedSprite2D>(get_node_internal("sans/Idle/leg"));
+    head = Object::cast_to<AnimatedSprite2D>(get_node_internal("sans/Idle/body/head"));
+    throw_head = Object::cast_to<AnimatedSprite2D>(get_node_internal("sans/Throw/head"));
+    AnimStates = Object::cast_to<AnimationNodeStateMachinePlayback>(get_node_internal("sans/States")->get("parameters/playback"));
     throw_timer = Object::cast_to<Timer>(get_node_internal("Timer"));
-    AnimStates = Object::cast_to<AnimationNodeStateMachinePlayback>(get_node_internal("States")->get("parameters/playback"));
-    sprites = Object::cast_to<Node2D>(get_node_internal("Sprites"));
+    sprite = Object::cast_to<Node2D>(get_sprites());
     attackScene = ResourceLoader::get_singleton()->load("res://Game/main_attacks.tscn");
 
-    sprites->set_z_index(102);
+    sprite->set_z_index(102);
     body->set_frame(8);
     head->set_frame(17);
     leg->set_frame(2);
     main->back_scene->set_visible(true);
-    sprites->set_y_sort_enabled(true);
+    sprite->set_y_sort_enabled(true);
 }
 
 void Enemy_SANS1::_on_get_turn() {
@@ -44,8 +44,8 @@ void Enemy_SANS1::_on_get_turn() {
                     body->set_frame(9);
                     leg->set_frame(3);
                     main->back_scene->set_visible(false);
-                    sprites->set_z_index(0);
-                    sprites->set_y_sort_enabled(false);
+                    sprite->set_z_index(0);
+                    sprite->set_y_sort_enabled(false);
                     
                     create_attack()->set_part(PartType::sans_1);
                     attacks->start_attack(0);
@@ -96,8 +96,8 @@ void Enemy_SANS1::_on_get_turn() {
                     body->set_frame(9);
                     leg->set_frame(3);
                     main->back_scene->set_visible(false);
-                    sprites->set_z_index(0);
-                    sprites->set_y_sort_enabled(false);
+                    sprite->set_z_index(0);
+                    sprite->set_y_sort_enabled(false);
                     
                     create_attack()->set_part(PartType::sans_1);
                     attacks->start_attack(0);
