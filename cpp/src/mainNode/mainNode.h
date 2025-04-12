@@ -5,8 +5,8 @@
 #include<godot_cpp/classes/resource_loader.hpp>
 #include<functional>
 #include<variant>
-#define clearReload_time 1.3f
 using namespace std;
+#define clearReload_time 1.3f
 using LoopTime = std::variant<double, function<int()>>;
 namespace godot {
     class MainNode : public SceneContainer {

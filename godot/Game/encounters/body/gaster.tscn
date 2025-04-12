@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3so01114ji25"]
+
+[ext_resource type="Texture2D" uid="uid://cbds8x3n6na50" path="res://Game/assets/sprite/head/gaster/gaster_1.tres" id="1_efm27"]
+[ext_resource type="Texture2D" uid="uid://d2so0aa3w0jyw" path="res://Game/assets/sprite/anim/gaster_body/gaster_0.png" id="1_noy4f"]
+[ext_resource type="Texture2D" uid="uid://dal5rf81nbn1o" path="res://Game/assets/sprite/head/gaster/gaster_2.tres" id="2_4af64"]
+[ext_resource type="Texture2D" uid="uid://dkmlmldc3nqha" path="res://Game/assets/sprite/anim/gaster_body/gaster_1.png" id="2_ga4ph"]
+[ext_resource type="Texture2D" uid="uid://dmqqb61se2cro" path="res://Game/assets/sprite/anim/gaster_body/gaster_2.png" id="3_as7x7"]
+[ext_resource type="Texture2D" uid="uid://3a0jy4op0qgg" path="res://Game/assets/sprite/anim/gaster_body/gaster_3.png" id="4_5ff1a"]
+[ext_resource type="Texture2D" uid="uid://csx81v3l8vrat" path="res://Game/assets/sprite/anim/gaster_body/gaster_4.png" id="5_ea3wy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r7s3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_efm27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4af64")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pv7dq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_noy4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ga4ph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_as7x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ff1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ea3wy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="gaster" type="Node2D"]
+
+[node name="head" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -63)
+scale = Vector2(1.7, 1.7)
+sprite_frames = SubResource("SpriteFrames_4r7s3")
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 30)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_pv7dq")
+autoplay = "default"

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dal5rf81nbn1o"]
+
+[ext_resource type="Texture2D" uid="uid://c5l0avw1rsfy2" path="res://Game/assets/sprite/sheet/gaster_head.png" id="1_8axax"]
+
+[resource]
+atlas = ExtResource("1_8axax")
+region = Rect2(3, 3, 27, 35)
