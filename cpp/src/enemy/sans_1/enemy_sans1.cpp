@@ -77,13 +77,10 @@ void Enemy_SANS1::_on_get_turn() {
                     Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
                     tween->tween_property(friends, "modulate:a", 0.0, 5.0);
                     tween->connect("finished", Callable(friends, "queue_free"));
-                }, 7.0f}
-            });
-
-            sys->sequence({
+                }, 7.0f},
                 {[this]() {
                     head->set_frame(18);
-                }, 17.0f},
+                }, 7.0f},
                 {[this]() {
                     head->set_frame(19);
                 }, 2.0f},
@@ -92,7 +89,7 @@ void Enemy_SANS1::_on_get_turn() {
                     camera_pro(2, "zoom", Vector2(2,2));
                     camera_pro(2, "rotation", 0.6);
                     camera_pro(0.1, "position", Vector2(320, 150));
-                }, 6.0f},
+                }, 4.5f},
                 {[this]() {
                     camera_pro(0.5);
                     head->set_frame(21);
