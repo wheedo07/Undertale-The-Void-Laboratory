@@ -9,6 +9,7 @@ LaboratoryNode::~LaboratoryNode() {}
 void LaboratoryNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("init"), &LaboratoryNode::init);
     ClassDB::bind_method(D_METHOD("character_talk"), &LaboratoryNode::character_talk);
+    ClassDB::bind_method(D_METHOD("main2_event"), &LaboratoryNode::main2_event);
     ClassDB::bind_method(D_METHOD("finished_on"), &LaboratoryNode::finished_on);
 }
 
@@ -109,27 +110,31 @@ void LaboratoryNode::character_talk() {
     audio_player->play("beep");
     TextBox* textbox = summontextbox();
     textbox->set_key(false);
-    textbox->set_process_input(false);
     textbox->character(Character::SANS, sys->dia()->from(
         PackedStringArray({
             String::utf8("어..? 잠깐만.. 뭔가 이상한..")
         })
     )->set_speed(Array::make(0.2))->set_expressions(Array::make(22)));
     sys->sleep([this, textbox]() { textbox->on_text_click_played(); }, 3.8);
-    sys->sequence({
-        {[this]() {
-            audio_player->stop_audio("beep");
-            global->set_player_in_menu(true);
-            camera->blind(0, 1);
-            audio_player->loop_play("glitch");
-            camera->glitch(4, 0.1);
+    sys->executeTrue([this]() { return !global->get_player_text_box(); },
+    [this]() {
+        audio_player->stop_audio("beep");
+        global->set_player_in_menu(true);
+        camera->blind(0, 1, 3.5);
+        camera->connect("finished_tween", Callable(this, "main2_event"), CONNECT_ONE_SHOT);
+    });
+}
 
-            event_main2->play();
-            Ref<PackedScene> scene = ResourceLoader::get_singleton()->load("res://Game/encounters/body/gaster.tscn");
-            gaster = Object::cast_to<Node2D>(scene->instantiate());
-            camera->blinder->add_child(gaster);
-            gaster->set_position(Vector2(330, 200));
-        }, [this]() { return !global->get_player_text_box(); }},
+void LaboratoryNode::main2_event() {
+    audio_player->loop_play("glitch");
+    camera->glitch(4, 0.1);
+
+    event_main2->play();
+    Ref<PackedScene> scene = ResourceLoader::get_singleton()->load("res://Game/encounters/body/gaster.tscn");
+    gaster = Object::cast_to<Node2D>(scene->instantiate());
+    camera->blinder->add_child(gaster);
+    gaster->set_position(Vector2(330, 200));
+    sys->sequence({
         {[this]() {
             gaster->get_node_internal("head")->call("set_frame", 1);
             camera->glitch(0.15, 0.4);

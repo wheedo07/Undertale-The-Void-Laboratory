@@ -18,6 +18,7 @@ namespace godot {
             Ref<Tween> tween;
 
             void character_talk();
+            void main2_event();
             void finished_on();
 
         public:
