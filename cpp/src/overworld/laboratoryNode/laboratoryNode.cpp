@@ -120,7 +120,7 @@ void LaboratoryNode::character_talk() {
     [this]() {
         audio_player->stop_audio("beep");
         global->set_player_in_menu(true);
-        camera->blind(0, 1, 3.5);
+        camera->blind(0, 1, 1.5);
         camera->connect("finished_tween", Callable(this, "main2_event"), CONNECT_ONE_SHOT);
     });
 }
