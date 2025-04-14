@@ -8,12 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://bmhg3dbp4yw2j" path="res://Game/assets/sprite/head/sans/sans_10.tres" id="6_jl3ot"]
 [ext_resource type="Texture2D" uid="uid://15snk3rimuqp" path="res://Game/assets/sprite/head/sans/sans_3.tres" id="7_nnc7y"]
 [ext_resource type="Texture2D" uid="uid://8xs0v0630d16" path="res://Game/assets/sprite/head/sans/sans_11.tres" id="8_epe1q"]
-[ext_resource type="Texture2D" uid="uid://ce1xddfss3d3k" path="res://Game/assets/sprite/body/sans_2.tres" id="9_24nx4"]
-[ext_resource type="Texture2D" uid="uid://dhtaucuu8qrwd" path="res://Game/assets/sprite/body/sans_4.tres" id="10_kw5vo"]
-[ext_resource type="Texture2D" uid="uid://bjmhymsi2r2pj" path="res://Game/assets/sprite/body/sans_1.tres" id="11_lmyny"]
-[ext_resource type="Texture2D" uid="uid://bf7e166xmtvs3" path="res://Game/assets/sprite/body/sans_3.tres" id="12_ms3xx"]
-[ext_resource type="Texture2D" uid="uid://b1mivm0slee4h" path="res://Game/assets/sprite/body/sans_5.tres" id="13_y3njm"]
-[ext_resource type="Texture2D" uid="uid://bcs22ipqay0qb" path="res://Game/assets/sprite/body/sans_6.tres" id="14_iprom"]
+[ext_resource type="Texture2D" uid="uid://ce1xddfss3d3k" path="res://Game/assets/sprite/body/sans/sans_2.tres" id="9_24nx4"]
+[ext_resource type="Texture2D" uid="uid://dhtaucuu8qrwd" path="res://Game/assets/sprite/body/sans/sans_4.tres" id="10_kw5vo"]
+[ext_resource type="Texture2D" uid="uid://bjmhymsi2r2pj" path="res://Game/assets/sprite/body/sans/sans_1.tres" id="11_lmyny"]
+[ext_resource type="Texture2D" uid="uid://bf7e166xmtvs3" path="res://Game/assets/sprite/body/sans/sans_3.tres" id="12_ms3xx"]
+[ext_resource type="Texture2D" uid="uid://b1mivm0slee4h" path="res://Game/assets/sprite/body/sans/sans_5.tres" id="13_y3njm"]
+[ext_resource type="Texture2D" uid="uid://bcs22ipqay0qb" path="res://Game/assets/sprite/body/sans/sans_6.tres" id="14_iprom"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd4a3"]
 atlas = ExtResource("1_m0b6s")
