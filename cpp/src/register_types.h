@@ -8,6 +8,7 @@
 #include "mainAttacks/mainAttacks.h"
 #include "overworld/coreNode/coreNode.h"
 #include "overworld/laboratoryNode/laboratoryNode.h"
+#include "overworld/trueLaboratory/trueLaboratory.h"
 #include "enemy/sans_1/enemy_sans1.h"
 using namespace godot;
 

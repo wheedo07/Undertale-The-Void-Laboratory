@@ -11,5 +11,6 @@ void register_init() {
     GDREGISTER_CLASS(MainAttacks);
     GDREGISTER_CLASS(CoreNode);
     GDREGISTER_CLASS(LaboratoryNode);
+    GDREGISTER_CLASS(TrueLaboratory);
     GDREGISTER_CLASS(Enemy_SANS1);
 }

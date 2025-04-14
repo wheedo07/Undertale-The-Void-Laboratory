@@ -120,7 +120,7 @@ void LaboratoryNode::character_talk() {
     [this]() {
         audio_player->stop_audio("beep");
         global->set_player_in_menu(true);
-        camera->blind(0, 1, 1.5);
+        camera->blind(0, 1, 3.5);
         camera->connect("finished_tween", Callable(this, "main2_event"), CONNECT_ONE_SHOT);
     });
 }
@@ -167,6 +167,9 @@ void LaboratoryNode::finished_on() {
     special_1->queue_free();
     camera->kill();
     audio_player->stop_audio("glitch");
-    global->set_player_in_menu(false);
-    printf("end\n");
+    hide();
+    global->get_scene_container()->reload_camera();
+    sys->sleep([this]() {
+        scene_changer->load_general_scene("res://Game/overworld/trueLaboratory/1.tscn");
+    }, 1.5);
 }

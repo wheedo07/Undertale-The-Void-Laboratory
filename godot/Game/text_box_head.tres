@@ -1,8 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://dj2frtvnpp2o6"]
+[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://dj2frtvnpp2o6"]
 
+[ext_resource type="Texture2D" uid="uid://bo1imrcncxkqa" path="res://Game/assets/sprite/head/flowey/0.tres" id="1_6h5og"]
 [ext_resource type="Texture2D" uid="uid://cpcpbncmm3ati" path="res://Enemies/sans_raw.png" id="1_y45kp"]
 [ext_resource type="Texture2D" uid="uid://mbu7krrwtuxm" path="res://Game/assets/sprite/head/sans/sans_2.tres" id="2_enwbm"]
 [ext_resource type="Texture2D" uid="uid://iytja4gkfe4a" path="res://Game/assets/sprite/head/sans/sans_1.tres" id="2_jslue"]
+[ext_resource type="Texture2D" uid="uid://b7xfhfow057lo" path="res://Game/assets/sprite/head/flowey/1.tres" id="2_ne7c4"]
 [ext_resource type="Texture2D" uid="uid://15snk3rimuqp" path="res://Game/assets/sprite/head/sans/sans_3.tres" id="4_nfqom"]
 [ext_resource type="Texture2D" uid="uid://bvc5e1wbrbcab" path="res://Game/assets/sprite/head/sans/sans_4.tres" id="5_f6pyg"]
 [ext_resource type="Texture2D" uid="uid://0s8uhofpqmxh" path="res://Game/assets/sprite/head/sans/sans_5.tres" id="6_2qdu4"]
@@ -88,7 +90,13 @@ animations = [{
 "name": &"asgore",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6h5og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ne7c4")
+}],
 "loop": true,
 "name": &"flowey",
 "speed": 5.0

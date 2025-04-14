@@ -11,11 +11,13 @@ void CoreNode::_bind_methods() {
     ClassDB::bind_method(D_METHOD("event1"), &CoreNode::event1);
     ClassDB::bind_method(D_METHOD("event2"), &CoreNode::event2);
     ClassDB::bind_method(D_METHOD("text_trigger1"), &CoreNode::text_trigger1);
+    ClassDB::bind_method(D_METHOD("main2_sans"), &CoreNode::main2_sans);
     ClassDB::bind_method(D_METHOD("main2_start"), &CoreNode::main2_start);
     ClassDB::bind_method(D_METHOD("main2_selected_option", "option"), &CoreNode::main2_selected_option);
 }
 
 void CoreNode::ready() {
+    main2 = Object::cast_to<OverworldAreaTrigger>(get_node_internal("trigger/main2_start"));
     String name = get_name();
 
     if(name == "core_9") {
@@ -29,6 +31,7 @@ void CoreNode::ready() {
         EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
         if(global->get_flag("main1")) {
             sans->queue_free();
+            main2->set_required_collider_group(StringName());
             return;
         }
 
@@ -38,16 +41,9 @@ void CoreNode::ready() {
                 String::utf8("* [color=red]..."),
             })
         )->set_speed(Array::make(0.03)));
-        sys->sequence({
-            {[this, sans]() {
-                sans->start_walking(Vector2i(0, 1));
-                sys->sleep([this, sans]() {
-                    global->set_flags("main1", true);
-                    music_player->play();
-                    sans->queue_free();
-                    global->set_player_move(true);
-                }, 1.5);
-            }, [this]() { return !global->get_player_text_box(); }}
+        sys->executeTrue([this]() { return !global->get_player_text_box(); },
+        [this, sans]() {
+            sans->start_walking(Vector2i(0, 1));
         });
     }
 }
@@ -187,6 +183,16 @@ void CoreNode::text_trigger1() {
             global->save_flag("event1", true);
         }, [this]() { return !global->get_player_text_box(); }}
     });
+}
+
+void CoreNode::main2_sans() {
+    if(get_node_or_null("Sans")) {
+        music_player->play();
+        global->set_player_move(true);
+        global->set_flags("main1", true);
+        main2->set_required_collider_group(StringName());
+        get_node_internal("Sans")->queue_free();
+    }else WARN_PRINT("SANS가 아닌 다른게 들어옴");
 }
 
 void CoreNode::main2_start() {

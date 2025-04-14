@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://bl46cnf1qthmi"]
+
+[ext_resource type="Texture2D" uid="uid://k5hagxla70d5" path="res://Game/assets/sprite/anim/flowey_dig/0.tres" id="1_abrw3"]
+[ext_resource type="Texture2D" uid="uid://b4536skequt22" path="res://Game/assets/sprite/body/flowey/flowey_1.tres" id="1_hat3d"]
+[ext_resource type="Texture2D" uid="uid://cal03vgxh7nev" path="res://Game/assets/sprite/body/flowey/flowey_2.tres" id="1_udchu"]
+[ext_resource type="Texture2D" uid="uid://cj67s3yew1nbm" path="res://Game/assets/sprite/anim/flowey_dig/1.tres" id="2_6mhir"]
+[ext_resource type="Texture2D" uid="uid://dgt76c4oamvka" path="res://Overworld/Interactions/alert.png" id="2_esbtt"]
+[ext_resource type="Texture2D" uid="uid://dhhfljaffw145" path="res://Game/assets/sprite/body/flowey/flowey_3.tres" id="2_ml1h2"]
+[ext_resource type="PackedScene" uid="uid://mh5dhu6wa6nf" path="res://Overworld/Interactions/interaction_trigger.tscn" id="3_pg32x"]
+[ext_resource type="Texture2D" uid="uid://b04vq1vnolv0s" path="res://Game/assets/sprite/anim/flowey_dig/2.tres" id="3_wvock"]
+[ext_resource type="AudioStream" uid="uid://b7pkf261ktb1q" path="res://sfx/overworld_encounter_surprise.wav" id="4_rvb3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdrqj"]
+size = Vector2(16, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c51cd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hat3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_udchu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ml1h2")
+}],
+"loop": true,
+"name": &"act",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("1_abrw3")
+}, {
+"duration": 1.3,
+"texture": ExtResource("2_6mhir")
+}, {
+"duration": 1.5,
+"texture": ExtResource("3_wvock")
+}],
+"loop": false,
+"name": &"dig",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hat3d")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilg8t"]
+atlas = ExtResource("2_esbtt")
+region = Rect2(1, 1, 12, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tlmq"]
+atlas = ExtResource("2_esbtt")
+region = Rect2(14, 1, 12, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coku4"]
+atlas = ExtResource("2_esbtt")
+region = Rect2(27, 1, 12, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3881"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilg8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tlmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coku4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="Flowey" type="EnemyOverworld"]
+character = 7
+y_sort_enabled = true
+slide_on_ceiling = false
+wall_min_slide_angle = 0.785398
+platform_on_leave = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_bdrqj")
+debug_color = Color(1, 1, 1, 0.419608)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_c51cd")
+animation = &"move"
+offset = Vector2(0, -5)
+
+[node name="Alert" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -36)
+sprite_frames = SubResource("SpriteFrames_c3881")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Area" parent="." instance=ExtResource("3_pg32x")]
+position = Vector2(0, -3)
+scale = Vector2(0.8, 0.3)
+
+[node name="encounter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rvb3b")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="interacted" from="Area" to="." method="_on_area_interacted"]

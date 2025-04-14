@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cal03vgxh7nev"]
+
+[ext_resource type="Texture2D" uid="uid://kihe16hljm63" path="res://Game/assets/sprite/sheet/flowey_sheet.png" id="1_mmtjg"]
+
+[resource]
+atlas = ExtResource("1_mmtjg")
+region = Rect2(97, 29, 42, 42)

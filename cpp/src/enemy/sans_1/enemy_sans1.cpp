@@ -131,7 +131,7 @@ void Enemy_SANS1::_on_get_turn() {
             }, isFun},
             {[this]() {
                 audio_player->stop_audio("beep");
-                global->set_flags("main2", true);
+                global->set_flags("main2", 1);
                 scene_changer->load_cached_overworld_scene();
             }, isFun}
         });

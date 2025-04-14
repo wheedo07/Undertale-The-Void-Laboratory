@@ -104,6 +104,7 @@ offset_right = 363.0
 offset_bottom = 370.0
 
 [node name="main2_start" parent="trigger" instance=ExtResource("9_sqw1q")]
+required_collider_group = &"sans"
 action = 6
 position = Vector2(322, 355)
 scale = Vector2(4, 0.3)
@@ -133,3 +134,4 @@ position = Vector2(-143, 69)
 shape = SubResource("RectangleShape2D_f3n87")
 
 [connection signal="cutscene" from="trigger/main2_start" to="." method="main2_start"]
+[connection signal="stopped_obj" from="trigger/main2_start" to="." method="main2_sans"]
