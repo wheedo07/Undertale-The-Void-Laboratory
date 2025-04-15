@@ -9,7 +9,6 @@ extern MainNode* sys;
 extern Global* global;
 extern OverworldSceneChanger* scene_changer;
 extern AudioPlayer* audio_player;
-extern AudioStreamPlayer* Music;
 extern int isEditor;
 
 #endif
