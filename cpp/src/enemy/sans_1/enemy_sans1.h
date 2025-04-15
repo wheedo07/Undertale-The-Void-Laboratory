@@ -12,7 +12,6 @@ namespace godot {
             static void _bind_methods();
         
         private:
-            bool is;
             AnimatedSprite2D* body;
             AnimatedSprite2D* leg;
             AnimatedSprite2D* head;

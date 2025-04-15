@@ -30,7 +30,6 @@ void Enemy_SANS1::ready() {
 
 void Enemy_SANS1::_on_get_turn() {
     if(main->turn_number == 0) {
-        is = true;
         if(global->get_flag("sans_1_death")) {
             global->get_Music()->seek(22);
             head->set_frame(20);

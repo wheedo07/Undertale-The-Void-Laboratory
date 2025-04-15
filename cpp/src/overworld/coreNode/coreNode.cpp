@@ -17,7 +17,6 @@ void CoreNode::_bind_methods() {
 }
 
 void CoreNode::ready() {
-    main2 = Object::cast_to<OverworldAreaTrigger>(get_node_internal("trigger/main2_start"));
     String name = get_name();
 
     if(name == "core_9") {
@@ -28,6 +27,7 @@ void CoreNode::ready() {
             String::utf8("* ( 화면은 더 이상 켜지지 않는다 )")
         ));
     }else if(name == "core_3") {
+        main2 = Object::cast_to<OverworldAreaTrigger>(get_node_internal("trigger/main2_start"));
         EnemyOverworld* sans = Object::cast_to<EnemyOverworld>(get_node_internal("Sans"));
         if(global->get_flag("main1")) {
             sans->queue_free();
