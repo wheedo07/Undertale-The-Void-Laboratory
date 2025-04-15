@@ -49,14 +49,14 @@ void LaboratoryNode::init() {
                     )->set_expressions(Array::make(1, 5)));
                 }else summontextbox()->character(Character::SANS, sys->dia()->from(
                     PackedStringArray({
-                        String::utf8("* ..?"),
-                        String::utf8("* ..."),
-                        String::utf8("* 음 kid 여기 있었네.."),
-                        String::utf8("* 뼈밖에서 보니까 반갑네.."),
-                        String::utf8("* 내가 여기 있는것도 우연은 아닐거고... 그치?"),
+                        String::utf8("* 헤. 따라오고 있었어?"),
+                        String::utf8("* 여기까지 오느라 바빴나 보네"),
+                        String::utf8("* 그 손에 묻은 먼지는 꽤 많아 보이는데... 몬스터를 많이 만났나 봐..?"),
+                        String::utf8("* 어째서 왜? 여전히 이런 길을 선택한 거지? 호기심? 지루함? 아니면..."),
+                        String::utf8("* 그저 할 수 있으니까?"),
                     })
-                )->set_expressions(Array::make(10, 18, 0, 1, 4))
-                ->set_speed(Array::make(0.03)));
+                )->set_expressions(Array::make(1, 0, 18, 4, 5))
+                ->set_speed(Array::make(0.08, 0.08, 0.08, 0.1)));
             }, 0.4f},
             {[this]() {
                 if(global->get_flag("sans_1_death")) return;
@@ -70,16 +70,13 @@ void LaboratoryNode::init() {
                 if(global->get_flag("sans_1_death")) return;
                 summontextbox()->character(Character::SANS, sys->dia()->from(
                     PackedStringArray({
-                        String::utf8("* 다른 타임라인에서 네가 한 일들..."),
-                        String::utf8("* 얼마나 많은 괴물들을 죽였지?"),
-                        String::utf8("* 얼마나 많은 타임라인을 망쳐놨지?"),
-                        String::utf8("* 나는 기억하고 있어 너가 수많은 리셋으로 이르킨 일들.."),
-                        String::utf8("* ..."),
-                        String::utf8("* 그렇기에 kid 한가지 조언을 할게 너를 위해서기도 해"),
+                        String::utf8("* 뭐, 중요하진 않아."),
+                        String::utf8("* 우리 모두 자신의 선택에 책임을 져야 하니까"),
+                        String::utf8("* 네 '재미'가 여기서 끝나길 바랐지만... 어쩔 수 없네"),
+                        String::utf8("* 마지막으로 kid 한가지 조언을 할게 너를 위해서기도 해"),
                         String::utf8("* 이제 그만두는게 좋을거야")
                     })
-                )->set_expressions(Array::make(4, 5, 15, 17, 19, 4, 5))
-                ->set_speed(Array::make(0.03, 0.01, 0.05)));
+                )->set_expressions(Array::make(4, 4, 3, 9, 17)));
             }, isFun},
             {[this]() {
                 sys->load_battle("res://Game/encounters/sans_1.tres",  Vector2(324, 323));

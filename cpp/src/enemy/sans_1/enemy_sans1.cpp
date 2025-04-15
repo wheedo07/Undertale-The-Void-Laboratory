@@ -1,4 +1,5 @@
 #include "enemy_sans1.h"
+#include "src/mainNode/dropText.h"
 #include "env.h"
 
 Enemy_SANS1::Enemy_SANS1() {}
@@ -21,9 +22,6 @@ void Enemy_SANS1::ready() {
     attackScene = ResourceLoader::get_singleton()->load("res://Game/main_attacks.tscn");
 
     sprite->set_z_index(102);
-    body->set_frame(8);
-    head->set_frame(17);
-    leg->set_frame(2);
     main->back_scene->set_visible(true);
     sprite->set_y_sort_enabled(true);
 }
@@ -32,6 +30,8 @@ void Enemy_SANS1::_on_get_turn() {
     if(main->turn_number == 0) {
         if(global->get_flag("sans_1_death")) {
             global->get_Music()->seek(22);
+            body->set_frame(8);
+            leg->set_frame(2);
             head->set_frame(20);
             camera_pro(2, "zoom", Vector2(2,2));
             camera_pro(2, "rotation", 0.6);
@@ -65,31 +65,33 @@ void Enemy_SANS1::_on_get_turn() {
             });
         }else {
             Node2D* friends = Object::cast_to<Node2D>(get_node_internal("friends"));
+            DropText* drop = Object::cast_to<DropText>(get_node_internal("DropText"));
+            head->set_frame(4);
+            auto isFun = [this]() { return !global->get_battle_text_box(); };
             sys->sequence({
                 {[this, friends]() {
+                    head->set_frame(17);
+                    body->set_frame(8);
+                    play_dialogue(0, 2.5, false);
                     friends->set_visible(true);
                     friends->set_modulate(Color(1, 1, 1, 0)); 
                     Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
-                    tween->tween_property(friends, "modulate:a", 1.0, 8.0);
-                }, 3.0f},
+                    tween->tween_property(friends, "modulate:a", 1, 8.0);
+                }, 2.0f},
                 {[this, friends]() {
+                    leg->set_frame(2);
+                    play_dialogue(1, 2.1, false);
                     Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
                     tween->tween_property(friends, "modulate:a", 0.0, 5.0);
                     tween->connect("finished", Callable(friends, "queue_free"));
-                }, 7.0f},
-                {[this]() {
-                    head->set_frame(18);
-                }, 7.0f},
-                {[this]() {
-                    head->set_frame(19);
-                }, 2.0f},
-                {[this]() {
+                }, isFun},
+                {[this, drop]() {
                     head->set_frame(20);
-                    camera_pro(2, "zoom", Vector2(2,2));
-                    camera_pro(2, "rotation", 0.6);
-                    camera_pro(0.1, "position", Vector2(320, 150));
-                }, 4.5f},
-                {[this]() {
+                    drop->set_font_size(30);
+                    drop->crumble_text(String::utf8("지 옥 에 나 떨 어 져"), Vector2(-130, 0));
+                }, isFun},
+                {[this, drop]() {
+                    drop->start();
                     camera_pro(0.5);
                     head->set_frame(21);
                     body->set_frame(9);
@@ -113,7 +115,7 @@ void Enemy_SANS1::_on_get_turn() {
                     head->set_frame(3);
                     body->set_frame(0);
                     attacks->end_attack(0);
-                }, [this]() { return !global->get_battle_text_box(); }}
+                }, isFun}
             });
         }
     }else if(main->turn_number == 1) {

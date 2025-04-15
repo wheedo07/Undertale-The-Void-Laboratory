@@ -3,6 +3,7 @@
 #include<godot_cpp/core/class_db.hpp>
 #include "mainNode/mainNode.h"
 #include "mainNode/title.h"
+#include "mainNode/dropText.h"
 #include "trigger/text_trigger.h"
 #include "trigger/move_trigger.h"
 #include "mainAttacks/mainAttacks.h"

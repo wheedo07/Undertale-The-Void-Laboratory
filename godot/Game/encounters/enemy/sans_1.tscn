@@ -1,31 +1,41 @@
-[gd_scene load_steps=31 format=3 uid="uid://cuuor6488vm2a"]
+[gd_scene load_steps=34 format=3 uid="uid://cuuor6488vm2a"]
 
 [ext_resource type="PackedScene" uid="uid://bp62m2pkjek8i" path="res://Game/encounters/body/sans.tscn" id="1_euocs"]
+[ext_resource type="AudioStream" uid="uid://dx5o1v0ulqlvx" path="res://sfx/impact_wallhit.wav" id="6_txbp0"]
+[ext_resource type="FontFile" uid="uid://csykmc6wiuic" path="res://Game/assets/font/sans.ttf" id="9_whbel"]
 [ext_resource type="Shader" uid="uid://5h6o16kson3k" path="res://Enemies/dust/undertale_dust.tres" id="14_8se00"]
 [ext_resource type="Texture2D" uid="uid://v2uk8ex2yh8f" path="res://Enemies/dust/default_dust.png" id="15_clr63"]
 [ext_resource type="Texture2D" uid="uid://bw02r33khpc4w" path="res://particles/smoke.png" id="16_n4l3h"]
 [ext_resource type="PackedScene" uid="uid://d3j04wql8n25c" path="res://Battle/Misc/dialogue.tscn" id="17_akvrj"]
-[ext_resource type="AudioStream" uid="uid://d0shy16q7rrx" path="res://sfx/snd_ehurt1.wav" id="18_fpynh"]
 [ext_resource type="Texture2D" uid="uid://be5xqdr4doast" path="res://Game/assets/sprite/sheet/death.png" id="18_teahm"]
 [ext_resource type="AudioStream" uid="uid://dtoo70e1wko8r" path="res://sfx/snd_vaporized.wav" id="19_31muo"]
 
 [sub_resource type="Dialogue" id="Dialogue_h1dhv"]
-dialog_text = "그럼"
-dialog_expressions = Array[int]([9, 1])
+dialog_text = "토리엘은 널 구하기 위해 노력했어. 그리고 그녀가 받은 보답이 뭐였지?"
+dialog_expressions = Array[int]([4, 0])
 
 [sub_resource type="Dialogue" id="Dialogue_rvqxv"]
-dialog_text = "슬슬 시작 하자"
-dialog_expressions = Array[int]([5, 2])
+dialog_text = "파피루스는... 너를 믿었어. 죽는 순간까지도 네가 더 나은 사람이 될 수 있다고 생각했지"
+dialog_speed = 0.1
+dialog_expressions = Array[int]([5, 12])
+
+[sub_resource type="Dialogue" id="Dialogue_pvxiy"]
+dialog_text = "언다인의 의지는 정말 대단했어. 하지만 결국엔 그것도 충분하지 않았지"
+dialog_expressions = Array[int]([19, 9])
 
 [sub_resource type="Dialogues" id="Dialogues_sjt8k"]
-dialogues = Array[Dialogue]([SubResource("Dialogue_h1dhv"), SubResource("Dialogue_rvqxv")])
+dialogues = Array[Dialogue]([SubResource("Dialogue_h1dhv"), SubResource("Dialogue_rvqxv"), SubResource("Dialogue_pvxiy")])
 
 [sub_resource type="Dialogue" id="Dialogue_x4mvr"]
-dialog_text = "kid 미안하지만.. 넌"
-dialog_expressions = Array[int]([4, -1])
+dialog_text = "이게 네가 원했던 거야? 모두를 죽이는 것? 무엇을 위해서?"
+dialog_expressions = Array[int]([-1, -1])
+
+[sub_resource type="Dialogue" id="Dialogue_6cko7"]
+dialog_text = "내가 뭘 기대한 거지... 네가 듣고 있는지도 모르겠군"
+dialog_expressions = Array[int]([-1, -1])
 
 [sub_resource type="Dialogues" id="Dialogues_ti782"]
-dialogues = Array[Dialogue]([SubResource("Dialogue_x4mvr")])
+dialogues = Array[Dialogue]([SubResource("Dialogue_x4mvr"), SubResource("Dialogue_6cko7")])
 
 [sub_resource type="Dialogue" id="Dialogue_ponph"]
 dialog_text = "..?"
@@ -135,18 +145,6 @@ dialogue_path = NodePath("Dialogue")
 [node name="sans" parent="." instance=ExtResource("1_euocs")]
 position = Vector2(1, -62)
 
-[node name="leg" parent="sans/Throw" index="0"]
-frame = 16
-
-[node name="Idle" parent="sans" index="1"]
-visible = false
-
-[node name="body" parent="sans/Idle" index="1"]
-position = Vector2(0, 0)
-
-[node name="head" parent="sans/Idle/body" index="0"]
-position = Vector2(0, -25)
-
 [node name="Dust" type="GPUParticles2D" parent="."]
 position = Vector2(-54, -144)
 emitting = false
@@ -184,7 +182,7 @@ one_shot = true
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("18_fpynh")
+stream = ExtResource("6_txbp0")
 bus = &"SFX"
 
 [node name="Dust" type="AudioStreamPlayer" parent="Sounds"]
@@ -215,6 +213,15 @@ scale = Vector2(1.48235, 1.57561)
 texture = ExtResource("18_teahm")
 region_enabled = true
 region_rect = Rect2(84, 240, 68, 80)
+
+[node name="DropText" type="DropText" parent="."]
+spacing = 20.0
+font = ExtResource("9_whbel")
+color = Color(0.847059, 0.14902, 0.152941, 1)
+z_index = 101
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -173)
 
 [connection signal="timeout" from="Timer" to="." method="end_throws"]
 

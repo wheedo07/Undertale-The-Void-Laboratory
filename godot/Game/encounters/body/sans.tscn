@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://bp62m2pkjek8i"]
+[gd_scene load_steps=89 format=3 uid="uid://bp62m2pkjek8i"]
 
 [ext_resource type="Texture2D" uid="uid://cpcpbncmm3ati" path="res://Enemies/sans_raw.png" id="1_m0b6s"]
 [ext_resource type="Texture2D" uid="uid://d2ty7f5o7onbe" path="res://Game/assets/sprite/head/sans/sans_6.tres" id="2_3jf5r"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bf7e166xmtvs3" path="res://Game/assets/sprite/body/sans/sans_3.tres" id="12_ms3xx"]
 [ext_resource type="Texture2D" uid="uid://b1mivm0slee4h" path="res://Game/assets/sprite/body/sans/sans_5.tres" id="13_y3njm"]
 [ext_resource type="Texture2D" uid="uid://bcs22ipqay0qb" path="res://Game/assets/sprite/body/sans/sans_6.tres" id="14_iprom"]
+[ext_resource type="Texture2D" uid="uid://gmcu842m3ddq" path="res://Game/assets/sprite/body/sans/sans_7.tres" id="15_bd3mo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd4a3"]
 atlas = ExtResource("1_m0b6s")
@@ -435,6 +436,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("14_iprom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bd3mo")
 }],
 "loop": true,
 "name": &"default",
@@ -1106,6 +1110,7 @@ visible = false
 [node name="leg" type="AnimatedSprite2D" parent="Throw"]
 position = Vector2(14.5, 10)
 sprite_frames = SubResource("SpriteFrames_acfb4")
+frame = 16
 
 [node name="head" type="AnimatedSprite2D" parent="Throw"]
 position = Vector2(-2.5, -22.5)
@@ -1116,6 +1121,7 @@ animation = &"heads"
 sprite_frames = SubResource("SpriteFrames_ghdqy")
 
 [node name="Idle" type="Node2D" parent="."]
+visible = false
 
 [node name="leg" type="AnimatedSprite2D" parent="Idle"]
 position = Vector2(21, 16)
@@ -1123,12 +1129,11 @@ sprite_frames = SubResource("SpriteFrames_tifa1")
 offset = Vector2(-20, 0.33)
 
 [node name="body" type="AnimatedSprite2D" parent="Idle"]
-position = Vector2(-0.367383, -0.126447)
 sprite_frames = SubResource("SpriteFrames_vko5n")
 offset = Vector2(0, -1)
 
 [node name="head" type="AnimatedSprite2D" parent="Idle/body"]
-position = Vector2(0, -26)
+position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_qg8do")
 animation = &"heads"
 offset = Vector2(0, -0.5)

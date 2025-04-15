@@ -90,6 +90,9 @@ stream_1/stream = ExtResource("46_54qmn")
 stream_2/stream = ExtResource("47_48vxc")
 
 [node name="Dialogue" type="DialogueControl"]
+z_index = 110
+z_as_relative = false
+y_sort_enabled = true
 clip_contents = true
 offset_right = 108.0
 offset_bottom = 110.0
