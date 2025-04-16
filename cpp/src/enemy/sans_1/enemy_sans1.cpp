@@ -70,8 +70,6 @@ void Enemy_SANS1::_on_get_turn() {
             auto isFun = [this]() { return !global->get_battle_text_box(); };
             sys->sequence({
                 {[this, friends]() {
-                    head->set_frame(17);
-                    body->set_frame(8);
                     play_dialogue(0, 2.5, false);
                     friends->set_visible(true);
                     friends->set_modulate(Color(1, 1, 1, 0)); 
@@ -79,6 +77,8 @@ void Enemy_SANS1::_on_get_turn() {
                     tween->tween_property(friends, "modulate:a", 1, 8.0);
                 }, 2.0f},
                 {[this, friends]() {
+                    head->set_frame(17);
+                    body->set_frame(8);
                     leg->set_frame(2);
                     play_dialogue(1, 2.1, false);
                     Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
