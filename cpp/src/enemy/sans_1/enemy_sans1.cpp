@@ -22,6 +22,9 @@ void Enemy_SANS1::ready() {
     attackScene = ResourceLoader::get_singleton()->load("res://Game/main_attacks.tscn");
 
     sprite->set_z_index(102);
+    body->set_frame(8);
+    head->set_frame(17);
+    leg->set_frame(2);
     main->back_scene->set_visible(true);
     sprite->set_y_sort_enabled(true);
 }
@@ -30,9 +33,6 @@ void Enemy_SANS1::_on_get_turn() {
     if(main->turn_number == 0) {
         if(global->get_flag("sans_1_death")) {
             global->get_Music()->seek(22);
-            body->set_frame(8);
-            leg->set_frame(2);
-            head->set_frame(20);
             camera_pro(2, "zoom", Vector2(2,2));
             camera_pro(2, "rotation", 0.6);
             camera_pro(0.1, "position", Vector2(320, 150));
@@ -46,6 +46,7 @@ void Enemy_SANS1::_on_get_turn() {
                     sprite->set_z_index(0);
                     sprite->set_y_sort_enabled(false);
                     
+                    box->change_size(Vector2(140, 140));
                     create_attack()->set_part(PartType::sans_1);
                     attacks->start_attack(0);
                 }, 3.0f},
@@ -66,32 +67,36 @@ void Enemy_SANS1::_on_get_turn() {
         }else {
             Node2D* friends = Object::cast_to<Node2D>(get_node_internal("friends"));
             DropText* drop = Object::cast_to<DropText>(get_node_internal("DropText"));
-            head->set_frame(4);
             auto isFun = [this]() { return !global->get_battle_text_box(); };
             sys->sequence({
                 {[this, friends]() {
-                    play_dialogue(0, 2.5, false);
                     friends->set_visible(true);
                     friends->set_modulate(Color(1, 1, 1, 0)); 
-                    Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
-                    tween->tween_property(friends, "modulate:a", 1, 8.0);
-                }, 2.0f},
+                    Ref<Tween> tween = create_tween();
+                    tween->tween_property(friends, "modulate:a", 1.0, 8.0);
+                }, 3.0f},
                 {[this, friends]() {
-                    head->set_frame(17);
-                    body->set_frame(8);
-                    leg->set_frame(2);
-                    play_dialogue(1, 2.1, false);
-                    Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
+                    Ref<Tween> tween = create_tween();
                     tween->tween_property(friends, "modulate:a", 0.0, 5.0);
                     tween->connect("finished", Callable(friends, "queue_free"));
-                }, isFun},
+                }, 7.0f},
+                {[this]() {
+                    head->set_frame(18);
+                }, 7.0f},
+                {[this]() {
+                    play_dialogue(0, 1.5, false);
+                    head->set_frame(19);
+                }, 2.0f},
                 {[this, drop]() {
+                    camera_pro(2, "zoom", Vector2(1.3, 1.3));
+                    camera_pro(2, "rotation", 0.3);
+                    camera_pro(0.1, "position", Vector2(320, 150));
+
                     head->set_frame(20);
                     drop->set_font_size(30);
-                    drop->crumble_text(String::utf8("지 옥 에 나 떨 어 져"), Vector2(-130, 0));
+                    drop->crumble_text(String::utf8("지 옥 에 나  떨 어 져"), Vector2(-130, 0));
                 }, isFun},
-                {[this, drop]() {
-                    drop->start();
+                {[this]() {
                     camera_pro(0.5);
                     head->set_frame(21);
                     body->set_frame(9);
@@ -100,16 +105,76 @@ void Enemy_SANS1::_on_get_turn() {
                     sprite->set_z_index(0);
                     sprite->set_y_sort_enabled(false);
                     
+                    box->change_size(Vector2(140, 140));
                     create_attack()->set_part(PartType::sans_1);
+                    _on_throws(Vector2(0, -1), 50);
+                }, 3.3f},
+                {[this, drop]() {
+                    Vector2 original_pos = main->camera->get_position();
+                    Vector2 drop_pos = drop->get_position();
+                    camera_pro(0.1, "position", original_pos + Vector2(0, -15));
+                                
+                    Ref<Tween> text_shake = create_tween();
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(10, -2), 0.05);
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(-10, 2), 0.05);
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(8, -3), 0.05);
+                    text_shake->tween_property(drop, "position", drop_pos, 0.05);
+                    
+                    text_shake->parallel()->tween_property(drop, "scale", Vector2(1.1, 1.1), 0.1);
+                    text_shake->tween_property(drop, "scale", Vector2(1, 1), 0.1);
+                }, 0.1},
+                {[this, drop]() {
+                    Vector2 original_pos = main->camera->get_position();
+                    Vector2 drop_pos = drop->get_position();
+                    camera_pro(0.15, "position", original_pos + Vector2(17, 0));
+                    
+                    Ref<Tween> text_shake = create_tween();
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(-12, -4), 0.04);
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(12, 4), 0.04);
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(-8, 4), 0.04);
+                    text_shake->tween_property(drop, "position", drop_pos + Vector2(8, -4), 0.04);
+                    text_shake->tween_property(drop, "position", drop_pos, 0.04);
+
+                    _on_throws(Vector2(1, 0), 50);
+                }, 0.7},
+                {[this, drop]() {
+                    Vector2 original_pos = main->camera->get_position();
+                    camera_pro(0.15, "position", original_pos + Vector2(-17, 0));
+
+                    Ref<Tween> text_shake = create_tween();
+                    text_shake->parallel()->tween_property(drop, "rotation", 0.1, 0.1);
+                    text_shake->tween_property(drop, "rotation", -0.1, 0.1);
+                    text_shake->tween_property(drop, "rotation", 0, 0.1);
+
+                    text_shake->parallel()->tween_property(drop, "scale", Vector2(1.2, 1.2), 0.1);
+                    text_shake->tween_property(drop, "scale", Vector2(0.9, 0.9), 0.1);
+                    text_shake->tween_property(drop, "scale", Vector2(1, 1), 0.1);
+
+                    _on_throws(Vector2(-1, 0), 50);
+                }, 0.7},
+                {[this, drop]() {
+                    _on_throws(Vector2(1, 0), 70);
+
+                    Ref<Tween> tween = create_tween();
+                    tween->tween_property(drop, "modulate", Color(0, 0.3, 1), 0.2);
+                }, 0.7},
+                {[this, drop]() {
+                    drop->start();
+                    Object::cast_to<AudioStreamPlayer>(get_node_internal("Sounds/boom"))->play();
+                    Vector2 original_pos = main->camera->get_position();
+                    camera_pro(0.2, "position", original_pos + Vector2(12, 5));
+                    camera_pro(0.2, "zoom", Vector2(1.15, 1.15));
+                    
                     attacks->start_attack(0);
-                }, 3.0f},
+                }, 0.4},
                 {[this]() {
+                    camera_pro(0.5);
                     head->set_frame(22);
                     body->set_frame(10);
                     leg->set_frame(0);
                 }, 24.0f},
                 {[this]() {
-                    play_dialogue(0);
+                    play_dialogue(1);
                 }, 11.0f},
                 {[this]() {
                     head->set_frame(3);
@@ -123,12 +188,12 @@ void Enemy_SANS1::_on_get_turn() {
         auto isFun = [this]() { return !global->get_battle_text_box(); };
         sys->sequence({
             {[this]() {
-                play_dialogue(1);
+                play_dialogue(2);
             }, 0.1f},
             {[this]() {
                 global->get_scene_container()->get_camera()->Void(0, 5, 0.005, 0.1, 2);
                 audio_player->play("beep");
-                play_dialogue(2);
+                play_dialogue(3);
             }, isFun},
             {[this]() {
                 audio_player->stop_audio("beep");
@@ -176,7 +241,7 @@ void Enemy_SANS1::end_throws() {
 }
 
 void Enemy_SANS1::camera_pro(float time, String key, Variant value) {
-    Tween* tween = Object::cast_to<Tween>(create_tween().ptr());
+    Ref<Tween> tween = create_tween();
     // zoom, position, rotation
     if(key == "all") {
         tween->tween_property(main->camera, "zoom", Vector2(1,1), time);

@@ -2,8 +2,7 @@
 #include "env.h"
 
 void MainAttacks::sans_1() {
-    emit_signal("throws", Vector2(0, 1));
-    box->change_size(Vector2(140, 140));
+    emit_signal("throws", Vector2(0, 1), 40);
 
     double* time = new double(1);
     sys->time_loop([this, time](double delta) {

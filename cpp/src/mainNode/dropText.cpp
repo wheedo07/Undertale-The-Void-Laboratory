@@ -63,13 +63,13 @@ void DropText::_process(double delta) {
 }
 
 void DropText::crumble_text(String text, Vector2 start_pos, float time) {
+    set_modulate(color);
     for(int i=0; i < text.length(); i++) {
         String c = text.substr(i, 1);
         Label* label = memnew(Label);
 		label->set_text(c);
 		label->set_position(start_pos + Vector2(spacing * i, 0));
 		label->add_theme_font_override("font", font);
-        label->add_theme_color_override("font_color", color);
         label->add_theme_font_size_override("font_size", font_size);
 
         float letter_delay = i * (time / 2);
