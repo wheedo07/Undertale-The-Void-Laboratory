@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cbur7ycquputw" path="res://Game/assets/img/battle/sans_1.png" id="1_81ouh"]
 [ext_resource type="PackedScene" uid="uid://cuuor6488vm2a" path="res://Game/encounters/enemy/sans_1.tscn" id="2_d02iu"]
-[ext_resource type="AudioStream" uid="uid://celc4psyhueu6" path="res://Game/assets/audio/battle/sans_1.wav" id="3_ojb4t"]
+[ext_resource type="AudioStream" uid="uid://bgd1p7lukvvdp" path="res://Game/assets/audio/battle/sans_1.mp3" id="3_8jrb4"]
 
 [resource]
 encounter_name = &"sans_1"
 background = ExtResource("1_81ouh")
 enemies = Array[PackedScene]([ExtResource("2_d02iu")])
-music = ExtResource("3_ojb4t")
+music = ExtResource("3_8jrb4")
 mercy_options = PackedStringArray("* 자비")
+flee_chance = 0.0

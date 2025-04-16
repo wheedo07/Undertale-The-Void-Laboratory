@@ -27,6 +27,7 @@ void Enemy_SANS1::ready() {
     leg->set_frame(2);
     main->back_scene->set_visible(true);
     sprite->set_y_sort_enabled(true);
+    global->get_Music()->seek(5);
 }
 
 void Enemy_SANS1::_on_get_turn() {
@@ -74,19 +75,19 @@ void Enemy_SANS1::_on_get_turn() {
                     friends->set_modulate(Color(1, 1, 1, 0)); 
                     Ref<Tween> tween = create_tween();
                     tween->tween_property(friends, "modulate:a", 1.0, 8.0);
-                }, 3.0f},
+                }, 5.0f},
                 {[this, friends]() {
                     Ref<Tween> tween = create_tween();
                     tween->tween_property(friends, "modulate:a", 0.0, 5.0);
                     tween->connect("finished", Callable(friends, "queue_free"));
-                }, 7.0f},
+                }, 7.5f},
                 {[this]() {
                     head->set_frame(18);
-                }, 7.0f},
+                }, 7.5f},
                 {[this]() {
                     play_dialogue(0, 1.5, false);
                     head->set_frame(19);
-                }, 2.0f},
+                }, 8.0f},
                 {[this, drop]() {
                     camera_pro(2, "zoom", Vector2(1.3, 1.3));
                     camera_pro(2, "rotation", 0.3);
@@ -94,11 +95,13 @@ void Enemy_SANS1::_on_get_turn() {
 
                     head->set_frame(20);
                     drop->set_font_size(30);
+                    AudioStreamPlayer* sound = Object::cast_to<AudioStreamPlayer>(get_node_internal("Sounds/damage"));
+                    drop->connect("stated_typeing", Callable(sound, "play"));
                     drop->crumble_text(String::utf8("지 옥 에 나  떨 어 져"), Vector2(-130, 0));
                 }, isFun},
                 {[this]() {
                     camera_pro(0.5);
-                    head->set_frame(21);
+                    head->set_frame(24);
                     body->set_frame(9);
                     leg->set_frame(3);
                     main->back_scene->set_visible(false);

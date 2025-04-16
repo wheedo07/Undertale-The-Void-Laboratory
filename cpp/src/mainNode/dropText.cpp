@@ -16,6 +16,7 @@ DropText::~DropText() {}
 
 void DropText::_bind_methods() {
     ADD_SIGNAL(MethodInfo("finished_drop"));
+    ADD_SIGNAL(MethodInfo("stated_typeing"));
 
     ClassDB::bind_method(D_METHOD("crumble_text", "text", "start_pos", "time"), &DropText::crumble_text, DEFVAL(0.5));
     ClassDB::bind_method(D_METHOD("start"), &DropText::start);
@@ -75,6 +76,7 @@ void DropText::crumble_text(String text, Vector2 start_pos, float time) {
         float letter_delay = i * (time / 2);
         Ref<SceneTreeTimer> timer = get_tree()->create_timer(letter_delay);
         timer->connect("timeout", Callable(this, "add_child").bind(label));
+        timer->connect("timeout", Callable(this, "emit_signal").bind("stated_typeing"));
 
 		Vector2 velocity = Vector2(UtilityFunctions::randf_range(-150, 150), UtilityFunctions::randf_range(-300, -100));
 		label->set_meta("velocity", velocity);

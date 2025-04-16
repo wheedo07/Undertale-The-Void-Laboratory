@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dx5o1v0ulqlvx" path="res://sfx/impact_wallhit.wav" id="6_txbp0"]
 [ext_resource type="AudioStream" uid="uid://b3ewfxphe2lp" path="res://sfx/boom2.ogg" id="8_r7kvv"]
 [ext_resource type="FontFile" uid="uid://csykmc6wiuic" path="res://Game/assets/font/sans.ttf" id="9_whbel"]
+[ext_resource type="AudioStream" uid="uid://dimh8qn8ampsv" path="res://sfx/snd_damage.wav" id="10_lidoa"]
 [ext_resource type="Shader" uid="uid://5h6o16kson3k" path="res://Enemies/dust/undertale_dust.tres" id="14_8se00"]
 [ext_resource type="Texture2D" uid="uid://v2uk8ex2yh8f" path="res://Enemies/dust/default_dust.png" id="15_clr63"]
 [ext_resource type="Texture2D" uid="uid://bw02r33khpc4w" path="res://particles/smoke.png" id="16_n4l3h"]
@@ -17,15 +18,12 @@ dialog_speed = 0.09
 dialog_expressions = Array[int]([-1, -1])
 
 [sub_resource type="Dialogue" id="Dialogue_rvqxv"]
-dialog_text = "뭐 그냥.."
+dialog_text = "아니다 뭐 그냥.."
+dialog_speed = 0.1
 dialog_expressions = Array[int]([17, -1])
 
-[sub_resource type="Dialogue" id="Dialogue_pvxiy"]
-dialog_text = "이런 날엔, 너 같은 꼬마들은..."
-dialog_expressions = Array[int]([19, -1])
-
 [sub_resource type="Dialogues" id="Dialogues_sjt8k"]
-dialogues = Array[Dialogue]([SubResource("Dialogue_h1dhv"), SubResource("Dialogue_rvqxv"), SubResource("Dialogue_pvxiy")])
+dialogues = Array[Dialogue]([SubResource("Dialogue_h1dhv"), SubResource("Dialogue_rvqxv")])
 
 [sub_resource type="Dialogue" id="Dialogue_x4mvr"]
 dialog_text = "그럼"
@@ -187,6 +185,15 @@ offset_bottom = -31.0
 wait_time = 0.6
 one_shot = true
 
+[node name="DropText" type="DropText" parent="."]
+spacing = 20.0
+font = ExtResource("9_whbel")
+color = Color(0.847059, 0.14902, 0.152941, 1)
+z_index = 101
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(0, -173)
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
@@ -201,14 +208,8 @@ bus = &"SFX"
 stream = ExtResource("8_r7kvv")
 bus = &"SFX"
 
-[node name="DropText" type="DropText" parent="."]
-spacing = 20.0
-font = ExtResource("9_whbel")
-color = Color(0.847059, 0.14902, 0.152941, 1)
-z_index = 101
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(0, -173)
+[node name="damage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_lidoa")
 
 [node name="friends" type="Node2D" parent="."]
 visible = false

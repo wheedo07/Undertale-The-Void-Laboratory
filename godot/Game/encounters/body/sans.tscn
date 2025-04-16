@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b1mivm0slee4h" path="res://Game/assets/sprite/body/sans/sans_5.tres" id="13_y3njm"]
 [ext_resource type="Texture2D" uid="uid://bcs22ipqay0qb" path="res://Game/assets/sprite/body/sans/sans_6.tres" id="14_iprom"]
 [ext_resource type="Texture2D" uid="uid://gmcu842m3ddq" path="res://Game/assets/sprite/body/sans/sans_7.tres" id="15_bd3mo"]
+[ext_resource type="Texture2D" uid="uid://cu1bd8eqna77s" path="res://Game/assets/sprite/head/sans/sans_13.tres" id="16_il7go"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd4a3"]
 atlas = ExtResource("1_m0b6s")
@@ -211,7 +212,7 @@ region = Rect2(486, 519, 32, 32)
 atlas = ExtResource("1_m0b6s")
 region = Rect2(523, 519, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bme0f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qg8do"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -296,6 +297,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_epe1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_il7go")
 }],
 "loop": false,
 "name": &"heads",
@@ -443,97 +447,6 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qg8do"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g8hbx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kn42i")
-}],
-"loop": true,
-"name": &"crazy",
-"speed": 15.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ns30s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wghvf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ya873")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_27okj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n0e0s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_giw00")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uby67")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqfn5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hlbu2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y0rkr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gstnc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5hqs4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_07wdr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukakn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_plei5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g8hbx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kn42i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_3jf5r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_7jhg6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_lyhxp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_6266s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_jl3ot")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_nnc7y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_epe1q")
-}],
-"loop": false,
-"name": &"heads",
-"speed": 0.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f6pgy"]
@@ -1114,7 +1027,7 @@ frame = 16
 
 [node name="head" type="AnimatedSprite2D" parent="Throw"]
 position = Vector2(-2.5, -22.5)
-sprite_frames = SubResource("SpriteFrames_bme0f")
+sprite_frames = SubResource("SpriteFrames_qg8do")
 animation = &"heads"
 
 [node name="sweat" type="AnimatedSprite2D" parent="Throw/head"]
