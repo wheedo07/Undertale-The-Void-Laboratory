@@ -210,6 +210,7 @@ bus = &"SFX"
 
 [node name="damage" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("10_lidoa")
+bus = &"SFX"
 
 [node name="friends" type="Node2D" parent="."]
 visible = false

@@ -3,6 +3,7 @@
 
 #include "engine/Battle/Attacks/attacks.h"
 #include "engine/Battle/Bullets/bone.h"
+#include "engine/Battle/Bullets/bone_spike.h"
 #include "engine/Battle/Bullets/blaster.h"
 enum PartType {
     sans_1
@@ -18,6 +19,7 @@ namespace godot {
         private:
             PartType part;
             Ref<PackedScene> bone;
+            Ref<PackedScene> bone_spike;
             Ref<PackedScene> blaster;
 
         public:
@@ -31,6 +33,7 @@ namespace godot {
             void sans_1();
 
             Bone* create_bone(Masking type);
+            BoneSpike* create_boneSpike(Masking type);
             Blaster* create_blaster(Masking type);
     };
 }

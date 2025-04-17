@@ -8,7 +8,8 @@ struct sleepFunction {
     int id;
 };
 struct loopFunction {
-    function<int(double delta)> fun;
+    function<bool(double delta, double* time)> fun;
+    double time;
     int id;
 };
 
@@ -18,8 +19,8 @@ void MainNode::sleep(function<void()> fun, double cool, int id) {
 }
 
 vector<loopFunction> loopFuns;
-void MainNode::loop(function<int(double delta)> fun, int id) {
-    loopFuns.push_back({ fun, id });
+void MainNode::loop(function<bool(double delta, double* time)> fun, int id) {
+    loopFuns.push_back({ fun, 0, id });
 }
 
 int loop_count = 0;
@@ -31,14 +32,13 @@ void MainNode::sequence(vector<pair<function<void()>, LoopTime>> funs) {
     int base_id = next_sequence_id;
     next_sequence_id += funs.size() + 1;
     int* index = new int(0);
-    funs.insert(funs.begin(), {[](){}, 0.001});
 
     LoopTime looptime = funs[*index].second;
     if(holds_alternative<double>(looptime)) {
         sleep(funs[*index].first, std::get<double>(looptime), base_id + *index);
-    }
+    }else executeTrue(std::get<function<int()>>(looptime), funs[*index].first, base_id + *index);
 
-    loop([this, funs, index, base_id](double delta) {
+    loop([this, funs, index, base_id](double delta, double* time) {
         if(*index < funs.size()) {
             bool is = false;
             for(auto& fun : sleepFuns) {
@@ -70,7 +70,7 @@ void MainNode::sequence(vector<pair<function<void()>, LoopTime>> funs) {
 }
 
 void MainNode::executeTrue(function<int()> isFun, function<void()> fun, int id) {
-    loop([this, fun, isFun](double delta) {
+    loop([fun, isFun](double delta, double* time) {
         if (isFun()) {
             fun();
             return true;
@@ -78,18 +78,17 @@ void MainNode::executeTrue(function<int()> isFun, function<void()> fun, int id) 
     }, id);
 }
 
-void MainNode::time_loop(function<void(double delta)> fun, double time) {
+void MainNode::time_loop(function<void(double delta, double* time)> fun, double duration) {
     double* total_time = new double(0);
-    loop([fun, time, total_time](double delta) {
+    loop([fun, duration, total_time](double delta, double* time) {
         *total_time += delta;
         
-        if(*total_time >= time) {
-            delete total_time;
+        if(*total_time >= duration) {
             return true;
+        }else {
+            fun(delta, time);
+            return false;
         }
-
-        fun(delta);
-        return false;
     });
 }
 
@@ -119,11 +118,16 @@ void MainNode::system(double delta) {
             }
         }
         
+        vector<int> to_remove;
         int i2 = 0;
-        for(auto& fun : loopFuns) {
-            if(fun.fun(delta)) 
-                loopFuns.erase(loopFuns.begin() + i2);
-            else i2++;
+        for (auto& fun : loopFuns) {
+            if(fun.fun(delta, &fun.time)) 
+                to_remove.push_back(i2);
+            i2++;
+        }
+
+        for(int i = to_remove.size() - 1; i >= 0; --i) {
+            loopFuns.erase(loopFuns.begin() + to_remove[i]);
         }
     }
 }
