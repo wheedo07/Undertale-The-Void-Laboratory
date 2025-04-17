@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://d0vr6ikc2lhu2"]
 
-[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_50nku"]
+[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/background/core.mp3" id="1_50nku"]
 [ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_pv7oy"]
 [ext_resource type="PackedScene" uid="uid://gyhc83v53iax" path="res://Overworld/Interactions/save.tscn" id="3_bp0c0"]
 [ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="4_733o5"]

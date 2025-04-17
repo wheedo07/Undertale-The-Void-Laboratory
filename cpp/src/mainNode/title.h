@@ -31,7 +31,6 @@ namespace godot {
             void _on_blind_completed_start();
             
             void set_current_pos(int pos);
-            void loop_audio();
     };
 }
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c3kbf0yvcjnyh"]
 
-[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/core.mp3" id="1_xy13e"]
+[ext_resource type="AudioStream" uid="uid://dfqid7tyfeodc" path="res://Game/assets/audio/background/core.mp3" id="1_xy13e"]
 [ext_resource type="Texture2D" uid="uid://c2b3j7vl1dxw6" path="res://Game/assets/img/core.png" id="2_jnrbo"]
 [ext_resource type="PackedScene" uid="uid://d4gqwwjrenhax" path="res://Camera/camera.tscn" id="3_h1fx4"]
 [ext_resource type="PackedScene" uid="uid://c8yexn6trfd1f" path="res://Game/text_trigger.tscn" id="4_xicio"]

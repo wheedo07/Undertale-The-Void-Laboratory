@@ -18,7 +18,6 @@ Title::~Title() {}
 
 void Title::_bind_methods() {
     ClassDB::bind_method(D_METHOD("refresh_thing", "action"), &Title::refresh_thing, DEFVAL(0));
-    ClassDB::bind_method(D_METHOD("loop_audio"), &Title::loop_audio);
     ClassDB::bind_method(D_METHOD("_on_blind_completed_start"), &Title::_on_blind_completed_start);
     
     ClassDB::bind_method(D_METHOD("set_current_pos", "pos"), &Title::set_current_pos);
@@ -34,11 +33,8 @@ void Title::_ready() {
     Object::cast_to<OptionSelectable>(options[current_pos])->set_selected(true);
     
     title_music = Object::cast_to<AudioStreamPlayer>(get_node_internal("../title_mus"));
-    title_music->connect("finished", Callable(this, "loop_audio"));
-}
-
-void Title::loop_audio() {
-    title_music->play();
+    global->get_Music()->set_stream(title_music->get_stream());
+    global->get_Music()->play();
 }
 
 void Title::set_current_pos(int pos) {
@@ -59,6 +55,7 @@ void Title::_input(const Ref<InputEvent>& event) {
     }
     
     if (event->is_action_pressed("ui_accept") && !is) {
+        global->get_Music()->stop();
         CameraFx* camera = global->get_scene_container()->get_camera();
         is = true;
         switch (current_pos) {
