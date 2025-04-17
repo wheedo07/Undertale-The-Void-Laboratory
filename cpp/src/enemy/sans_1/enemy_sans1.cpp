@@ -33,7 +33,7 @@ void Enemy_SANS1::ready() {
 void Enemy_SANS1::_on_get_turn() {
     if(main->turn_number == 0) {
         if(global->get_flag("sans_1_death")) {
-            global->get_Music()->seek(22);
+            global->get_Music()->seek(42);
             camera_pro(2, "zoom", Vector2(2,2));
             camera_pro(2, "rotation", 0.6);
             camera_pro(0.1, "position", Vector2(320, 150));
@@ -46,7 +46,10 @@ void Enemy_SANS1::_on_get_turn() {
                     main->back_scene->set_visible(false);
                     sprite->set_z_index(0);
                     sprite->set_y_sort_enabled(false);
-                    
+                    Vector2 original_pos = main->camera->get_position();
+                    camera_pro(0.2, "position", original_pos + Vector2(12, 5));
+                    camera_pro(0.2, "zoom", Vector2(1.15, 1.15));
+
                     box->change_size(Vector2(140, 140));
                     create_attack()->set_part(PartType::sans_1);
                     attacks->start_attack(0);
@@ -57,7 +60,7 @@ void Enemy_SANS1::_on_get_turn() {
                     leg->set_frame(0);
                 }, 24.0f},
                 {[this]() {
-                    play_dialogue(0);
+                    play_dialogue(1);
                 }, 11.0f},
                 {[this]() {
                     head->set_frame(3);
