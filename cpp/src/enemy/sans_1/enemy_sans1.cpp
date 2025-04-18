@@ -142,7 +142,7 @@ void Enemy_SANS1::_on_get_turn() {
                     text_shake->tween_property(drop, "position", drop_pos, 0.04);
 
                     _on_throws(Vector2(1, 0), 50);
-                }, 0.7},
+                }, 0.65},
                 {[this, drop]() {
                     Vector2 original_pos = main->camera->get_position();
                     camera_pro(0.15, "position", original_pos + Vector2(-17, 0));
@@ -157,13 +157,13 @@ void Enemy_SANS1::_on_get_turn() {
                     text_shake->tween_property(drop, "scale", Vector2(1, 1), 0.1);
 
                     _on_throws(Vector2(-1, 0), 50);
-                }, 0.7},
+                }, 0.65},
                 {[this, drop]() {
                     _on_throws(Vector2(1, 0), 70);
 
                     Ref<Tween> tween = create_tween();
                     tween->tween_property(drop, "modulate", Color(0, 0.3, 1), 0.2);
-                }, 0.7},
+                }, 0.65},
                 {[this, drop]() {
                     drop->start();
                     Object::cast_to<AudioStreamPlayer>(get_node_internal("Sounds/boom"))->play();

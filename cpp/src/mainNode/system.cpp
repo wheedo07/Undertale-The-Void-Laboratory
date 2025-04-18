@@ -8,8 +8,8 @@ struct sleepFunction {
     int id;
 };
 struct loopFunction {
-    function<bool(double delta, double* time)> fun;
-    double time;
+    function<bool(double delta, TimeAccumPtr acc)> fun;
+    double time[3];
     int id;
 };
 
@@ -19,8 +19,8 @@ void MainNode::sleep(function<void()> fun, double cool, int id) {
 }
 
 vector<loopFunction> loopFuns;
-void MainNode::loop(function<bool(double delta, double* time)> fun, int id) {
-    loopFuns.push_back({ fun, 0, id });
+void MainNode::loop(function<bool(double delta, TimeAccumPtr acc)> fun, int id) {
+    loopFuns.push_back({ fun, {0,0,0}, id });
 }
 
 int loop_count = 0;
@@ -38,7 +38,7 @@ void MainNode::sequence(vector<pair<function<void()>, LoopTime>> funs) {
         sleep(funs[*index].first, std::get<double>(looptime), base_id + *index);
     }else executeTrue(std::get<function<int()>>(looptime), funs[*index].first, base_id + *index);
 
-    loop([this, funs, index, base_id](double delta, double* time) {
+    loop([this, funs, index, base_id](double delta, TimeAccumPtr acc) {
         if(*index < funs.size()) {
             bool is = false;
             for(auto& fun : sleepFuns) {
@@ -70,7 +70,7 @@ void MainNode::sequence(vector<pair<function<void()>, LoopTime>> funs) {
 }
 
 void MainNode::executeTrue(function<int()> isFun, function<void()> fun, int id) {
-    loop([fun, isFun](double delta, double* time) {
+    loop([fun, isFun](double delta, TimeAccumPtr acc) {
         if (isFun()) {
             fun();
             return true;
@@ -78,15 +78,15 @@ void MainNode::executeTrue(function<int()> isFun, function<void()> fun, int id) 
     }, id);
 }
 
-void MainNode::time_loop(function<void(double delta, double* time)> fun, double duration) {
+void MainNode::time_loop(function<void(double delta, TimeAccumPtr acc)> fun, double duration) {
     double* total_time = new double(0);
-    loop([fun, duration, total_time](double delta, double* time) {
+    loop([fun, duration, total_time](double delta, TimeAccumPtr acc) {
         *total_time += delta;
         
         if(*total_time >= duration) {
             return true;
         }else {
-            fun(delta, time);
+            fun(delta, acc);
             return false;
         }
     });

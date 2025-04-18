@@ -19,7 +19,8 @@ void TrueLaboratory::ready() {
             camera->blind(0.5, 0.9);
             player->set_frame(1);
             
-            sys->time_loop([this](double delta, double* time) {
+            sys->time_loop([this](double delta, TimeAccumPtr acc) {
+                double* time = acc[0];
                 *time += delta;
                 
                 Vector2 originalPos = player->get_position();

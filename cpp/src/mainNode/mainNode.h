@@ -8,6 +8,7 @@
 using namespace std;
 #define clearReload_time 1.3f
 using LoopTime = std::variant<double, function<int()>>;
+using TimeAccumPtr = double (*)[3];
 namespace godot {
     class MainNode : public SceneContainer {
         GDCLASS(MainNode, SceneContainer);
@@ -29,8 +30,8 @@ namespace godot {
             void clear_system(bool is=true);
             void system(double delta);
             void sleep(function<void()> fun, double cool, int id=-1);
-            void loop(function<bool(double delta, double* time)> fun, int id=-1);
-            void time_loop(function<void(double delta, double* time)> fun, double duration);
+            void loop(function<bool(double delta, TimeAccumPtr acc)> fun, int id=-1);
+            void time_loop(function<void(double delta, TimeAccumPtr acc)> fun, double duration);
             void executeTrue(function<int()> isFun, function<void()> fun, int id=-1);
             void sequence(vector<pair<function<void()>, LoopTime>> funs);
 
