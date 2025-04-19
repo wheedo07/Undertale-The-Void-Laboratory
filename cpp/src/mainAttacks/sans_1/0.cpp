@@ -1,7 +1,7 @@
-#include "mainAttacks.h"
+#include "attack_sans1.h"
 #include "env.h"
 
-void MainAttacks::sans_1() {
+void AttackSans1::turn_0() {
     emit_signal("throws", Vector2(0, 1), 75);
 
     BoneSpike* spike = create_boneSpike(Masking::ABSOLUTE_CLIP);
@@ -9,7 +9,7 @@ void MainAttacks::sans_1() {
     spike->fire(Vector2(300, 100), 0.7, 1.5);
     sys->sequence({
         {[this]() {
-            soul->set_mode(SoulBattle::RED);
+            soul->set_mode();
         }, 1.4f},
         {[this]() {
             sys->time_loop([this](double delta, TimeAccumPtr acc) {
@@ -45,7 +45,7 @@ void MainAttacks::sans_1() {
             bl->fire(Vector2(265, 100), 1.5, 0.3, 0.5);
         }, 0.2},
         {[this]() {
-            soul->set_mode(SoulBattle::RED);
+            soul->set_mode();
             box->change_size(Vector2(200, 140));
 
             Blaster* bl = create_blaster(Masking::ABSOLUTE);

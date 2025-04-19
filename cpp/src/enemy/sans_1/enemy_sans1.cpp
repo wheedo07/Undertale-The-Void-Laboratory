@@ -19,7 +19,7 @@ void Enemy_SANS1::ready() {
     AnimStates = Object::cast_to<AnimationNodeStateMachinePlayback>(get_node_internal("sans/States")->get("parameters/playback"));
     throw_timer = Object::cast_to<Timer>(get_node_internal("Timer"));
     sprite = Object::cast_to<Node2D>(get_sprites());
-    attackScene = ResourceLoader::get_singleton()->load("res://Game/main_attacks.tscn");
+    attackScene = ResourceLoader::get_singleton()->load("res://Game/mainAttacks/attack_sans_1.tscn");
 
     sprite->set_z_index(102);
     body->set_frame(8);
@@ -51,7 +51,7 @@ void Enemy_SANS1::_on_get_turn() {
                     camera_pro(0.2, "zoom", Vector2(1.2, 1.2));
 
                     box->change_size(Vector2(140, 140));
-                    create_attack()->set_part(PartType::sans_1);
+                    create_attack();
                     attacks->start_attack(0);
                 }, 3.0f},
                 {[this]() {
@@ -113,7 +113,7 @@ void Enemy_SANS1::_on_get_turn() {
                     sprite->set_y_sort_enabled(false);
                     
                     box->change_size(Vector2(140, 140));
-                    create_attack()->set_part(PartType::sans_1);
+                    create_attack();
                     _on_throws(Vector2(0, -1), 50);
                 }, 3.3f},
                 {[this, drop]() {
@@ -190,7 +190,7 @@ void Enemy_SANS1::_on_get_turn() {
                 }, isFun}
             });
         }
-    }else if(main->turn_number == 1) {
+    }else if(main->turn_number == 2) {
         soul->set_mode();
         auto isFun = [this]() { return !global->get_battle_text_box(); };
         sys->sequence({
@@ -208,6 +208,9 @@ void Enemy_SANS1::_on_get_turn() {
                 scene_changer->load_cached_overworld_scene();
             }, isFun}
         });
+    }else {
+        create_attack();
+        attacks->start_attacks();
     }
 }
 
@@ -215,8 +218,8 @@ void Enemy_SANS1::on_death_player() {
     global->save_flag("sans_1_death", true);
 }
 
-MainAttacks* Enemy_SANS1::create_attack() {
-    MainAttacks* attack = Object::cast_to<MainAttacks>(attacks->add_attack(attackScene));
+AttackSans1* Enemy_SANS1::create_attack() {
+    AttackSans1* attack = Object::cast_to<AttackSans1>(attacks->add_attack(attackScene));
     attack->connect("throws", Callable(this, "_on_throws"));
     return attack;
 }

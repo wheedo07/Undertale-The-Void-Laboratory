@@ -3,7 +3,7 @@
 
 #include "engine/Battle/enemy.h"
 #include "engine/Battle/battle_system.h"
-#include "src/mainAttacks/mainAttacks.h"
+#include "src/mainAttacks/sans_1/attack_sans1.h"
 namespace godot {
     class Enemy_SANS1 : public Enemy {
         GDCLASS(Enemy_SANS1, Enemy);
@@ -30,7 +30,7 @@ namespace godot {
             void _on_get_turn() override;
             void on_death_player() override;
 
-            MainAttacks* create_attack();
+            AttackSans1* create_attack();
             void camera_pro(float time, String key="all", Variant value=true);
             void _on_throws(Vector2 dir=Vector2(0, 1), int power = 10);
             void end_throws();

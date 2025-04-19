@@ -6,7 +6,7 @@
 #include "mainNode/dropText.h"
 #include "trigger/text_trigger.h"
 #include "trigger/move_trigger.h"
-#include "mainAttacks/mainAttacks.h"
+#include "mainAttacks/sans_1/attack_sans1.h"
 #include "overworld/coreNode/coreNode.h"
 #include "overworld/laboratoryNode/laboratoryNode.h"
 #include "overworld/trueLaboratory/trueLaboratory.h"

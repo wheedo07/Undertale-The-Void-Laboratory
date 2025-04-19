@@ -1,36 +1,30 @@
-#ifndef MainAttacks_H
-#define MainAttacks_H
+#ifndef AttackSans1_H
+#define AttackSans1_H
 
 #include "engine/Battle/Attacks/attacks.h"
 #include "engine/Battle/Bullets/bone.h"
 #include "engine/Battle/Bullets/bone_spike.h"
 #include "engine/Battle/Bullets/blaster.h"
-enum PartType {
-    sans_1
-};
-
 namespace godot {
-    class MainAttacks : public AttackBase {
-        GDCLASS(MainAttacks, AttackBase);
+    class AttackSans1 : public AttackBase {
+        GDCLASS(AttackSans1, AttackBase);
 
         protected:
             static void _bind_methods();
 
         private:
-            PartType part;
             Ref<PackedScene> bone;
             Ref<PackedScene> bone_spike;
             Ref<PackedScene> blaster;
 
+            void turn_0();
+
         public:
-            MainAttacks();
-            ~MainAttacks();
+            AttackSans1();
+            ~AttackSans1();
 
             void ready() override;
             void start_attack() override;
-            void set_part(PartType type);
-
-            void sans_1();
 
             Bone* create_bone(Masking type);
             BoneSpike* create_boneSpike(Masking type);
