@@ -135,6 +135,7 @@ stream = ExtResource("2_752qb")
 bus = &"SFX"
 
 [node name="KrTimer" type="Timer" parent="."]
+process_mode = 1
 autostart = true
 
 [node name="MusicGlobal" type="AudioStreamPlayer" parent="."]

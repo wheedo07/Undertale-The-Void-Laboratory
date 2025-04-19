@@ -48,13 +48,14 @@ void Enemy_SANS1::_on_get_turn() {
                     sprite->set_y_sort_enabled(false);
                     Vector2 original_pos = main->camera->get_position();
                     camera_pro(0.2, "position", original_pos + Vector2(12, 5));
-                    camera_pro(0.2, "zoom", Vector2(1.15, 1.15));
+                    camera_pro(0.2, "zoom", Vector2(1.2, 1.2));
 
                     box->change_size(Vector2(140, 140));
                     create_attack()->set_part(PartType::sans_1);
                     attacks->start_attack(0);
                 }, 3.0f},
                 {[this]() {
+                    camera_pro(0.5);
                     head->set_frame(22);
                     body->set_frame(10);
                     leg->set_frame(0);
@@ -169,7 +170,7 @@ void Enemy_SANS1::_on_get_turn() {
                     Object::cast_to<AudioStreamPlayer>(get_node_internal("Sounds/boom"))->play();
                     Vector2 original_pos = main->camera->get_position();
                     camera_pro(0.2, "position", original_pos + Vector2(12, 5));
-                    camera_pro(0.2, "zoom", Vector2(1.15, 1.15));
+                    camera_pro(0.2, "zoom", Vector2(1.2, 1.2));
                     
                     attacks->start_attack(0);
                 }, 0.4},
